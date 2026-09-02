@@ -225,6 +225,14 @@ em.gold{font-style:italic;color:var(--gold);font-weight:500}
 .cart-field label{display:block;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-45);margin-bottom:6px}
 .cart-field input{width:100%;padding:12px 14px;border:1px solid var(--rule);border-radius:4px;font-family:var(--body);font-size:.95rem;color:var(--ink);background:var(--paper)}
 .cart-field input:focus{outline:2px solid var(--orange);outline-offset:1px;border-color:var(--orange)}
+/* DTC-4 (spec v10 §5): drawer deltas — de-emphasized optional fields + Maya door #2 */
+.lbl-opt{font-weight:400;text-transform:none;letter-spacing:0;color:var(--ink-45)}
+.cart-subhint{font-size:.75rem;color:var(--ink-45);margin:5px 0 0;line-height:1.4}
+.cart-ask-maya{display:flex;align-items:center;gap:8px;width:100%;text-align:left;background:none;border:0;padding:0;margin:0 0 16px;font-family:var(--body);font-size:.85rem;color:var(--ink-65);cursor:pointer}
+.cart-ask-maya u{text-decoration:underline;text-decoration-color:var(--rule-strong);text-underline-offset:3px}
+.cart-ask-maya:hover{color:var(--orange)}
+.cart-ask-maya:hover u{text-decoration-color:var(--orange)}
+.cart-ask-maya svg{width:16px;height:16px;stroke-width:2;flex-shrink:0;color:var(--orange)}
 /* BE-1: drop zone moderna del recibo (drag-drop + tap/cámara; preview tras soltar).
    Técnica: <input type=file> overlay (inset:0, opacity:0) → acepta click Y drop NATIVAMENTE;
    el JS solo da el feedback visual .dragover. */
@@ -481,6 +489,17 @@ em.gold{font-style:italic;color:var(--gold);font-weight:500}
 .plans-fine{margin-top:14px;font-size:.75rem;color:var(--ink-45);line-height:1.6;max-width:760px}
 .plans-fine a{color:var(--ink-65);text-decoration:underline;text-decoration-color:var(--rule-strong);text-underline-offset:2px}
 .plans-fine a:hover{color:var(--ink);text-decoration-color:var(--ink)}
+
+/* DTC-4 (spec v10 §5): How-checkout-works strip — spacing + hairline only (top rule matches the
+   .plans pattern; #faq below brings its own border-top, so no bottom rule here = no double rules). */
+.how-checkout{border-top:1px solid var(--rule);padding:clamp(40px,5vw,64px) 0;text-align:center}
+.how-steps{list-style:none;margin:0 0 16px;padding:0;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:10px}
+.how-steps li{font-family:var(--display);font-weight:500;font-size:1.125rem;letter-spacing:-.01em;color:var(--ink)}
+.how-num{font-family:var(--body);font-weight:700;font-size:.72rem;letter-spacing:.1em;color:var(--ink-45);margin-right:9px;vertical-align:2px}
+.how-secure{font-size:.8125rem;color:var(--ink-65);margin:0 0 24px}
+@media (min-width:680px){
+  .how-steps{flex-direction:row;column-gap:34px}
+}
 
 /* Feature list + tagline folded down from the removed #plans cards (orange check bullets). */
 .cmp-for{font-size:.875rem;color:var(--ink-65);margin:0 0 18px}
@@ -846,23 +865,12 @@ details.faq-item summary:focus-visible{outline:2px solid var(--orange);outline-o
 /* ============================================================
    CHAT WIDGET
    ============================================================ */
-.chat-btn{
-  position:fixed;bottom:24px;right:24px;z-index:70;
-  width:60px;height:60px;border-radius:50%;
-  background:var(--orange);color:#fff;border:0;
-  box-shadow:0 4px 12px rgba(212,84,30,.3),0 12px 28px rgba(14,20,24,.18);
-  cursor:pointer;display:flex;align-items:center;justify-content:center;
-  transition:transform var(--t-fast) var(--ease),background-color var(--t-fast) var(--ease);
-}
-.chat-btn:hover{transform:scale(1.06);background:var(--orange-hover)}
-.chat-btn svg{width:26px;height:26px;stroke-width:2}
-.chat-btn .dot{position:absolute;top:8px;right:8px;width:10px;height:10px;border-radius:50%;background:var(--success);border:2px solid #fff}
-.chat-btn.open .icon-chat{display:none}
-.chat-btn.open .icon-close{display:block}
-.chat-btn .icon-close{display:none}
-
+/* DTC-4 (spec v10 §5): global floating chat FAB killed — Maya opens only via door #1
+   (#plans-ask-maya) and door #2 (#cart-ask-maya, inside the checkout drawer). The panel
+   gained its own close button (.chat-close) since the FAB used to be the toggle, and its
+   z-index moved above the drawer (.cart-panel is 120) so door #2 opens Maya OVER the form. */
 .chat-panel{
-  position:fixed;bottom:96px;right:24px;z-index:69;
+  position:fixed;bottom:24px;right:24px;z-index:125;
   width:min(360px,calc(100vw - 48px));max-height:min(560px,calc(100vh - 140px));
   background:#fff;border:1px solid var(--rule);border-radius:8px;
   box-shadow:0 12px 32px rgba(14,20,24,.18),0 4px 12px rgba(14,20,24,.08);
@@ -872,6 +880,9 @@ details.faq-item summary:focus-visible{outline:2px solid var(--orange);outline-o
 }
 .chat-panel.open{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
 .chat-head{padding:16px 20px;background:var(--navy-deep);color:#fff;display:flex;align-items:center;gap:12px;border-bottom:4px solid var(--orange)}
+/* DTC-4: panel-native close (the killed FAB used to toggle the panel shut) */
+.chat-close{background:transparent;border:0;padding:4px 6px;font-size:22px;line-height:1;color:rgba(255,255,255,.75);cursor:pointer;flex-shrink:0}
+.chat-close:hover{color:#fff}
 .chat-avatar{width:36px;height:36px;border-radius:50%;background:var(--orange);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:600;font-size:1rem;letter-spacing:-.01em;flex-shrink:0}
 .chat-head .who{flex:1;line-height:1.2}
 .chat-head .who .name{font-family:var(--display);font-weight:500;font-size:1rem;letter-spacing:-.01em}
@@ -893,8 +904,7 @@ details.faq-item summary:focus-visible{outline:2px solid var(--orange);outline-o
 .chat-foot button svg{width:16px;height:16px;stroke-width:2}
 
 @media (max-width:879px){
-  .chat-btn{bottom:84px}
-  .chat-panel{bottom:152px}
+  .chat-panel{bottom:90px}   /* DTC-4: clear the sticky mobile CTA bar (FAB offset gone) */
 }
 
 /* Coverage Assistant: trigger prominente (header cerca del tope de la card, look de Doug) + flip del chat. */
@@ -1208,6 +1218,20 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
 
 <!-- DTC-1: standalone membership section removed; becomes a callout inside plan cards (later slice) -->
 
+<!-- DTC-4 (spec v10 §5): How-checkout-works — short strip, no form. Second entrance to the SAME
+     checkout drawer (no auto-add: an empty cart still opens it, matching the header cart button). -->
+<section class="how-checkout" id="how-checkout" aria-label="How checkout works">
+  <div class="container reveal">
+    <ol class="how-steps">
+      <li><span class="how-num" aria-hidden="true">1</span>Pick your plan</li>
+      <li><span class="how-num" aria-hidden="true">2</span>2-minute checkout</li>
+      <li><span class="how-num" aria-hidden="true">3</span>Add delivery date &amp; receipt now, or later from your dashboard</li>
+    </ol>
+    <p class="how-secure">Secure checkout by Stripe. Cancel anytime.</p>
+    <button type="button" id="how-checkout-cta" class="btn btn-accent">Start checkout <span class="arrow">&rarr;</span></button>
+  </div>
+</section>
+
 <!-- FAQ -->
 <section class="faq" id="faq" style="background: var(--paper-cool); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);">
   <div class="container faq-wrap reveal">
@@ -1353,6 +1377,12 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
         <div class="cart-kits-title">Repair Safety Net</div>
         <ul id="cart-membership-list"></ul>
       </div>
+      <!-- DTC-4 (spec v10 §5) · Maya door #2: compact icon/link row where the old horizontal Maya
+           container sat (v9: under the plan lines, above TOTAL) → opens the existing chat popup. -->
+      <button type="button" class="cart-ask-maya" id="cart-ask-maya">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <span>Questions about the form or your receipt? <u>Ask Maya</u></span>
+      </button>
       <div id="cart-total" class="cart-total" hidden>
         <span class="cart-total-label">Total</span>
         <span id="cart-total-val" class="cart-total-val"></span>
@@ -1378,22 +1408,26 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
           <input id="cart-address" name="address" type="text" autocomplete="street-address" placeholder="Street, City, State ZIP" required>
         </div>
         <div id="cart-receipt-fields">
-          <p class="cart-hint">From your sales receipt &mdash; we use this to match your dealer automatically.</p>
+          <!-- DTC-4 (spec v10 §5): dealer-matching hint removed (dealer attribution is out of this
+               product); order # is now optional + de-emphasized, hint lives on the field itself. -->
           <div class="cart-field kiosk-only">
             <label for="cart-associate">Sales associate #</label>
             <input id="cart-associate" name="associate" type="text" autocomplete="off" placeholder="e.g. 4471">
           </div>
           <div class="cart-field">
-            <label for="cart-order">Sale order number</label>
-            <input id="cart-order" name="order" type="text" autocomplete="off" inputmode="numeric" placeholder="e.g. 100482" required>
+            <label for="cart-order">Sale order number <span class="lbl-opt">(optional)</span></label>
+            <input id="cart-order" name="order" type="text" autocomplete="off" inputmode="numeric" placeholder="e.g. 100482">
+            <p class="cart-subhint">From your sales receipt, if you have it.</p>
           </div>
           <div class="cart-field">
             <label for="cart-zip">ZIP code</label>
             <input id="cart-zip" name="zip" type="text" autocomplete="postal-code" inputmode="numeric" maxlength="10" pattern="\d{5}(-\d{4})?" placeholder="e.g. 84321" required>
           </div>
+          <!-- DTC-4 (spec v10 §5): delivery date optional — "add it later from your dashboard" -->
           <div class="cart-field">
-            <label for="cart-date"><span class="lbl-default">Purchase date</span><span class="lbl-kiosk">Delivery date (coverage start)</span></label>
-            <input id="cart-date" name="date" type="date" required>
+            <label for="cart-date"><span class="lbl-default">Delivery date <span class="lbl-opt">(optional)</span></span><span class="lbl-kiosk">Delivery date (coverage start)</span></label>
+            <input id="cart-date" name="date" type="date">
+            <p class="cart-subhint">Don&rsquo;t know it yet? Leave it blank &mdash; add it anytime from your dashboard.</p>
           </div>
           <div class="cart-field" id="cart-receipt-field">
             <!-- KIOSK-19 (Doug 08-jul): "explain it like these people are 10 years old" — el paso
@@ -1514,6 +1548,8 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
       <div class="name">Maya · your sales assistant</div>
 <!-- MAYA-3 (Doug 02-jul 29:12): fuera la línea de status del header — prometía respuesta "en minutos" y Maya responde al instante -->
     </div>
+    <!-- DTC-4: panel-native close — the killed FAB used to be the toggle that closed the panel -->
+    <button type="button" class="chat-close" id="chat-close" aria-label="Close chat">&times;</button>
   </div>
   <div class="chat-body" id="chat-body" aria-live="polite">
     <div class="chat-msg them">Hi there 👋 I&rsquo;m Maya on the FurnitureRx team. Anything I can help you sort out about the plans or membership?</div>
@@ -1565,11 +1601,8 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
   </div>
 </section>
 
-<button class="chat-btn" id="chat-btn" aria-label="Open chat" aria-expanded="false">
-  <span class="dot" aria-hidden="true"></span>
-  <svg class="icon-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-  <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 6L6 18M6 6l12 12"/></svg>
-</button>
+<!-- DTC-4 (spec v10 §5): floating chat FAB removed — Maya is reachable only via door #1
+     (#plans-ask-maya) and door #2 (#cart-ask-maya inside the checkout drawer). -->
 
 <!-- ISS-14: modal de confirmación con estilo (reemplaza window.confirm). Reusa .dashqr-* + .btn.
      Lo abre openConfirm({title,body,confirmLabel,cancelLabel,onConfirm}); lo reusa DEC-4. -->
@@ -1908,7 +1941,7 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
 
   /* "Need more?" (beyond MAX_COUNT plans) → chat; "Start over" → reset the card. */
   var needMore = document.getElementById('cfg-needmore');
-  if(needMore) needMore.addEventListener('click', function(e){ e.preventDefault(); var cb = document.getElementById('chat-btn'); if(cb) cb.click(); });
+  if(needMore) needMore.addEventListener('click', function(e){ e.preventDefault(); openChat(); });   /* DTC-4: FAB killed → shared openChat() (hoisted, same IIFE) */
   function resetCfg(){
     state.term = 'monthly'; state.type = 'furniture'; state.count = 1;
     termBtns.forEach(function(b){ var on = b.dataset.term === 'monthly'; b.classList.toggle('active', on); b.setAttribute('aria-checked', on ? 'true' : 'false'); });
@@ -1995,7 +2028,10 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
     var receipt = document.getElementById('cart-receipt-fields');
     if(receipt){
       receipt.hidden = !hasPlans;
-      ['cart-order','cart-zip','cart-date','cart-receipt-photo'].forEach(function(id){ var el = document.getElementById(id); if(el) el.required = hasPlans; });   /* BE-1: foto requerida con plan */
+      ['cart-zip','cart-receipt-photo'].forEach(function(id){ var el = document.getElementById(id); if(el) el.required = hasPlans; });   /* BE-1: foto requerida con plan */
+      /* DTC-4 (spec v10 §5): order # + delivery date optional in DTC ("add it later from your
+         dashboard"); kiosk keeps both required — the server enforces date in kiosk mode. */
+      ['cart-order','cart-date'].forEach(function(id){ var el = document.getElementById(id); if(el) el.required = hasPlans && KIOSK; });
       var assocEl = document.getElementById('cart-associate'); if(assocEl) assocEl.required = hasPlans && KIOSK;   /* KIOSK-1: associate # required solo en kiosk */
     }
     renderPlanLines();
@@ -3502,13 +3538,20 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
     renderC(2500);
   })();
 
-  /* ── DTC-3 · Maya door #1: quiet link under the plan cards → same behavior as the
-     floating chat button (general chat open, no coverage prefill). */
+  /* ── DTC-3 · Maya door #1: quiet link under the plan cards → general chat open, no coverage
+     prefill. DTC-4: rewired from the killed FAB's click() to the shared openChat(). */
   var plansAskMaya = document.getElementById('plans-ask-maya');
-  if(plansAskMaya) plansAskMaya.addEventListener('click', function(){
-    var cb = document.getElementById('chat-btn');
-    if(cb) cb.click();
-  });
+  if(plansAskMaya) plansAskMaya.addEventListener('click', function(){ openChat(); });
+
+  /* ── DTC-4 · Maya door #2: row inside the checkout drawer → same general open. The chat panel
+     renders OVER the drawer (z-index 125 > .cart-panel 120), so the form stays underneath. */
+  var cartAskMaya = document.getElementById('cart-ask-maya');
+  if(cartAskMaya) cartAskMaya.addEventListener('click', function(){ openChat(); });
+
+  /* ── DTC-4 · §5 How-checkout-works CTA: second entrance to the SAME drawer — plain openCart()
+     like the header cart button (no auto-add; an empty cart still opens the drawer). */
+  var howCta = document.getElementById('how-checkout-cta');
+  if(howCta) howCta.addEventListener('click', function(){ openCart(); });
 
   /* Hydrate the hero from the persisted cart. The hero state defaults to stain/monthly, but the
      saved line may be a different coverage (e.g. stain-mech) or term — in which case the default
@@ -3566,7 +3609,10 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
   })();
 
   // CHAT WIDGET
-  var chatBtn = document.getElementById('chat-btn');
+  /* DTC-4 (spec v10 §5): the floating FAB is gone. chatOpen()/chatClose() keep the low-level
+     panel mechanics (reused by the Coverage-Assistant seeding, which must NOT reset covTier);
+     openChat() is the shared GENERAL entrance for both Maya doors — it replicates the old FAB
+     click exactly (reset any coverage conversation, then open; already open → just focus). */
   var chatPanel = document.getElementById('chat-panel');
   var chatBody = document.getElementById('chat-body');
   var chatForm = document.getElementById('chat-form');
@@ -3574,22 +3620,20 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
 
   function chatOpen(){
     chatPanel.classList.add('open');
-    chatBtn.classList.add('open');
-    chatBtn.setAttribute('aria-expanded','true');
     setTimeout(function(){ chatInput.focus(); }, 280);
   }
   function chatClose(){
     chatPanel.classList.remove('open');
-    chatBtn.classList.remove('open');
-    chatBtn.setAttribute('aria-expanded','false');
   }
-  chatBtn.addEventListener('click', function(){
-    if(chatPanel.classList.contains('open')){ chatClose(); return; }
-    /* Apertura GENERAL (no desde una card): chat normal + posición default (sin flip). */
+  function openChat(){
+    if(chatPanel.classList.contains('open')){ chatInput.focus(); return; }
+    /* Apertura GENERAL (no desde una card): chat normal, sin lead de cobertura. */
     covTier = null;
     covConvId = null;                                        /* chat general → el server NO lo persiste como lead de cobertura */
     chatOpen();
-  });
+  }
+  var chatCloseBtn = document.getElementById('chat-close');
+  if(chatCloseBtn) chatCloseBtn.addEventListener('click', chatClose);
 
   function chatPush(text, who){
     var d = document.createElement('div');
