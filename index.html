@@ -285,66 +285,59 @@ em.gold{font-style:italic;color:var(--gold);font-weight:500}
 .cart-success .success-call a{color:var(--orange);font-weight:700;text-decoration:none;white-space:nowrap}
 
 /* ============================================================
-   DTC-2 · HERO — photo anchored right at full strength, paper
-   gradient seam over the empty cushion, text column left. The
-   old kiosk hero rules (grid/price/proof) were cannibalized —
-   this block replaces them. Mobile (<768px): art-directed photo
-   band ABOVE the text, no gradient, no overlay.
+   DTC-7 · HERO — full master frame anchored right at full
+   strength (photo owns the right ~60% of the band), paper
+   gradient seam over the empty cushion, text column left ~40%:
+   H1, lead line, two muted support lines, CTA row (filled
+   primary + quiet Get Help). Mobile (<768px): art-directed
+   photo band ABOVE the text, no gradient; primary CTA
+   full-width, Get Help demoted to a centered text link.
    ============================================================ */
 .hero{position:relative;background:var(--paper);overflow:hidden}
 .hero-media{height:200px;background-image:url(assets/hero-mobile.webp);background-size:cover;background-position:center;background-repeat:no-repeat}
 .hero-inner{position:relative;z-index:1;width:100%}
 .hero-copy{padding:30px 0 44px}
-.hero-headline{margin:0 0 18px;font-size:clamp(2.4rem,4.6vw,4.2rem);line-height:1;letter-spacing:-.03em;font-variation-settings:"opsz" 96}
-.hero-lead{font-size:clamp(1.1rem,1.7vw,1.35rem);line-height:1.45;color:var(--ink-65);margin:0 0 28px;max-width:540px}
+.hero-headline{margin:0 0 16px;font-size:clamp(2.1rem,3.4vw,3.3rem);line-height:1.04;letter-spacing:-.03em;font-variation-settings:"opsz" 96}
+.hero-lead{font-size:clamp(1.05rem,1.5vw,1.25rem);line-height:1.5;font-weight:500;color:var(--ink);margin:0 0 10px}
+.hero-sub{font-size:clamp(.9rem,1.15vw,1rem);line-height:1.5;color:var(--ink-65);margin:0 0 6px}
+.hero-cta{display:flex;flex-direction:column;align-items:stretch;gap:14px;margin-top:26px}
+/* DTC-7: below 768px Get Help drops its .btn-quiet box and reads as a plain
+   centered text link under the full-width primary. */
+@media (max-width:767.98px){
+  .hero-cta .hero-help{background:none;border:none;padding:2px 0;align-self:center;font-weight:500;color:var(--ink-65);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;text-decoration-color:var(--rule-strong)}
+}
 @media (min-width:768px){
   .hero{min-height:clamp(520px,60vh,600px);display:flex;align-items:center}
   /* Two background layers on one element: photo height-fit + right-anchored
-     (so its left edge — the empty cushion — meets the seam), and a
-     left-to-right wash of --paper on top: solid to ~55% of the band,
-     transparent by ~66%, photo full-strength in the right third. */
+     (full 1672x941 master frame — its empty-cushion/bright-wall left third
+     takes the seam; the tipping glass sits ~67-70% of the band at full
+     strength), and a left-to-right wash of --paper on top: solid to ~40%
+     of the band, transparent by ~55%, photo full-strength rightward. */
   .hero-media{position:absolute;top:0;left:0;right:0;bottom:0;height:auto;
-    background-image:linear-gradient(90deg,var(--paper) 0%,var(--paper) 55%,rgba(255,255,255,0) 66%),url(assets/hero-desktop.webp);
+    background-image:linear-gradient(90deg,var(--paper) 0%,var(--paper) 40%,rgba(255,255,255,0) 55%),url(assets/hero-desktop.webp);
     background-size:auto,auto 100%;
     background-position:0 0,right center;
     background-repeat:no-repeat,no-repeat}
-  .hero-copy{max-width:55%;padding:48px 0}
+  .hero-copy{max-width:40%;padding:48px 0}
+  .hero-cta{flex-direction:row;align-items:center;gap:16px}
 }
 
 /* ============================================================
-   DTC-2 · INVOICE STRIP — page background, hairline rules top +
-   bottom, nothing clickable. Sentence left, invoice card right.
+   DTC-7 · TRUST STRIP v2 — narrow REVERSED band (navy-deep fill,
+   light text, gold star), nothing clickable. The ONLY reversed
+   band on the page. The fill itself separates hero above from
+   #plans below, so no hairline rules here or on those edges.
+   Mobile: compact 2x2 grid, middots hidden.
    ============================================================ */
-.invoice-strip{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:clamp(40px,5vw,64px) 0}
-.invoice-grid{display:grid;grid-template-columns:1fr;gap:36px;align-items:center}
-.invoice-statement{font-family:var(--display);font-weight:500;font-size:clamp(1.5rem,2.6vw,2rem);line-height:1.18;letter-spacing:-.022em;color:var(--ink);margin:0 0 12px;font-variation-settings:"opsz" 96}
-.invoice-sub{font-size:clamp(1rem,1.4vw,1.125rem);line-height:1.55;color:var(--ink-65);margin:0}
-.invoice-card{max-width:400px;margin:0 auto;background:var(--paper);border:1px solid var(--rule-strong);border-radius:3px;box-shadow:var(--shadow-card);padding:26px 28px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;line-height:1.5;color:var(--ink)}
-.invoice-eyebrow{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45);margin:0 0 16px}
-.invoice-row{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin:0 0 8px}
-.invoice-dots{flex:1;border-bottom:1px dotted var(--rule-strong);transform:translateY(-3px)}
-.invoice-total{display:flex;align-items:baseline;justify-content:space-between;gap:8px;border-top:1px solid var(--rule);margin-top:12px;padding-top:12px;font-weight:700}
-.invoice-hassle{font-family:var(--body);font-size:.8125rem;line-height:1.5;color:var(--ink-65);margin:16px 0 0}
-@media (min-width:880px){
-  .invoice-grid{grid-template-columns:1.2fr 1fr;gap:64px}
-  .invoice-card{margin-left:auto;margin-right:0}
-}
-
-/* ============================================================
-   DTC-2 · TRUST STRIP — one line of muted text, nothing clickable,
-   no fill, no heading. Hairlines come from the neighbors (invoice
-   strip border-bottom above, #compare border-top below) so bands
-   share single rules. Mobile: compact 2×2 grid, middots hidden.
-   ============================================================ */
-.trust-strip{padding:22px 0}
-.trust-items{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:12px 20px;font-size:.8438rem;line-height:1.4;color:var(--ink-65)}
+.trust-strip{background:var(--navy-deep);padding:9px 0}
+.trust-items{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:8px 16px;font-size:.8438rem;line-height:1.4;color:rgba(255,255,255,.85)}
 .trust-star{color:var(--gold)}
 @media (min-width:768px){
-  .trust-strip{display:flex;align-items:center;min-height:66px;padding:0}
+  .trust-strip{display:flex;align-items:center;min-height:52px;padding:0}
   .trust-strip .container{width:100%}
   .trust-items{display:flex;justify-content:center;align-items:center}
   .trust-items li{white-space:nowrap}
-  .trust-items li+li::before{content:"\00B7";color:var(--ink-45);margin:0 clamp(14px,2.2vw,28px)}
+  .trust-items li+li::before{content:"\00B7";color:rgba(255,255,255,.45);margin:0 clamp(14px,2.2vw,28px)}
 }
 
 /* DTC-5: old how-it-works (.hiw-*) + configurator (.signed-card, .cfg-*) CSS reaped —
@@ -357,9 +350,10 @@ em.gold{font-style:italic;color:var(--gold);font-weight:500}
 
 /* ============================================================
    PLANS (DTC-3) — A primary left (~57%), B + C stacked right.
-   Section separated by spacing + a hairline rule only (no fill).
+   No top rule: the navy trust band directly above (DTC-7) is a
+   fill, so its edge is the separation.
    ============================================================ */
-.plans{padding:clamp(32px,4vw,56px) 0 var(--sp-section);border-top:1px solid var(--rule)}
+.plans{padding:clamp(32px,4vw,56px) 0 var(--sp-section)}
 .plans-elig{font-size:.9rem;color:var(--ink-65);line-height:1.55;max-width:640px;margin:0 0 22px}
 .plans-grid{display:grid;grid-template-columns:1fr;gap:20px;align-items:stretch}
 .plans-col-side{display:flex;flex-direction:column;gap:20px}
@@ -697,44 +691,28 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
 <main id="main">
 
 
-<!-- DTC-2 · HERO — four elements only: photo, H1, price line, one button.
-     Photo is a background layer (never an <img> in flow); the button is the
-     hero's only interactive element. -->
+<!-- DTC-7 · HERO — photo is a background layer (never an <img> in flow).
+     Owner copy verbatim: H1, lead, two support lines. CTA row: the filled
+     primary sells (orange = purchase action); Get Help is a quiet exit to
+     the service site, same target as the header's Get Service link. -->
 <section class="hero" aria-label="Protect your furniture">
   <div class="hero-media" aria-hidden="true"></div>
   <div class="container hero-inner">
     <div class="hero-copy">
-      <h1 class="hero-headline">Protect the sofa before you buy it.</h1>
-      <p class="hero-lead">$19.99 a month. Starts the day it&rsquo;s delivered. Cancel anytime.</p>
-      <a href="#plans" class="btn btn-accent">Protect my furniture</a>
-    </div>
-  </div>
-</section>
-
-<!-- DTC-2 · INVOICE STRIP — nothing clickable.
-     Figures are PLACEHOLDERS pending RAP claims data (owner). The
-     "typical quote" label is load-bearing — keep it. -->
-<section class="invoice-strip" aria-label="What one repair costs">
-  <div class="container">
-    <div class="invoice-grid">
-      <div class="invoice-lead">
-        <p class="invoice-statement">This is what one repair costs without a plan.</p>
-        <p class="invoice-sub">We find the technician, book the visit, and pay the bill.</p>
-      </div>
-      <div class="invoice-card">
-        <p class="invoice-eyebrow">Upholstery repair &middot; typical quote</p>
-        <div class="invoice-row"><span>Trip charge</span><span class="invoice-dots" aria-hidden="true"></span><span>$89</span></div>
-        <div class="invoice-row"><span>Labor, 2 hrs</span><span class="invoice-dots" aria-hidden="true"></span><span>$240</span></div>
-        <div class="invoice-row"><span>Re-web + fabric</span><span class="invoice-dots" aria-hidden="true"></span><span>$185</span></div>
-        <div class="invoice-total"><span>Total</span><span>$514</span></div>
-        <p class="invoice-hassle">&hellip;plus finding someone, three quotes, a weekday at home.</p>
+      <h1 class="hero-headline">The sofa hasn&rsquo;t arrived. But life is waiting.</h1>
+      <p class="hero-lead">Protect your new furniture for $19.99 a month. Cancel anytime.</p>
+      <p class="hero-sub">Sign up before you shop. Payments begin at delivery.</p>
+      <p class="hero-sub">Accidents happen, and repairs are expensive.</p>
+      <div class="hero-cta">
+        <a href="#plans" class="btn btn-accent">Protect my furniture</a>
+        <a href="https://5starservice.net/" target="_blank" rel="noopener" class="btn btn-quiet hero-help">Get Help</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- DTC-2 · TRUST STRIP — replaces the old RAP trust banner. One muted
-     text line, only the star carries color, nothing clickable. -->
+<!-- DTC-7 · TRUST STRIP v2 — reversed navy band, one muted light line,
+     only the star carries color, nothing clickable. -->
 <section class="trust-strip" aria-label="Service facts">
   <div class="container">
     <ul class="trust-items">
