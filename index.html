@@ -347,103 +347,13 @@ em.gold{font-style:italic;color:var(--gold);font-weight:500}
   .trust-items li+li::before{content:"\00B7";color:var(--ink-45);margin:0 clamp(14px,2.2vw,28px)}
 }
 
-.hiw-title{font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45);margin:14px 0 8px}
-.hiw-steps{list-style:none;counter-reset:hiw;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
-.hiw-steps li{counter-increment:hiw;font-size:.92rem;line-height:1.42;color:var(--ink-80);padding-left:32px;position:relative}
-.hiw-steps li::before{content:counter(hiw);position:absolute;left:0;top:1px;width:21px;height:21px;border-radius:50%;background:var(--orange);color:#fff;font-size:.72rem;font-weight:700;display:flex;align-items:center;justify-content:center;font-family:var(--body)}
-.hiw-foot{font-size:.88rem;line-height:1.45;color:var(--ink-65);margin:8px 0 0}
-
-/* CONFIGURATOR — signature 4px orange left rim */
-.signed-card{position:relative;background:var(--paper);border:1px solid var(--rule);border-radius:4px;box-shadow:var(--shadow-lift);overflow:hidden}
-.signed-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:var(--rim);background:var(--orange)}
-
-.configurator{padding:clamp(28px,3.4vw,40px) clamp(24px,3vw,36px) clamp(24px,3vw,32px) clamp(28px,3.4vw,40px)}
-.cfg-title{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:24px;padding-bottom:22px;border-bottom:1px solid var(--rule)}
-.cfg-title h2{font-family:var(--display);font-size:1.5rem;font-weight:500;letter-spacing:-.018em;font-variation-settings:"opsz" 24}
-
-.cfg-group{margin-bottom:22px}
-.cfg-label{display:block;font-size:.75rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45);margin-bottom:10px}
-/* Coverage limit read-out (Step 3) — segmented look, DISPLAY-ONLY (follows the term). */
-.cfg-limits{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;background:var(--paper-cool);padding:4px;border-radius:4px}
-.cfg-limit{padding:12px 6px;border-radius:3px;font-weight:600;font-size:.8125rem;color:var(--ink-45);text-align:center;transition:background-color var(--t-fast) var(--ease),color var(--t-fast) var(--ease),box-shadow var(--t-fast) var(--ease)}
-.cfg-limit.active{background:var(--paper);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.05),0 0 0 1px var(--ink) inset}
-
-/* Type dropdown (custom listbox — rich, wrapping, two-line options) */
-#cfg-type{position:relative}
-.cfg-type-btn{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--paper);border:1px solid var(--rule);border-radius:4px;padding:11px 14px;cursor:pointer;text-align:left;font-family:var(--body);transition:border-color var(--t-fast) var(--ease),box-shadow var(--t-fast) var(--ease)}
-.cfg-type-btn:hover{border-color:var(--ink-45)}
-.cfg-type-btn[aria-expanded="true"]{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
-.cfg-type-sel{display:flex;flex-direction:column;gap:2px;min-width:0}
-.cfg-type-name{font-weight:600;font-size:.9rem;color:var(--ink)}
-.cfg-type-desc{font-size:.75rem;color:var(--ink-45);line-height:1.35}
-.cfg-type-caret{color:var(--ink-45);font-size:.7rem;flex:none}
-.cfg-type-menu{position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:20;margin:0;padding:4px;list-style:none;background:var(--paper);border:1px solid var(--rule);border-radius:4px;box-shadow:var(--shadow-lift);max-height:300px;overflow:auto}
-.cfg-type-menu[hidden]{display:none}
-.cfg-type-menu.cfg-type-menu--up{top:auto;bottom:calc(100% + 6px)}   /* flip above the button when there's no room below */
-.cfg-type-opt{display:flex;flex-direction:column;gap:2px;padding:10px 12px;border-radius:3px;cursor:pointer}
-.cfg-type-opt:hover{background:var(--paper-cool)}
-.cfg-type-opt.active{background:var(--paper-cool);box-shadow:inset 0 0 0 1px var(--ink)}
-.cfg-type-opt.focus{box-shadow:inset 0 0 0 2px var(--orange)}
-.cfg-type-menu:focus{outline:none}
-
-/* Price equation row: per plan × count = total */
-.cfg-eq{display:flex;align-items:stretch;gap:8px;flex-wrap:wrap;width:100%}
-.cfg-eq-box{flex:1 1 0;min-width:96px;display:flex;flex-direction:column;gap:5px;background:var(--paper-cool);border-radius:4px;padding:10px 12px}
-.cfg-eq-k{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-45)}
-.cfg-eq-v{font-family:var(--display);font-weight:500;font-size:clamp(1.1rem,2.6vw,1.45rem);line-height:1.05;letter-spacing:-.01em;color:var(--ink);font-variation-settings:"opsz" 28;white-space:nowrap}
-.cfg-eq-v small{font-size:.6em;font-weight:500;color:var(--ink-45);margin-left:.25em}
-.cfg-eq-v small:empty{display:none}
-.cfg-eq-total{background:transparent;box-shadow:inset 0 0 0 1px var(--ink)}
-.cfg-eq-op{align-self:center;font-family:var(--display);font-size:1.1rem;color:var(--ink-45);flex:none}
+/* DTC-5: old how-it-works (.hiw-*) + configurator (.signed-card, .cfg-*) CSS reaped —
+   their markup left in slices 1-3. The .cfg-count-ctl stepper survives: the plans
+   cards (DTC-3) reuse it for their qty steppers. */
 .cfg-count-ctl{display:flex;align-items:center;gap:8px}
 .cfg-count-ctl button{width:28px;height:28px;border:1px solid var(--rule);background:var(--paper);border-radius:3px;font-size:1rem;line-height:1;color:var(--ink);cursor:pointer;flex:none;display:flex;align-items:center;justify-content:center}
 .cfg-count-ctl button:hover:not(:disabled){border-color:var(--ink)}
 .cfg-count-ctl button:disabled{opacity:.4;cursor:not-allowed}
-.cfg-count-ctl #cfg-count{font-family:var(--display);font-size:1.2rem;font-weight:500;min-width:1ch;text-align:center}
-
-/* secondary text actions (Start over / Need more) */
-.cfg-link{background:none;border:0;padding:0;font:inherit;color:var(--orange);font-weight:600;cursor:pointer;text-decoration:underline;text-underline-offset:2px}
-.cfg-link:hover{color:var(--scarlet)}
-.btn.is-disabled{opacity:.5;cursor:not-allowed;box-shadow:none}
-
-.cfg-toggle{display:grid;grid-template-columns:1fr 1fr;gap:6px;background:var(--paper-cool);padding:4px;border-radius:4px}
-.cfg-toggle button{background:transparent;border:0;padding:13px 14px;border-radius:3px;font-family:var(--body);font-weight:600;font-size:.875rem;color:var(--ink-65);cursor:pointer;transition:background-color var(--t-fast) var(--ease),color var(--t-fast) var(--ease),box-shadow var(--t-fast) var(--ease);display:flex;flex-direction:column;align-items:flex-start;gap:3px;text-align:left}
-.cfg-toggle button .price{font-size:.75rem;color:var(--ink-45);font-weight:500}
-.cfg-toggle button .cfg-cov-desc{font-size:.72rem;color:var(--ink-45);font-weight:500;line-height:1.35}
-.cfg-toggle button.active .cfg-cov-desc{color:var(--ink-65)}
-.cfg-toggle button.active{background:var(--paper);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.05),0 0 0 1px var(--ink) inset}
-.cfg-toggle button.active .price{color:var(--ink-65)}
-
-.cfg-price{margin-top:24px;padding:20px 0 0;border-top:1px solid var(--rule);display:flex;flex-direction:column;align-items:stretch;gap:10px}
-
-.cfg-actions{margin-top:18px;display:flex;flex-direction:column;gap:8px}
-.cfg-note{font-size:.75rem;color:var(--ink-45);text-align:center;margin-top:4px;line-height:1.6}
-.cfg-yearly-note{font-size:.82rem;color:var(--ink-80);text-align:center;line-height:1.55;background:rgba(212,84,30,.09);border:1px solid rgba(212,84,30,.22);border-radius:8px;padding:10px 14px;margin:0 0 14px}
-.cfg-cta-row{display:flex;gap:8px}
-.cfg-cta-row .btn{flex:1}
-.cmp-cta-row{margin-top:18px}   /* same two-up row as the hero, pinned to the card bottom */
-.cmp-addons{margin-top:16px;padding-top:16px;border-top:1px solid var(--rule)}
-.cmp-addons-label{display:block;font-size:.6875rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-45);font-family:var(--body);margin-bottom:10px}
-.cmp-addons-row{display:flex;flex-wrap:wrap;gap:10px}
-.btn-addon{flex:1;min-width:140px;display:inline-flex;align-items:center;justify-content:center;gap:6px;text-align:center;padding:10px 14px;font:inherit;font-size:.8125rem;font-weight:600;font-family:var(--body);color:var(--ink);background:var(--paper);border:1px solid var(--rule-strong);border-radius:99px;cursor:pointer;text-decoration:none;transition:background-color var(--t-fast) var(--ease),border-color var(--t-fast) var(--ease),color var(--t-fast) var(--ease)}
-.btn-addon:hover{background:var(--ink);border-color:var(--ink);color:#fff}
-.btn-addon small{font-weight:500;color:var(--ink-65)}
-.btn-addon:hover small{color:rgba(255,255,255,.75)}
-.cfg-saved{font-size:.8rem;font-weight:600;color:var(--orange);text-align:center;margin:2px 0 0}
-.cfg-saved[hidden]{display:none}
-
-/* Term selector (segmented, mirrors .cfg-toggle styling) */
-.cfg-term{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;background:var(--paper-cool);padding:4px;border-radius:4px}
-.cfg-term button{background:transparent;border:0;padding:8px 6px;border-radius:3px;font-family:var(--body);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--ink-65);transition:background-color var(--t-fast) var(--ease),color var(--t-fast) var(--ease),box-shadow var(--t-fast) var(--ease)}
-.cfg-term button .t-name{font-weight:600;font-size:.875rem}
-.cfg-term button .t-tag{display:flex;flex-direction:column;align-items:center;line-height:1.16;gap:1px}
-.cfg-term button .t-price{font-size:.56rem;letter-spacing:.02em;text-transform:uppercase;color:var(--orange);font-weight:700}
-.cfg-term button .t-svc{font-size:.56rem;color:var(--ink-45);font-weight:600}
-.cfg-term button.active .t-svc{color:var(--ink-65)}
-.cfg-term button.active{background:var(--paper);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.05),0 0 0 1px var(--ink) inset}
-.cfg-term button:not(.active):hover{color:var(--ink)}
-/* "Covers $X · assign items at checkout" line */
-.cfg-covers{font-size:.8rem;color:var(--ink-65);line-height:1.4;margin:0}
 
 /* ============================================================
    PLANS (DTC-3) — A primary left (~57%), B + C stacked right.
@@ -501,8 +411,8 @@ em.gold{font-style:italic;color:var(--gold);font-weight:500}
   .how-steps{flex-direction:row;column-gap:34px}
 }
 
-/* Feature list + tagline folded down from the removed #plans cards (orange check bullets). */
-.cmp-for{font-size:.875rem;color:var(--ink-65);margin:0 0 18px}
+/* Feature list folded down from the removed #compare cards (orange check bullets) —
+   reused by plan card A (DTC-3). DTC-5: .cmp-for reaped (markup gone). */
 .cmp-features{list-style:none;padding:0;margin:0 0 22px;display:flex;flex-direction:column;gap:10px}
 .cmp-features li{font-size:.9rem;color:var(--ink-80);padding-left:24px;position:relative;line-height:1.5}
 .cmp-features li strong{font-weight:600;color:var(--ink)}
@@ -512,212 +422,19 @@ em.gold{font-style:italic;color:var(--gold);font-weight:500}
    (no inserta el viejo <p> "already in your cart" que estiraba la card — feedback de Doug ~17:00). */
 .btn-incart, .btn-incart:disabled{background:var(--success,#2f6b3a);border-color:var(--success,#2f6b3a);color:#fff;opacity:1;cursor:default}
 
-/* ============================================================
-   REFERRAL PERK STRIP
-   ============================================================ */
-.refer{padding:clamp(40px,5vw,72px) 0;background:var(--paper);border-bottom:1px solid var(--rule)}
-.refer-inner{
-  display:flex;flex-direction:column;gap:24px;align-items:flex-start;
-  padding:32px clamp(24px,3vw,40px);
-  background:var(--paper-cool);border:1px solid var(--rule);border-radius:4px;
-  position:relative;overflow:hidden;
-}
-.refer-inner::before{
-  content:"";position:absolute;left:0;top:0;bottom:0;width:var(--rim);background:var(--gold);
-}
-.refer-inner::after{
-  content:"";position:absolute;top:-40%;right:-10%;width:50%;height:180%;
-  background:radial-gradient(ellipse 50% 50% at center,rgba(200,148,70,.18),transparent 65%);
-  pointer-events:none;
-}
-.refer-copy{position:relative;z-index:1;max-width:600px}
-.refer-copy .eyebrow{color:var(--gold);margin-bottom:10px}
-.refer-copy h2{font-family:var(--display);font-weight:500;font-size:clamp(1.5rem,2.8vw,2.125rem);letter-spacing:-.02em;line-height:1.1;margin:0 0 10px;font-variation-settings:"opsz" 32}
-.refer-copy h2 em{font-style:italic;color:var(--gold);font-weight:500}
-.refer-copy p{font-size:.95rem;color:var(--ink-65);line-height:1.55;margin:0}
-.refer-cta{position:relative;z-index:1}
-.refer-fine{font-size:.75rem;color:var(--ink-45);margin-top:8px;line-height:1.5}
+/* DTC-5: dead CSS reaped — referral perk strip (.refer-*), control tiles (.control-*),
+   old navy trust banner (.trust, .trust-grid/-stats/-dash-lead + dashLeadBob keyframes),
+   dashboard mock (.dash-grid/.dash-mock/.dash-item…), standalone membership card
+   (.membership, .mem-*), care kits strip (.kits, .kit-*, .kit-toast). Their markup was
+   removed in slices 1-3; header .dash-pill/.dash-icon-btn and the drawer's
+   .cart-line.membership are separate and stay. */
 
 /* ============================================================
-   CONTROL TILES
+   FAQ (DTC-5) — 4 items, no heading, no fill: spacing + a single
+   border-top hairline (the footer below brings its own border-top).
    ============================================================ */
-.control{padding:var(--sp-section) 0;background:var(--paper-cool);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
-.control-intro{max-width:760px;margin-bottom:var(--sp-block)}
-.control-intro p{margin-top:18px}
-.control-grid{display:grid;grid-template-columns:1fr;gap:18px}
-.control-tile{background:var(--paper);border:1px solid var(--rule);border-radius:4px;padding:28px 26px;display:flex;flex-direction:column;gap:10px}
-.control-tile .icon{width:36px;height:36px;color:var(--orange);margin-bottom:6px;stroke-width:1.5}
-.control-tile h3{font-family:var(--display);font-size:1.375rem;font-weight:500;letter-spacing:-.015em;font-variation-settings:"opsz" 24}
-.control-tile p{font-size:.9rem;color:var(--ink-65);line-height:1.55;margin:0}
-
-/* ============================================================
-   TRUST — single navy-deep anchor with subtle orange glow
-   ============================================================ */
-.trust{background:var(--navy-deep);color:#fff;padding:clamp(40px,5vw,72px) 0;position:relative;overflow:hidden}
-.trust::before{content:"";position:absolute;top:-30%;right:-15%;width:60%;height:160%;background:radial-gradient(ellipse 50% 50% at center,rgba(212,84,30,.18),transparent 60%);pointer-events:none}
-.trust .container{position:relative;z-index:1}
-.trust-grid{display:grid;grid-template-columns:1fr;gap:48px;align-items:start}
-.trust-lead{max-width:560px}
-.trust-lead .eyebrow{color:var(--gold);margin-bottom:16px}
-.trust-lead h2{color:#fff;font-size:clamp(2rem,4.2vw,3.25rem);line-height:1.04;margin-bottom:20px;font-variation-settings:"opsz" 96}
-.trust-lead p{color:rgba(255,255,255,.7);font-size:1.0625rem;margin:0;line-height:1.55}
-.trust-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:36px}
-.trust-stat .num{font-family:var(--display);font-weight:500;font-size:clamp(2.25rem,3.6vw,3rem);line-height:1;color:#fff;letter-spacing:-.025em;margin-bottom:8px;font-variation-settings:"opsz" 96}
-.trust-stat .num .star{color:var(--gold)}
-.trust-stat .lbl{font-size:.825rem;color:rgba(255,255,255,.68);line-height:1.45}
-/* Slim dashboard lead-in: a narrow, centered dark cap that funnels into the dashboard below.
-   Scoped to .trust-dash-lead so the hero trust banner (base .trust) is untouched. */
-.trust-dash-lead{padding:clamp(28px,3.4vw,44px) 0 clamp(34px,3.8vw,52px)}
-.trust-dash-lead .dash-lead-inner{max-width:640px;margin:0 auto;text-align:center;display:flex;flex-direction:column;align-items:center}
-.trust-dash-lead .eyebrow{color:var(--gold);margin-bottom:14px}
-.trust-dash-lead h2{color:#fff;font-size:clamp(1.7rem,3.4vw,2.5rem);line-height:1.06;margin-bottom:14px;font-variation-settings:"opsz" 96}
-.trust-dash-lead p{color:rgba(255,255,255,.7);font-size:1.0625rem;line-height:1.55;margin:0}
-.trust-dash-lead .dash-lead-arrow{margin-top:22px;font-size:1.6rem;line-height:1;color:var(--gold);animation:dashLeadBob 1.8s var(--ease) infinite}
-@keyframes dashLeadBob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
-@media (prefers-reduced-motion:reduce){.trust-dash-lead .dash-lead-arrow{animation:none}}
-
-/* ============================================================
-   DASHBOARD MOCK
-   ============================================================ */
-.dash{padding:var(--sp-block) 0 var(--sp-section) 0;background:var(--navy-wash)}
-.dash-grid{display:grid;grid-template-columns:1fr;gap:48px;align-items:center}
-.dash-copy{max-width:520px}
-.dash-copy p{margin-top:18px}
-.dash-copy ul{list-style:none;padding:0;margin:22px 0 0;display:flex;flex-direction:column;gap:10px}
-.dash-copy ul li{font-size:.95rem;color:var(--ink-80);padding-left:24px;position:relative;line-height:1.5}
-.dash-copy ul li::before{content:"";position:absolute;left:0;top:.55em;width:6px;height:6px;background:var(--orange);border-radius:50%}
-.dash-promises{margin-top:28px;padding-top:24px;border-top:1px solid var(--rule);display:flex;flex-direction:column;gap:14px}
-.dash-promise{font-size:.9rem;color:var(--ink-80);line-height:1.55;margin:0;padding-left:24px;position:relative}
-.dash-promise::before{content:"";position:absolute;left:0;top:8px;width:14px;height:8px;border-left:2px solid var(--orange);border-bottom:2px solid var(--orange);transform:rotate(-45deg)}
-.dash-promise strong{color:var(--ink);font-weight:700}
-
-.dash-mock{background:var(--paper);border:1px solid var(--rule);border-radius:6px;box-shadow:var(--shadow-lift);overflow:hidden}
-.dash-mock-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 18px;background:var(--paper-cool);border-bottom:1px solid var(--rule)}
-.dash-mock-bar .title{font-size:.8125rem;font-weight:600;color:var(--ink-65);letter-spacing:.04em;font-family:var(--body)}
-.dash-mock-bar .dots{display:flex;gap:6px}
-.dash-mock-bar .dots span{width:9px;height:9px;border-radius:50%;background:var(--rule-strong)}
-.dash-mock-bar .dots span:first-child{background:#e87055}
-.dash-mock-bar .dots span:nth-child(2){background:var(--gold)}
-.dash-mock-bar .dots span:nth-child(3){background:#7aa787}
-
-.dash-body{padding:28px 26px}
-.dash-greet{font-size:.75rem;color:var(--ink-65);margin-bottom:4px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;font-family:var(--body)}
-.dash-greet-h{font-family:var(--display);font-size:1.625rem;font-weight:500;letter-spacing:-.018em;margin-bottom:24px;font-variation-settings:"opsz" 32}
-
-.dash-item{border:1px solid var(--rule);border-radius:4px;padding:22px 20px;display:flex;flex-direction:column;gap:14px;transition:opacity var(--t-med) var(--ease),border-color var(--t-med) var(--ease)}
-.dash-item.paused{opacity:.6;border-style:dashed;background:var(--paper-cool)}
-.dash-item-top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap}
-.dash-item-name{font-family:var(--display);font-weight:500;font-size:1.25rem;letter-spacing:-.015em;font-variation-settings:"opsz" 24}
-.dash-item-cov{font-size:.8125rem;color:var(--ink-65);margin-top:2px;font-family:var(--body)}
-.dash-item-status{font-size:.6875rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:4px 10px;border-radius:99px;background:rgba(47,107,58,.12);color:var(--success);font-family:var(--body)}
-.dash-item.paused .dash-item-status{background:rgba(14,20,24,.08);color:var(--ink-65)}
-.dash-item-price{font-family:var(--display);font-weight:500;font-size:1.625rem;letter-spacing:-.018em;font-variation-settings:"opsz" 32}
-.dash-item-price small{font-size:.75rem;color:var(--ink-65);font-weight:400;font-family:var(--body)}
-
-.dash-actions{display:flex;flex-wrap:wrap;gap:8px;padding-top:14px;border-top:1px solid var(--rule)}
-.dash-actions button{background:var(--paper);border:1px solid var(--rule);border-radius:99px;padding:9px 16px;font-size:.8125rem;font-weight:500;color:var(--ink);cursor:pointer;transition:background-color var(--t-fast) var(--ease),border-color var(--t-fast) var(--ease),color var(--t-fast) var(--ease);display:inline-flex;align-items:center;gap:6px;font-family:var(--body)}
-.dash-actions button:hover{border-color:var(--ink);background:var(--paper-cool)}
-.dash-actions button.primary{background:var(--orange);color:#fff;border-color:var(--orange)}
-.dash-actions button.primary:hover{background:var(--orange-hover);border-color:var(--orange-hover)}
-
-.dash-toast{margin-top:14px;padding:12px 14px;border-radius:4px;font-size:.8125rem;background:rgba(47,107,58,.1);color:var(--success);border-left:3px solid var(--success);opacity:0;max-height:0;overflow:hidden;transition:opacity var(--t-med) var(--ease),max-height var(--t-med) var(--ease),padding var(--t-med) var(--ease),margin-top var(--t-med) var(--ease);padding-top:0;padding-bottom:0;margin-top:0;font-family:var(--body);line-height:1.5}
-.dash-toast.show{opacity:1;max-height:120px;padding-top:12px;padding-bottom:12px;margin-top:14px}
-
-.dash-section-label{font-size:.6875rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-65);font-family:var(--body);margin:24px 0 10px}
-.dash-section-label .count{color:var(--ink-45);font-weight:500;letter-spacing:.04em;text-transform:none}
-
-.dash-items{border:1px solid var(--rule);border-radius:4px;max-height:138px;overflow-y:auto;background:var(--paper)}
-.dash-items-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 14px;border-bottom:1px solid var(--rule);font-size:.875rem;font-family:var(--body)}
-.dash-items-row:last-child{border-bottom:none}
-.dash-items-row.selected{background:var(--paper-cool)}
-.dash-items-row .name{font-weight:500;color:var(--ink);display:flex;align-items:center;gap:8px}
-.dash-items-row .name .check{color:var(--success);font-size:.8rem}
-.dash-items-row .pill{font-size:.625rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:3px 8px;border-radius:99px;background:rgba(47,107,58,.12);color:var(--success);font-family:var(--body)}
-.dash-items-row .pill.paused{background:rgba(14,20,24,.08);color:var(--ink-65)}
-
-.dash-activity{margin-top:18px;border-top:1px solid var(--rule);padding-top:14px}
-.dash-activity-row{display:flex;gap:10px;align-items:flex-start;font-size:.8125rem;color:var(--ink-80);font-family:var(--body);line-height:1.5;padding:6px 0}
-.dash-activity-row .dot{width:6px;height:6px;border-radius:50%;background:var(--orange);margin-top:7px;flex-shrink:0}
-.dash-activity-row .meta{color:var(--ink-45);font-size:.75rem;margin-left:4px}
-
-.dash-foot{margin-top:16px;padding-top:14px;border-top:1px solid var(--rule);display:flex;gap:14px;flex-wrap:wrap;font-size:.75rem;font-family:var(--body)}
-.dash-foot a{color:var(--ink-65);text-decoration:none;border-bottom:1px solid transparent;transition:color var(--t-fast) var(--ease),border-color var(--t-fast) var(--ease)}
-.dash-foot a:hover{color:var(--ink);border-bottom-color:var(--ink-45)}
-
-/* ============================================================
-   MEMBERSHIP CARD — signature 4px orange left rim
-   ============================================================ */
-.membership{padding:var(--sp-block) 0 var(--sp-section);background:var(--paper);position:relative}
-.membership::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:var(--rule)}
-.mem-intro{max-width:1040px;margin-bottom:32px}
-.mem-intro h2{margin:18px 0 20px}
-.mem-intro .lead{max-width:640px}
-
-.mem-card{display:grid;grid-template-columns:1fr;gap:0;border:1px solid var(--rule);border-radius:4px;overflow:hidden;background:var(--paper);position:relative;box-shadow:var(--shadow-card)}
-.mem-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:var(--rim);background:var(--orange);z-index:2}
-
-.mem-card-head{padding:36px 36px 28px;border-bottom:1px solid var(--rule);display:flex;flex-direction:column;gap:8px}
-.mem-card-head .kicker{font-size:.6875rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--orange);font-family:var(--body)}
-.mem-card-head h3{font-size:clamp(1.75rem,3vw,2.5rem);letter-spacing:-.022em;line-height:1.02;margin:0;font-variation-settings:"opsz" 64}
-.mem-card-head .price{display:flex;align-items:baseline;gap:8px;margin-top:14px}
-.mem-card-head .price .amt{font-family:var(--display);font-weight:500;font-size:3rem;letter-spacing:-.025em;line-height:1;color:var(--ink);font-variation-settings:"opsz" 96}
-.mem-card-head .price .per{font-size:.95rem;color:var(--ink-65);font-weight:500}
-.mem-card-head .price-sub{font-size:.875rem;color:var(--ink-65)}
-
-.mem-card-body{padding:36px;display:grid;grid-template-columns:1fr;gap:36px}
-.mem-card-body .copy h4{font-family:var(--display);font-weight:500;font-size:1.25rem;letter-spacing:-.015em;margin:0 0 14px;font-variation-settings:"opsz" 24}
-.mem-card-body .copy p{font-size:.95rem;color:var(--ink-65);line-height:1.6}
-.mem-benefits{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:16px}
-.mem-benefits li{padding-left:32px;position:relative;font-size:.9375rem;color:var(--ink);line-height:1.5}
-.mem-benefits li::before{content:"";position:absolute;left:0;top:5px;width:18px;height:11px;border-left:2.5px solid var(--orange);border-bottom:2.5px solid var(--orange);transform:rotate(-45deg)}
-.mem-benefits li strong{font-weight:700}
-
-.mem-card-foot{padding:24px 36px;background:var(--paper-cool);border-top:1px solid var(--rule);display:flex;flex-direction:column;gap:14px;align-items:flex-start}
-.mem-card-foot .note{font-size:.8125rem;color:var(--ink-65)}
-
-/* ============================================================
-   CARE KITS STRIP
-   ============================================================ */
-.kits{padding:clamp(40px,5vw,72px) 0 var(--sp-section);background:var(--paper-cool);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
-.kits-intro{max-width:1040px;margin-bottom:var(--sp-block)}
-.kits-intro p{margin-top:18px;max-width:640px}
-.kits-grid{display:grid;grid-template-columns:1fr;gap:18px}
-.kit-card{background:var(--paper);border:1px solid var(--rule);border-radius:4px;padding:0;display:flex;flex-direction:column;overflow:hidden;transition:transform var(--t-med) var(--ease),box-shadow var(--t-med) var(--ease)}
-.kit-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-card)}
-.kit-image{aspect-ratio:5/4;background:#eef1f5;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;border-bottom:1px solid var(--rule)}
-.kit-image::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 25% 35%,rgba(212,84,30,.08),transparent 60%);pointer-events:none}
-.kit-image.fabric{background:#e8edf3}
-.kit-image.fabric::before{background:radial-gradient(ellipse 70% 60% at 25% 35%,rgba(15,42,74,.10),transparent 60%)}
-.kit-image.leather{background:#e6e9ee}
-.kit-image.leather::before{background:radial-gradient(ellipse 70% 60% at 25% 35%,rgba(200,148,70,.12),transparent 60%)}
-.kit-image svg{color:var(--ink);opacity:.22;width:88px;height:88px;stroke-width:1.25;position:relative;z-index:1}
-.kit-image img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
-.kit-image .kit-pkg{position:absolute;bottom:-1px;right:-1px;width:62%;height:78%;background:var(--paper);border-radius:6px 0 0 0;display:flex;flex-direction:column;justify-content:space-between;padding:14px 14px 12px;box-shadow:-8px -8px 24px rgba(14,20,24,.10);border-left:1px solid var(--rule);border-top:1px solid var(--rule);z-index:2}
-.kit-image .kit-pkg .pkg-logo{font-family:var(--display);font-weight:600;font-size:.6875rem;letter-spacing:.04em;color:var(--ink);font-variation-settings:"opsz" 14}
-.kit-image .kit-pkg .pkg-logo .star{color:var(--orange);margin-right:4px}
-.kit-image .kit-pkg .pkg-title{font-family:var(--display);font-weight:500;font-size:1.125rem;letter-spacing:-.015em;color:var(--ink);line-height:1;font-variation-settings:"opsz" 24}
-.kit-image .kit-pkg .pkg-title small{display:block;font-family:var(--body);font-weight:500;font-size:.6875rem;color:var(--ink-65);letter-spacing:.08em;text-transform:uppercase;margin-top:6px}
-.kit-image .kit-pkg .pkg-band{height:6px;background:var(--orange);margin:8px -14px -12px}
-
-.kit-body{padding:24px;display:flex;flex-direction:column;gap:8px;flex:1}
-.kit-body .kit-tag{font-size:.6875rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--orange);font-family:var(--body)}
-.kit-body h3{font-family:var(--display);font-weight:500;font-size:1.375rem;letter-spacing:-.015em;margin:0;font-variation-settings:"opsz" 24}
-.kit-body .kit-desc{font-size:.875rem;color:var(--ink-65);line-height:1.5;margin:6px 0 12px;flex:1}
-.kit-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:14px;border-top:1px solid var(--rule)}
-.kit-price{font-family:var(--display);font-weight:500;font-size:1.5rem;letter-spacing:-.018em;color:var(--ink);font-variation-settings:"opsz" 32}
-/* (.kit-add viejo eliminado: las kit cards ahora usan stepper .cfg-count-ctl + .btn-accent/.btn-ghost,
-   mismo patrón que las #compare cards; el estado "en carrito" usa .btn-incart) */
-
-.kit-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:14px 22px;border-radius:99px;font-size:.875rem;font-weight:500;box-shadow:var(--shadow-lift);opacity:0;pointer-events:none;transition:opacity var(--t-med) var(--ease),transform var(--t-med) var(--ease);z-index:80;font-family:var(--body);max-width:90vw}
-.kit-toast.show{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto}
-.kit-toast .check{color:var(--gold);margin-right:8px;font-weight:700}
-
-/* ============================================================
-   FAQ
-   ============================================================ */
-.faq{padding:clamp(40px,5vw,72px) 0 var(--sp-section);background:var(--paper)}
+.faq{border-top:1px solid var(--rule);padding:clamp(40px,5vw,72px) 0 var(--sp-section)}
 .faq-wrap{max-width:1040px}
-.faq-header{margin-bottom:var(--sp-block)}
 details.faq-item{border-bottom:1px solid var(--rule-strong);padding:0}
 details.faq-item:first-of-type{border-top:1px solid var(--rule-strong)}
 details.faq-item summary{list-style:none;cursor:pointer;padding:18px 40px 18px 0;position:relative;font-family:var(--display);font-weight:500;font-size:clamp(1.125rem,1.6vw,1.375rem);letter-spacing:-.015em;color:var(--ink);line-height:1.25;transition:color var(--t-fast) var(--ease);font-variation-settings:"opsz" 24}
@@ -728,53 +445,22 @@ details.faq-item summary:hover{color:var(--orange)}
 details.faq-item summary:focus-visible{outline:2px solid var(--orange);outline-offset:2px;border-radius:2px}
 .faq-answer{padding:0 0 24px 0;font-size:1.0625rem;line-height:1.65;color:var(--ink-65)}
 
-/* ============================================================
-   FINAL — dark, gold + orange glow
-   ============================================================ */
-.final{padding:var(--sp-section) 0;background:var(--navy-deep);color:#fff;position:relative;overflow:hidden}
-.final::before{content:"";position:absolute;top:-20%;left:-10%;width:60%;height:140%;background:radial-gradient(ellipse 50% 50% at center,rgba(200,148,70,.18),transparent 60%);pointer-events:none}
-.final::after{content:"";position:absolute;bottom:-30%;right:-10%;width:50%;height:120%;background:radial-gradient(ellipse 50% 50% at center,rgba(212,84,30,.14),transparent 65%);pointer-events:none}
-.final-wrap{max-width:760px;position:relative;z-index:1}
-.final .eyebrow{color:var(--gold)}
-.final h2{color:#fff;margin-bottom:18px}
-.final .final-sub{color:rgba(255,255,255,.78);font-size:1.0625rem;line-height:1.6;margin-bottom:36px}
+/* DTC-5: dead CSS reaped — final dark CTA band (.final*), membership-mode drawer
+   extras (#cart-membership-extras, .cart-kit-add, #cart-kit-type-field) and the kit
+   cart-line variants (.cart-line.kit, #cart-kits, .cart-kits-note): their markup is
+   gone and renderCartKits() no-ops without #cart-kits-list. .cart-kits-title stays —
+   the drawer's "Plans" / "Repair Safety Net" list titles still use it. */
 
-.final-form{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:6px;padding:24px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);margin-bottom:32px}
-.final-form .eyebrow{color:var(--gold);margin-bottom:8px}
-.final-form-title{font-family:var(--display);font-weight:500;font-size:1.375rem;color:#fff;margin-bottom:14px;letter-spacing:-.015em;font-variation-settings:"opsz" 24}
-.final-form-row{display:flex;flex-direction:column;gap:10px}
-.final-form input{font:inherit;font-size:.95rem;padding:14px 16px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);color:#fff;border-radius:3px;transition:border-color var(--t-fast) var(--ease),background-color var(--t-fast) var(--ease)}
-.final-form input::placeholder{color:rgba(255,255,255,.5)}
-.final-form input:focus{outline:0;border-color:var(--orange);background:rgba(255,255,255,.12)}
-.final-form .status{font-size:.875rem;color:var(--gold);margin-top:10px;min-height:1em}
-
-.final-ctas{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
-.final-tertiary{font-size:.875rem;color:rgba(255,255,255,.6);margin-top:20px}
-.final-tertiary a{color:#fff;text-decoration:underline;text-decoration-color:rgba(255,255,255,.3)}
-
-
-/* Membership-mode drawer extras (Path 2: add a care kit) */
-#cart-membership-extras{margin-bottom:18px}
-.cart-kit-add{display:flex;align-items:center;gap:10px;padding:14px 16px;border:1px solid var(--rule-strong);border-radius:4px;cursor:pointer;font-size:.95rem;color:var(--ink);background:var(--paper)}
-.cart-kit-add input{width:18px;height:18px;flex:none;accent-color:var(--orange);cursor:pointer}
-.cart-kit-add small{color:var(--ink-65);font-weight:500}
-#cart-kit-type-field{margin-top:14px}
-#cart-kit-type-field select{width:100%;font:inherit;font-size:.95rem;padding:12px 14px;border:1px solid var(--rule-strong);border-radius:3px;background:var(--paper);color:var(--ink)}
-/* Cart lines (planes + kits) — tarjetas estilo resumen con × arriba-derecha (rework multi-línea).
-   El plan reusa el lenguaje del viejo #cart-plan-summary (rim naranja + cov/meta/price); el kit es
-   el mismo lenguaje pero más discreto (rim gris, precio menor). */
-#cart-plans, #cart-kits{margin:0 0 18px}
+/* Cart lines — summary-style cards with × top-right. The plan line reuses the old
+   #cart-plan-summary language (orange rim + cov/meta/price). */
+#cart-plans{margin:0 0 18px}
 .cart-kits-title{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-45);margin:0 0 8px}
-.cart-kits-note{font-size:.72rem;color:var(--ink-45);margin:8px 0 0;line-height:1.5}
-#cart-plans-list, #cart-kits-list, #cart-membership-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+#cart-plans-list, #cart-membership-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
 .cart-line{position:relative;background:var(--paper-cool);border-left:var(--rim) solid var(--orange);border-radius:3px;padding:14px 42px 14px 16px}
 .cart-line .cov{font-weight:600;font-size:.95rem;color:var(--ink)}
 .cart-line .meta{font-size:.85rem;color:var(--ink-65);margin-top:4px}
 .cart-line .price{font-family:var(--display);font-weight:500;font-size:1.5rem;color:var(--ink);margin-top:8px;letter-spacing:-.02em}
 .cart-line .price small{font-size:.78rem;color:var(--ink-65);font-family:var(--body);margin-left:5px;letter-spacing:0}
-.cart-line.kit{border-left-color:var(--rule);padding:12px 40px 12px 14px}
-.cart-line.kit .cov{font-size:.9rem;font-weight:500}
-.cart-line.kit .price{font-size:1.1rem;margin-top:3px}
 .cart-line.membership{border-left-color:var(--gold)}
 .cart-line.membership .price{font-size:1.1rem;margin-top:3px}
 #cart-pay .pay-sub{font-weight:400;font-size:.8em;opacity:.85;letter-spacing:0}
@@ -792,75 +478,35 @@ details.faq-item summary:focus-visible{outline:2px solid var(--orange);outline-o
 .cart-clear:hover{color:var(--scarlet,#a8362a)}
 #cart-pay:disabled{opacity:.45;cursor:not-allowed}
 
-/* Membership Terms & Conditions popup (scrollable) */
-.terms-backdrop{position:fixed;inset:0;background:rgba(14,20,24,.5);z-index:130;opacity:0;pointer-events:none;transition:opacity var(--t-med) var(--ease)}
-.terms-backdrop.open{opacity:1;pointer-events:auto}
-.terms-modal{position:fixed;top:50%;left:50%;width:min(94%,680px);max-height:88vh;display:flex;flex-direction:column;overflow:hidden;background:var(--paper);z-index:140;border-radius:6px;box-shadow:0 24px 60px rgba(14,20,24,.28);transform:translate(-50%,-46%);opacity:0;pointer-events:none;transition:opacity var(--t-med) var(--ease),transform var(--t-med) var(--ease)}
-.terms-modal.open{opacity:1;pointer-events:auto;transform:translate(-50%,-50%)}
-.terms-modal::before{content:"";position:absolute;left:0;top:0;bottom:0;width:var(--rim);background:var(--orange);z-index:1}
-.terms-head{flex:none;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 28px;border-bottom:1px solid var(--rule);background:var(--paper)}
-.terms-head h3{font-family:var(--display);font-weight:500;font-size:1.25rem;letter-spacing:-.015em;margin:0;color:var(--ink);font-variation-settings:"opsz" 24}
-.terms-close{background:none;border:0;font-size:1.5rem;line-height:1;color:var(--ink-45);cursor:pointer;padding:4px;flex:none}
-.terms-close:hover{color:var(--ink)}
-.terms-body{overflow:auto;padding:24px 28px 32px}
-.terms-body h4{font-family:var(--display);font-weight:500;font-size:1.0625rem;letter-spacing:-.01em;margin:22px 0 8px;color:var(--ink)}
-.terms-body h4:first-child{margin-top:0}
-.terms-body p{font-size:.9375rem;line-height:1.6;color:var(--ink-65);margin:0 0 12px}
-.terms-body ul{margin:0 0 12px;padding-left:20px}
-.terms-body li{font-size:.9375rem;line-height:1.55;color:var(--ink-65);margin-bottom:6px}
-.terms-body strong{color:var(--ink);font-weight:600}
-.terms-meta{font-size:.875rem !important;color:var(--ink-45) !important}
+/* DTC-5: dead CSS reaped — embedded membership T&C modal (.terms-backdrop/.terms-modal/
+   .terms-head/.terms-body/.terms-close/.terms-meta): the modal markup + JS left in
+   slice 1; terms live at /terms/. */
 
-/* "My dashboard" (variante B, 08-jul): overlay con QR hacia el dashboard del site principal.
-   El show/hide va por el atributo [hidden] (regla global display:none!important). */
+/* .dashqr-* card pattern — the ISS-14 confirm modal (#confirm-backdrop) reuses
+   .dashqr-backdrop/.dashqr-card/.dashqr-sub, so these stay. (DTC-5: the QR-specific
+   extras .dashqr-close/.dashqr-box/.dashqr-url died with the dashboard-QR overlay.) */
 .dashqr-backdrop{position:fixed;inset:0;background:rgba(8,23,41,.5);z-index:150;display:flex;align-items:center;justify-content:center;padding:20px}
 .dashqr-card{position:relative;overflow:hidden;width:min(92vw,360px);background:var(--paper);border-radius:8px;box-shadow:0 24px 60px rgba(14,20,24,.28);padding:32px 28px 26px;text-align:center}
 .dashqr-card::before{content:"";position:absolute;left:0;right:0;top:0;height:var(--rim);background:var(--orange)}
-.dashqr-close{position:absolute;top:10px;right:12px;background:none;border:0;font-size:1.5rem;line-height:1;color:var(--ink-45);cursor:pointer;padding:6px}
-.dashqr-close:hover{color:var(--ink)}
 .dashqr-card h3{font-family:var(--display);font-weight:500;font-size:1.25rem;letter-spacing:-.015em;margin:0 0 8px;color:var(--ink);font-variation-settings:"opsz" 24}
 .dashqr-sub{font-size:.9rem;line-height:1.55;color:var(--ink-65);margin:0 0 18px}
-.dashqr-box{display:flex;justify-content:center;margin:0 auto 14px;line-height:0}
-.dashqr-box svg{display:block;width:min(220px,60vw);height:auto;border:1px solid var(--rule);border-radius:6px;padding:8px;background:#fff}
-.dashqr-url{margin:0;font-weight:700;letter-spacing:.02em;font-size:.95rem;color:var(--ink)}
-.dashqr-url a{color:var(--orange);text-decoration:none;border-bottom:1px solid currentColor}
-.dashqr-url a:hover{opacity:.75}
 /* ISS-14: fila de acciones del modal de confirmación (reusa .dashqr-backdrop/.dashqr-card + .btn) */
 .confirm-actions{display:flex;gap:10px;margin-top:6px}
 .confirm-actions .btn{flex:1}
 
-/* GIFT-1 (F6): overlay "Gift FurnitureRx coverage" — mismo patrón que .dashqr-* (show/hide por
-   [hidden], regla global display:none!important). Card a la izquierda porque lleva formulario. */
-.gift-backdrop{position:fixed;inset:0;background:rgba(8,23,41,.5);z-index:150;display:flex;align-items:center;justify-content:center;padding:20px}
-.gift-card{position:relative;overflow:hidden;width:min(92vw,420px);background:var(--paper);border-radius:8px;box-shadow:0 24px 60px rgba(14,20,24,.28);padding:32px 28px 26px;text-align:left}
-.gift-card::before{content:"";position:absolute;left:0;right:0;top:0;height:var(--rim);background:var(--orange)}
-.gift-close{position:absolute;top:10px;right:12px;background:none;border:0;font-size:1.5rem;line-height:1;color:var(--ink-45);cursor:pointer;padding:6px}
-.gift-close:hover{color:var(--ink)}
-.gift-card h3{font-family:var(--display);font-weight:500;font-size:1.25rem;letter-spacing:-.015em;margin:0 0 8px;color:var(--ink);font-variation-settings:"opsz" 24}
-.gift-sub{font-size:.9rem;line-height:1.55;color:var(--ink-65);margin:0 0 18px}
-.gift-field{margin-bottom:14px}
-.gift-field label{display:block;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-45);margin-bottom:6px}
-.gift-field select,.gift-field input{width:100%;font-family:var(--body);font-size:.95rem;padding:12px 14px;border:1px solid var(--rule);border-radius:4px;background:var(--paper);color:var(--ink)}
-.gift-field select:focus,.gift-field input:focus{outline:2px solid var(--orange);outline-offset:1px;border-color:var(--orange)}
-.gift-total{margin:0 0 16px;font-weight:700;font-size:.95rem;color:var(--ink)}
-.gift-msg{margin:10px 0 0;font-size:.875rem;line-height:1.5;color:var(--scarlet,#a8362a)}
+/* DTC-5: dead CSS reaped — gift coupon overlay (.gift-*): markup + entry links left in slice 1. */
 
 /* ============================================================
-   FOOTER
+   FOOTER (DTC-5) — compact single band: admin line + four links
+   (stacked on mobile, one row on desktop) + © line. The old
+   Program/Account/Legal grid is gone with its markup.
    ============================================================ */
-.footer{background:var(--paper);border-top:1px solid var(--rule);padding:56px 0 28px}
-.footer-grid{display:grid;grid-template-columns:1fr;gap:36px;margin-bottom:40px}
-.footer-brand .logo{margin-bottom:12px}
-.footer-tagline{font-size:.875rem;color:var(--ink-65);max-width:320px;line-height:1.55}
-.footer-col h4{font-family:var(--body);font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-45);margin:0 0 16px}
-.footer-col ul{list-style:none;padding:0;margin:0}
-.footer-col li{margin-bottom:10px}
-.footer-col a{font-size:.9375rem;color:var(--ink);text-decoration:none;transition:color var(--t-fast) var(--ease)}
-.footer-col a:hover{color:var(--orange)}
-/* FOOT-1a: entradas aún sin destino (esperan URLs/textos de Doug) — sin href no son interactivas */
-.footer-col a:not([href]){cursor:default}
-.footer-col a:not([href]):hover{color:var(--ink)}
-.footer-base{padding-top:24px;border-top:1px solid var(--rule);display:flex;flex-direction:column;gap:6px;font-size:.8125rem;color:var(--ink-65)}
+.footer{background:var(--paper);border-top:1px solid var(--rule);padding:28px 0}
+.footer-row{display:flex;flex-direction:column;gap:10px;font-size:.8125rem;color:var(--ink-65)}
+.footer-links{display:flex;flex-wrap:wrap;gap:10px 18px}
+.footer a{color:var(--ink-65);text-decoration:none;transition:color var(--t-fast) var(--ease)}
+.footer a:hover{color:var(--ink)}
+.footer-copy{margin:14px 0 0;font-size:.75rem;color:var(--ink-45)}
 
 /* ============================================================
    CHAT WIDGET
@@ -907,12 +553,8 @@ details.faq-item summary:focus-visible{outline:2px solid var(--orange);outline-o
   .chat-panel{bottom:90px}   /* DTC-4: clear the sticky mobile CTA bar (FAB offset gone) */
 }
 
-/* Coverage Assistant: trigger prominente (header cerca del tope de la card, look de Doug) + flip del chat. */
-.cov-assist-trigger{display:block;width:100%;text-align:left;cursor:pointer;margin:0 0 20px;padding:11px 15px;background:var(--paper-cool);border:1px solid var(--orange);border-left:4px solid var(--orange);border-radius:6px;font-family:var(--body);transition:background var(--t-fast) var(--ease),box-shadow var(--t-fast) var(--ease)}
-.cov-assist-trigger:hover{background:#fff;box-shadow:0 2px 10px rgba(212,84,30,.14)}
-.cov-assist-title{display:block;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--orange)}
-.cov-assist-sub{display:block;font-size:.85rem;color:var(--ink-65);margin-top:3px}
-/* MAYA-3: las reglas del flip de posición del chat se retiraron — Maya vive en una sola esquina */
+/* DTC-5: dead CSS reaped — Coverage-Assistant card trigger (.cov-assist-*): its per-card
+   markup left with the old #compare cards; the drawer's Maya row uses .cart-ask-maya. */
 
 /* ============================================================
    STICKY MOBILE CTA
@@ -937,23 +579,9 @@ details.faq-item summary:focus-visible{outline:2px solid var(--orange);outline-o
 /* ============================================================
    RESPONSIVE
    ============================================================ */
-@media (min-width:680px){
-  .control-grid{grid-template-columns:repeat(2,1fr)}
-  .trust-stats{grid-template-columns:repeat(4,1fr)}
-  .kits-grid{grid-template-columns:repeat(3,1fr)}
-  .final-form-row{flex-direction:row}
-  .final-form-row input{flex:1}
-  .final-ctas{flex-direction:row;align-items:center}
-  .mem-card-body{grid-template-columns:1fr 1.1fr;gap:48px;align-items:start}
-  .mem-card-foot{flex-direction:row;align-items:center;justify-content:space-between}
-  .refer-inner{flex-direction:row;align-items:center;justify-content:space-between;gap:36px}
-}
+/* DTC-5: the old 680px block (control/kits/final/mem/refer grids) died with its markup */
 @media (min-width:880px){
-  .control-grid{grid-template-columns:repeat(4,1fr)}
-  .footer-grid{grid-template-columns:1.6fr 1fr 1fr 1fr;gap:48px}
-  .footer-base{flex-direction:row;justify-content:space-between;align-items:center}
-  .dash-grid{grid-template-columns:1fr 1.1fr;gap:64px}
-  .trust-grid{grid-template-columns:1fr 1.2fr;gap:80px}
+  .footer-row{flex-direction:row;align-items:center;justify-content:space-between}
   .sticky-mobile{display:none}
 }
 @media (min-width:880px){
@@ -970,11 +598,9 @@ details.faq-item summary:focus-visible{outline:2px solid var(--orange);outline-o
    queda para que el associate vaya directo a comprar. Las secciones son hermanas de <main id="main">, así
    que el flex `order` aplica limpio. Orden: nav fino → cards de compra (#compare) → trust → kits → membership → FAQ. */
 .kiosk #main{display:flex;flex-direction:column}
-.kiosk .nav{padding:10px 0}
-.kiosk #compare{order:1}
-.kiosk .trust{order:2}                          /* trust banner ENTRE subscription y kits (Doug 24-jun) */
-.kiosk #kits{order:3}
-.kiosk #membership{order:4}
+/* DTC-5: kiosk order rules for markup that no longer exists anywhere (.nav, #compare,
+   .trust banner, #kits, #membership) reaped with their base selectors (ground rule 3
+   keeps kiosk gates, but these targeted killed markup). #faq survives, so its rule stays. */
 .kiosk #faq{order:5}                            /* FAQs de vuelta en kiosk, al final (Doug 24-jun) */
 /* Kiosk-only fields + conditional labels (shown/swapped only in kiosk mode) */
 .kiosk-only{display:none}
@@ -1232,74 +858,39 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
   </div>
 </section>
 
-<!-- FAQ -->
-<section class="faq" id="faq" style="background: var(--paper-cool); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);">
+<!-- DTC-5 · FAQ — exactly 4 accordion items (spec v10 §6). No section heading, no
+     background fill: spacing + a single border-top hairline (the footer below brings
+     its own border-top, so no bottom rule here = no doubles). Native <details>
+     accordion — no JS involved. Answer copy drafted from the old FAQ, tightened;
+     item 1 carries NEW eligibility/claim language pending owner sign-off. -->
+<section class="faq" id="faq">
   <div class="container faq-wrap reveal">
-    <div class="faq-header">
-      <span class="eyebrow eyebrow-orange">Real questions</span>
-      <h2 class="h-section">Direct answers.</h2>
-    </div>
 
-    <p class="eyebrow eyebrow-ink" style="margin: 0 0 0; padding-bottom: 12px; border-bottom: 1px solid var(--rule);">About the plan</p>
+    <details class="faq-item">
+      <summary>Can I buy before I&rsquo;ve picked my furniture?</summary>
+      <div class="faq-answer">
+        <p>Yes. Buy the plan now and add your delivery date and receipt later from your dashboard. Coverage applies to new, undamaged furniture from any store, added within 60 days of delivery &mdash; and starts 30 days after your delivery date.</p>
+      </div>
+    </details>
 
     <details class="faq-item">
       <summary>Can I really cancel anytime?</summary>
       <div class="faq-answer">
-        <p>Yes. One tap from your dashboard cancels your coverage at the end of the current month. No cancellation fee, no retention call, no fine print. If you want to come back two months later, your account is still there &mdash; one tap restarts it.</p>
+        <p>Yes. One tap from your dashboard cancels your coverage at the end of the current month. No cancellation fee, no retention call. Come back later &mdash; one tap restarts it.</p>
       </div>
     </details>
 
     <details class="faq-item">
-      <summary>How much coverage does my plan offer?</summary>
+      <summary>What isn&rsquo;t covered?</summary>
       <div class="faq-answer">
-        <p>Your subscription&rsquo;s total coverage is <strong>$5,000</strong>, based on what you paid for the items.</p>
+        <p>Used or previously owned pieces aren&rsquo;t eligible for protection plans, and damage from misuse or wear beyond the covered perils isn&rsquo;t covered. The full list lives in the <a href="/terms/" target="_blank" rel="noopener">coverage terms</a>.</p>
       </div>
     </details>
 
     <details class="faq-item">
-      <summary>What&rsquo;s <em>not</em> covered?</summary>
+      <summary>What does Repair Safety Net cover?</summary>
       <div class="faq-answer">
-        <p>For information about coverage, click the terms and conditions link in the Review Terms &amp; Conditions section.</p>
-        <p>Generally, the plans do not cover used or previously owned items, and you must have a sales receipt showing purchase of the items to be covered, that you received the items, and that you purchased the items and received delivery in the last 60 days before purchasing a plan.</p>
-        <p>If you purchased used furniture, you can purchase a repair membership program instead of a protection plan to help keep your furniture looking new and functioning.</p>
-      </div>
-    </details>
-
-    <p class="eyebrow eyebrow-ink" style="margin: 32px 0 0; padding-bottom: 12px; border-bottom: 1px solid var(--rule);">About the membership</p>
-
-    <details class="faq-item">
-      <summary>What&rsquo;s the difference between Protection and Membership?</summary>
-      <div class="faq-answer">
-        <p>Protection covers new pieces for damage and stains and is available at a low per-month rate of $9.99 or $19.99.</p>
-        <p>You can add a Membership for a low monthly fee that helps you repair and keep used items looking new and functioning. Memberships provide you with access to discounted service: touch-ups, repairs, setup, moving help, and priority scheduling. Membership programs are great for items purchased through online marketplaces, like Facebook Marketplace.</p>
-      </div>
-    </details>
-
-    <details class="faq-item">
-      <summary>What if I don&rsquo;t want protection at all?</summary>
-      <div class="faq-answer">
-        <p>Then start with the membership instead, or pick up a care kit on this page and call us when you need a technician. No subscription is required to use the service network &mdash; we just charge at member rates instead of retail rates for anyone who has the membership.</p>
-      </div>
-    </details>
-
-    <details class="faq-item">
-      <summary>What happens if a claim isn&rsquo;t covered by the plan?</summary>
-      <div class="faq-answer">
-        <p>Every FurnitureRx protection plan includes the <strong>Repair Safety Net</strong> at no extra cost. So if you have damage the plan doesn&rsquo;t cover &mdash; a rip, a burn, an older inherited piece, anything &mdash; you still get access to our managed service network at discounted member rates. You pay only for the service itself, not full retail labor charges. The traditional store plan doesn&rsquo;t include this; if your claim is denied there, you&rsquo;re on your own.</p>
-      </div>
-    </details>
-
-    <details class="faq-item">
-      <summary>Who is RAP?</summary>
-      <div class="faq-answer">
-        <p>Risk Assurance Partners &mdash; the service network behind FurnitureRx. RAP has handled tens of thousands of claims for furniture retailers and households, with an average 4.5-star service rating. We administer every claim end-to-end so you never have to chase a retailer for help.</p>
-      </div>
-    </details>
-
-    <details class="faq-item">
-      <summary>How do claims actually work?</summary>
-      <div class="faq-answer">
-        <p>File 24/7 from the dashboard, the app, or a phone call. Most claims are processed the same day. A repair-first concierge coordinates a technician visit, parts, or cleaning service. If the piece can&rsquo;t be repaired, you receive a partial cash benefit toward replacement.</p>
+        <p>It&rsquo;s included with every plan &mdash; 3 months free with the current offer. When something happens that your plan doesn&rsquo;t cover &mdash; a rip, a burn, a Marketplace find, an inherited piece &mdash; you get repairs from our service network at member rates instead of retail. It&rsquo;s help at a discount, not insurance coverage: you pay the member rate for the service itself.</p>
       </div>
     </details>
   </div>
@@ -1309,43 +900,20 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
 
 </main>
 
+<!-- DTC-5 · Footer — compact single band per spec v10 ("Footer"): the admin line + four
+     links, nothing else. Hairline border-top; the © line stays. Matches the stub pages. -->
 <footer class="footer">
   <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="/" class="logo"><span class="mark">FurnitureRx</span></a>
-        <p class="footer-tagline">A subscription protection and repair-help program administered by Risk Assurance Partners.</p>
-      </div>
-      <!-- DTC-1: minimal footer patch — dead links (#membership, #kits, Dealer login) removed;
-           Log in points at the customer dashboard; Privacy/Accessibility wired to the new stubs.
-           Full footer rebuild is slice 5. -->
-      <div class="footer-col">
-        <h4>Program</h4>
-        <ul>
-          <li><a href="#plans">Protection plans</a></li>
-          <li><a href="#faq">FAQ</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Account</h4>
-        <ul>
-          <li><a href="https://www.furniturerx.net/dashboard">Log in</a></li>
-          <li><a href="https://5starservice.net/" target="_blank" rel="noopener">File a claim</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Legal</h4>
-        <ul>
-          <li><a href="/terms/" target="_blank" rel="noopener" class="js-plan-terms">Coverage terms</a></li>
-          <li><a href="/privacy/">Privacy policy</a></li>
-          <li><a href="/accessibility/">Accessibility</a></li>
-        </ul>
-      </div>
+    <div class="footer-row">
+      <span class="footer-admin">Administered by Risk Assurance Partners</span>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="/terms/">Coverage terms</a>
+        <a href="/privacy/">Privacy</a>
+        <a href="/accessibility/">Accessibility</a>
+        <a href="https://www.furniturerx.net/dashboard">Log in</a>
+      </nav>
     </div>
-    <div class="footer-base">
-      <span>&copy; 2026 Risk Assurance Partners. All rights reserved.</span>
-      <span>FurnitureRx is administered by Risk Assurance Partners.</span>
-    </div>
+    <p class="footer-copy">&copy; 2026 Risk Assurance Partners. All rights reserved.</p>
   </div>
 </footer>
 
@@ -1473,12 +1041,16 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
           <!-- LEG-4 (Doug 08-jul): UN solo link a T&C — la frase TNC-7 (02-jul) cierra el párrafo
                ("that stranded sentence belongs on the end of that paragraph… you're making a real
                paragraph"). Sigue dentro de #cart-receipt-fields: se oculta sola en carritos solo-kit. -->
-          <p class="cart-fine">Eligibility: new furniture from any store within the last 60 days; a valid sales receipt is required to activate. Billed monthly in advance &middot; coverage starts 30 days after payment &middot; not available in all states. Read the <a href="/terms/" target="_blank" rel="noopener" class="js-plan-terms">terms and conditions</a> of this plan before you purchase.</p>
+          <!-- DTC-5: eligibility wording aligned with the #plans fine print (60 days of
+               delivery, coverage starts 30 days after the delivery date, any store) -->
+          <p class="cart-fine">Eligibility: new, undamaged furniture from any store, added within 60 days of delivery; a valid sales receipt is required to activate. Billed monthly in advance &middot; coverage starts 30 days after your delivery date &middot; not available in all states. Read the <a href="/terms/" target="_blank" rel="noopener" class="js-plan-terms">terms and conditions</a> of this plan before you purchase.</p>
         </div>
         <!-- PORT-9 (método B, Doug 15-jul): referral code del dealer — atribuye la venta y su
              comisión; opcional. La verdad la re-resuelve el server (resolveAttribution). -->
         <div class="cart-field" id="cart-referral-field">
-          <label for="cart-referral">Dealer referral code (optional)</label>
+          <!-- DTC-5: "Dealer" dropped from the visible label (dealer attribution is out of
+               this product); the field itself stays per spec §5 "Keep". -->
+          <label for="cart-referral">Referral code (optional)</label>
           <input id="cart-referral" name="referral_code" type="text" autocomplete="off" maxlength="24" placeholder="e.g. GAL-7K2M">
           <p class="cart-note" id="cart-referral-msg" aria-live="polite" hidden></p>
         </div>
@@ -1552,7 +1124,8 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
     <button type="button" class="chat-close" id="chat-close" aria-label="Close chat">&times;</button>
   </div>
   <div class="chat-body" id="chat-body" aria-live="polite">
-    <div class="chat-msg them">Hi there 👋 I&rsquo;m Maya on the FurnitureRx team. Anything I can help you sort out about the plans or membership?</div>
+    <!-- DTC-5: "membership" (killed standalone section) → "Repair Safety Net" in the greeting -->
+    <div class="chat-msg them">Hi there 👋 I&rsquo;m Maya on the FurnitureRx team. Anything I can help you sort out about the plans or the Repair Safety Net?</div>
   </div>
   <form class="chat-foot" id="chat-form">
     <input type="text" id="chat-input" placeholder="Type a message…" autocomplete="off" aria-label="Your message">
@@ -2281,7 +1854,7 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
       fetch('/api/referral-validate?code=' + encodeURIComponent(v)).then(function(r){ return r.json(); }).then(function(d){
         msg.hidden = false;
         msg.textContent = d && d.valid
-          ? ('Code applied — supporting ' + (d.org_name || 'your dealer') + '.')
+          ? ('Code applied — supporting ' + (d.org_name || 'your referrer') + '.')   /* DTC-5: no "dealer" in DTC-visible copy */
           : 'Code not recognized — you can still check out.';
       }).catch(function(){ msg.hidden = true; });
     }
@@ -3654,7 +3227,7 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
   ];
   var fallbackIdx = 0;
   /* Seed history with Maya's opening line (matches the greeting rendered in the panel). */
-  var chatHistory = [{ role: 'assistant', content: 'Hi there! I’m Maya on the FurnitureRx team. Anything I can help you sort out about the plans or membership?' }];
+  var chatHistory = [{ role: 'assistant', content: 'Hi there! I’m Maya on the FurnitureRx team. Anything I can help you sort out about the plans or the Repair Safety Net?' }];   /* DTC-5: seed matches the rendered greeting */
   var covKnown = null;   /* QA-5: último `coverage` capturado — viaja como body.known para que Maya no re-pregunte tras el truncado */
 
   function chatFallback(typing){
