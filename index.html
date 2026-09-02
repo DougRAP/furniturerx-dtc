@@ -438,47 +438,50 @@ em.gold{font-style:italic;color:var(--gold);font-weight:500}
 .cfg-covers{font-size:.8rem;color:var(--ink-65);line-height:1.4;margin:0}
 
 /* ============================================================
-   COMPARISON
+   PLANS (DTC-3) — A primary left (~57%), B + C stacked right.
+   Section separated by spacing + a hairline rule only (no fill).
    ============================================================ */
-.compare{padding:clamp(32px,4vw,56px) 0 var(--sp-section);background:var(--paper-cool);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
-.compare-header{max-width:1040px;margin-bottom:var(--sp-block)}
-.compare-header .lead{max-width:640px}
-/* DASH-5: puerta de recaptura al dashboard del cliente (Doug 24-jun: "login to your dashboard") */
-.dash-login{margin:0 0 14px;font-size:.9rem}
-.dash-login a{color:var(--orange);font-weight:600;text-decoration:none;border-bottom:1px solid currentColor}
-.dash-login a:hover{opacity:.75}
-.compare-grid{display:grid;grid-template-columns:1fr;gap:18px}
-.compare-col{background:var(--paper);border:1px solid var(--rule);border-radius:4px;padding:32px 28px;position:relative}
-.compare-col.declined{background:#eef0f3;border-color:var(--rule-strong)}
-.compare-col.ours{position:relative}
-.compare-col.ours::before{content:"";position:absolute;left:0;top:0;bottom:0;width:var(--rim);background:var(--orange);border-radius:4px 0 0 4px}
-.compare-col.ours::after{content:"YOUR BUILD";position:absolute;top:-12px;left:24px;background:var(--orange);color:#fff;font-size:.6875rem;letter-spacing:.16em;font-weight:700;padding:5px 12px;border-radius:2px;font-family:var(--body)}
-.compare-tag{font-size:.75rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45);margin-bottom:12px;font-family:var(--body)}
-.compare-col.ours .compare-tag{color:var(--orange)}
-.compare-col h3{font-family:var(--display);font-weight:500;font-size:1.625rem;margin-bottom:20px;letter-spacing:-.02em;font-variation-settings:"opsz" 32}
-.compare-col .upfront{font-family:var(--display);font-weight:500;font-size:2.5rem;line-height:1;color:var(--ink);letter-spacing:-.025em;margin-bottom:6px;font-variation-settings:"opsz" 96}
-.compare-col .upfront small{font-size:.875rem;color:var(--ink-65);font-weight:400;font-family:var(--body)}
-.compare-col .upfront-sub{font-size:.875rem;color:var(--ink-65);margin-bottom:24px}
+.plans{padding:clamp(32px,4vw,56px) 0 var(--sp-section);border-top:1px solid var(--rule)}
+.plans-elig{font-size:.9rem;color:var(--ink-65);line-height:1.55;max-width:640px;margin:0 0 22px}
+.plans-grid{display:grid;grid-template-columns:1fr;gap:20px;align-items:stretch}
+.plans-col-side{display:flex;flex-direction:column;gap:20px}
+.plan-card{background:var(--paper);border:1px solid var(--rule-strong);border-radius:4px;padding:28px 26px;position:relative;display:flex;flex-direction:column;box-shadow:var(--shadow-card)}
+/* The 4px orange left rim is the site's signature gesture — always on the primary card,
+   and on any card whose plan is in the cart (purchase state, so orange is allowed). */
+.plan-card-primary::before,
+.plan-card.in-cart::before{content:"";position:absolute;left:0;top:0;bottom:0;width:var(--rim);background:var(--orange);border-radius:4px 0 0 4px}
+.plan-badge{align-self:flex-start;font-family:var(--body);font-size:.6875rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);border:1px solid currentColor;border-radius:99px;padding:4px 12px;margin-bottom:14px}
+.plan-card h3{font-family:var(--display);font-weight:500;font-size:1.375rem;margin:0 0 10px;letter-spacing:-.02em;font-variation-settings:"opsz" 32}
+.plan-card-primary h3{font-size:1.625rem}
+.plan-price{font-family:var(--display);font-weight:500;font-size:1.5rem;line-height:1;color:var(--ink);letter-spacing:-.025em;margin-bottom:16px;font-variation-settings:"opsz" 96}
+.plan-price small{font-size:.8125rem;color:var(--ink-65);font-weight:400;font-family:var(--body);letter-spacing:0}
+.plan-price-lg{font-size:3rem;margin-bottom:20px}   /* A's price = 2× B/C per spec */
+.plan-oneliner{font-size:.875rem;color:var(--ink-65);line-height:1.55;margin:0 0 16px}
+.plan-included{background:var(--paper-cool);border-radius:4px;padding:14px 16px;font-size:.875rem;color:var(--ink-80);line-height:1.55;margin:2px 0 20px}
+.plan-included strong{font-weight:600;color:var(--ink)}
+.plan-qty{display:flex;align-items:center;gap:12px;margin-top:auto;padding-top:16px;border-top:1px solid var(--rule)}
+.plan-qty-label{font-size:.75rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45);font-family:var(--body)}
+.plan-qty-total{margin-left:auto;font-family:var(--display);font-weight:500;font-size:1.15rem;color:var(--ink)}
+.plan-qty-total small{font-size:.7rem;color:var(--ink-45);font-family:var(--body);margin-left:2px}
+.plan-cta{margin-top:16px;width:100%}
+/* Quiet "Choose this instead" link (button element, styled like .link-inline). */
+.plan-choose{margin-top:14px;align-self:flex-start;background:none;border:0;padding:0;cursor:pointer;font-family:var(--body);font-weight:500;font-size:.875rem;color:var(--ink-65);text-decoration:underline;text-decoration-color:var(--rule-strong);text-underline-offset:3px;transition:color var(--t-fast) var(--ease)}
+.plan-choose:hover:not(:disabled){color:var(--ink);text-decoration-color:var(--ink)}
+.plan-choose:disabled{color:var(--ink-45);cursor:default;text-decoration-color:var(--rule)}
+.plan-choose-row{display:flex;align-items:center;gap:10px}
+.plan-soon-pill{font-family:var(--body);font-size:.6563rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45);border:1px solid var(--rule-strong);border-radius:99px;padding:3px 10px;margin-top:14px}
+/* Card C purchase-price controls (display-only until the endpoint exists — DTC-3) */
+.plan-retail-label{display:block;font-size:.75rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45);font-family:var(--body);margin:2px 0 8px}
+.plan-retail-input{width:110px;padding:8px 12px;border:1px solid var(--rule-strong);border-radius:4px;font-family:var(--body);font-size:.9375rem;color:var(--ink);background:var(--paper)}
+.plan-retail-input:focus{outline:none;border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.plan-slider{width:100%;margin:14px 0 10px;accent-color:var(--ink)}
+.plan-caption{font-size:.75rem;color:var(--ink-45);line-height:1.5;margin:0 0 14px}
+/* Maya door #1 — quiet link under the grid, above the fine print */
+.plans-ask{margin-top:24px}
+.plans-fine{margin-top:14px;font-size:.75rem;color:var(--ink-45);line-height:1.6;max-width:760px}
+.plans-fine a{color:var(--ink-65);text-decoration:underline;text-decoration-color:var(--rule-strong);text-underline-offset:2px}
+.plans-fine a:hover{color:var(--ink);text-decoration-color:var(--ink)}
 
-.compare-list{list-style:none;padding:0;margin:0 0 24px;display:flex;flex-direction:column;gap:10px}
-.compare-list li{font-size:.9rem;color:var(--ink-80);padding-left:22px;position:relative;line-height:1.5}
-.compare-list li::before{content:"";position:absolute;left:0;top:.55em;width:8px;height:8px;border-radius:50%;background:var(--rule-strong)}
-.compare-col.ours .compare-list li::before{background:var(--orange)}
-
-.compare-table{width:100%;border-collapse:collapse;margin-top:18px;font-size:.875rem}
-.compare-table th,.compare-table td{padding:11px 0;text-align:right;border-bottom:1px solid var(--rule);font-weight:500;font-family:var(--body)}
-.compare-table th:first-child,.compare-table td:first-child{text-align:left;color:var(--ink-65);font-weight:500}
-.compare-table th{font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-45);font-weight:700;border-bottom-color:var(--rule-strong)}
-.compare-col.ours .compare-table td.value{color:var(--ink);font-weight:700}
-
-.compare-savings{margin-top:18px;padding:14px 16px;background:rgba(47,107,58,.08);border-left:3px solid var(--success);font-size:.875rem;color:var(--success);font-weight:500;line-height:1.5;border-radius:0 3px 3px 0}
-.compare-fine{margin-top:12px;font-size:.75rem;color:var(--ink-45);line-height:1.5}
-.compare-fine a{color:var(--ink-65);text-decoration:underline;text-decoration-color:var(--rule-strong);text-underline-offset:2px}
-.compare-fine a:hover{color:var(--ink);text-decoration-color:var(--ink)}
-.compare-col.plan-offer{display:flex;flex-direction:column}
-.compare-col.in-cart{box-shadow:inset 0 0 0 1px var(--orange)}
-.compare-col.in-cart::before{content:"";position:absolute;left:0;top:0;bottom:0;width:var(--rim);background:var(--orange);border-radius:4px 0 0 4px}
-.compare-col .cfg-price{margin-top:auto}
 /* Feature list + tagline folded down from the removed #plans cards (orange check bullets). */
 .cmp-for{font-size:.875rem;color:var(--ink-65);margin:0 0 18px}
 .cmp-features{list-style:none;padding:0;margin:0 0 22px;display:flex;flex-direction:column;gap:10px}
@@ -515,11 +518,6 @@ em.gold{font-style:italic;color:var(--gold);font-weight:500}
 .refer-copy p{font-size:.95rem;color:var(--ink-65);line-height:1.55;margin:0}
 .refer-cta{position:relative;z-index:1}
 .refer-fine{font-size:.75rem;color:var(--ink-45);margin-top:8px;line-height:1.5}
-
-/* ============================================================
-   PLAN FINE PRINT (cards relocated into #compare; only the legal line lives on)
-   ============================================================ */
-.plans-fine{margin-top:24px;font-size:.8125rem;color:var(--ink-45);max-width:760px}
 
 /* ============================================================
    CONTROL TILES
@@ -931,7 +929,6 @@ details.faq-item summary:focus-visible{outline:2px solid var(--orange);outline-o
    ============================================================ */
 @media (min-width:680px){
   .control-grid{grid-template-columns:repeat(2,1fr)}
-  .compare-grid{grid-template-columns:1fr 1fr}
   .trust-stats{grid-template-columns:repeat(4,1fr)}
   .kits-grid{grid-template-columns:repeat(3,1fr)}
   .final-form-row{flex-direction:row}
@@ -949,8 +946,9 @@ details.faq-item summary:focus-visible{outline:2px solid var(--orange);outline-o
   .trust-grid{grid-template-columns:1fr 1.2fr;gap:80px}
   .sticky-mobile{display:none}
 }
-@media (min-width:1080px){
-  .compare-grid{gap:32px}
+@media (min-width:880px){
+  /* DTC-3: desktop plans grid — A ~57% left, B+C stacked right (v9 wireframe) */
+  .plans-grid{grid-template-columns:57fr 43fr;gap:24px}
 }
 @media (min-width:1400px){
   :root{--gutter:56px}
@@ -1114,124 +1112,96 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
 
 
 
-<!-- COMPARISON -->
-<section class="compare" id="compare" aria-label="Comparison">
-  <!-- DTC-2: #plans anchor target for the hero CTA. Slice 3 renames this
-       section id="compare" → id="plans" and this span goes away. -->
-  <span id="plans"></span>
+<!-- DTC-3 · PLANS — A/B/C cards per spec v10 §4; layout per the v9 wireframe
+     (no section heading; A left ~57%, B+C stacked right; mobile stacks A→B→C).
+     A and B sell the EXISTING monthly SKUs (stain-mech / stain); C is visually
+     complete but NOT purchasable until the variable-price endpoint exists. -->
+<section class="plans" id="plans" aria-label="Protection plans">
   <div class="container">
-    <div class="compare-header reveal">
-      <!-- DASH-5 (Doug 24-jun): recaptura; absoluto porque el kiosk es un site aparte (kiosk.furniturerx.net)
-           y el dashboard vive en el site principal. Pestaña nueva: la tablet no pierde el kiosk. -->
-      <p class="dash-login"><a href="https://www.furniturerx.net/dashboard" target="_blank" rel="noopener">Already covered? Log in to your dashboard &rarr;</a></p>
-      <span class="eyebrow eyebrow-orange">Only pay for what you need</span>
-      <h2 class="h-section">Multi-year plan more than you wanted to spend? Get the same coverage, <em class="accent">monthly.</em></h2>
-      <p class="lead" style="max-width:none;margin-top:18px">Each subscription covers furniture, outdoor furniture, rugs, adjustable beds, mattresses, lamps and accessories.</p>
-      <p class="compare-fine">Monthly &middot; cancel, pause or upgrade anytime &middot; <a href="/terms/" target="_blank" rel="noopener" class="js-plan-terms">Read Plan Terms &amp; Conditions</a> before purchasing.</p>
-    </div>
+    <!-- Eligibility line — replaces the old section header entirely (v9) -->
+    <p class="plans-elig reveal">For new, undamaged furniture from any store. Buy before you shop and add your delivery date later, or within 60 days of delivery.</p>
 
-    <div class="compare-grid reveal">
-      <article class="compare-col plan-offer" data-cov="stain">
-        <div class="compare-tag">Monthly plan</div>
-        <h3>Stain Protection</h3>
-        <div class="upfront">$9.99<small>/month</small></div>
-        <p class="upfront-sub">Everyday stain coverage &middot; up to $5,000 protection. For new furniture you want to keep looking new.</p>
+    <div class="plans-grid reveal">
 
-        <button type="button" class="cov-assist-trigger" data-cov="stain">
-          <span class="cov-assist-title">Maya · your sales assistant</span>
-          <span class="cov-assist-sub">Tell me about your purchase &rarr;</span>
-        </button>
-
+      <!-- Card A · PRIMARY (existing monthly SKU: cov stain-mech). Default qty 1. -->
+      <article class="plan-card plan-card-primary" data-cov="stain-mech">
+        <span class="plan-badge">Most chosen</span>
+        <h3>Stain + Structure, monthly</h3>
+        <div class="plan-price plan-price-lg">$19.99<small> /month</small></div>
         <ul class="cmp-features">
-          <li>Covers everyday stain accidents &mdash; food, drink, ink, pets</li>
-          <li><strong>$5,000</strong> total coverage</li>
-          <li>Includes household spills, pet stains, dye transfer, and more</li>
-          <li>Built for fabric, leather, vinyl, wood, rugs, and more</li>
-          <li>We clean or repair first &mdash; replace it if we can&rsquo;t fix it</li>
-          <li>24/7 claim filing &middot; same-day processing</li>
-          <li><strong>Repair Safety Net included</strong> &mdash; member rates on labor, parts, and coordinated repairs</li>
+          <li>Stains, rips, burns, mechanical and electrical</li>
+          <li>Up to $5,000 coverage per plan</li>
+          <li>We book and pay the repair; replace if it can&rsquo;t be fixed</li>
+          <li>24/7 claim filing &middot; same-day</li>
         </ul>
-
-        <div class="cfg-price">
-          <div class="cfg-eq" role="group" aria-label="Stain plans in your cart">
-            <span class="cfg-eq-box">
-              <span class="cfg-eq-k">Per plan</span>
-              <span class="cfg-eq-v">$9.99<small>/month</small></span>
-            </span>
-            <span class="cfg-eq-op" aria-hidden="true">&times;</span>
-            <span class="cfg-eq-box">
-              <span class="cfg-eq-k">Plans</span>
-              <span class="cfg-count-ctl">
-                <button type="button" id="cmp-stain-dec" aria-label="One fewer Stain plan">&minus;</button>
-                <span class="cmp-count" id="cmp-stain-count" aria-live="polite">0</span>
-                <button type="button" id="cmp-stain-inc" aria-label="One more Stain plan">+</button>
-              </span>
-            </span>
-            <span class="cfg-eq-op" aria-hidden="true">=</span>
-            <span class="cfg-eq-box cfg-eq-total">
-              <span class="cfg-eq-k">Total</span>
-              <span class="cfg-eq-v"><span id="cmp-stain-total">$0.00</span><small>/month</small></span>
-            </span>
-          </div>
+        <p class="plan-included"><strong>Repair Safety Net included, 3 months free.</strong> Member-rate repairs for the rest of the room, incl. Marketplace and inherited pieces.</p>
+        <div class="plan-qty" role="group" aria-label="Number of Stain + Structure plans">
+          <span class="plan-qty-label">Plans</span>
+          <span class="cfg-count-ctl">
+            <button type="button" id="cmp-mech-dec" aria-label="One fewer Stain + Structure plan">&minus;</button>
+            <span class="cmp-count" id="cmp-mech-count" aria-live="polite">1</span>
+            <button type="button" id="cmp-mech-inc" aria-label="One more Stain + Structure plan">+</button>
+          </span>
+          <span class="plan-qty-total"><span id="cmp-mech-total">$19.99</span><small>/month</small></span>
         </div>
-        <div class="cfg-cta-row cmp-cta-row">
-          <button type="button" id="cmp-stain-save" class="btn btn-accent">Save to cart <span class="arrow">&rarr;</span></button>
-          <button type="button" id="cmp-stain-checkout" class="btn btn-ghost">Checkout</button>
-        </div>
-        <!-- DTC-1: add-on row (used-furniture membership + kits) removed with the killed sections -->
+        <!-- The ONLY filled (orange) button in the section: adds AND opens the drawer -->
+        <button type="button" id="cmp-mech-checkout" class="btn btn-accent plan-cta">Add to cart <span class="arrow">&rarr;</span></button>
       </article>
 
-      <article class="compare-col plan-offer" data-cov="stain-mech">
-        <div class="compare-tag">Monthly plan</div>
-        <h3>Stain + Structure</h3>
-        <div class="upfront">$19.99<small>/month</small></div>
-        <p class="upfront-sub">Rips, burns, mechanical &amp; electrical failure &middot; up to $5,000 coverage. For sofas, recliners, beds &mdash; anything with moving parts.</p>
+      <div class="plans-col-side">
 
-        <button type="button" class="cov-assist-trigger" data-cov="stain-mech">
-          <span class="cov-assist-title">Maya · your sales assistant</span>
-          <span class="cov-assist-sub">Tell me about your purchase &rarr;</span>
-        </button>
-
-        <ul class="cmp-features">
-          <li>Everything in Stain Protection</li>
-          <li>Adds coverage for rips, tears, burns, and heat marks</li>
-          <li>Protects frames, springs, motors, switches, and controls</li>
-          <li><strong>$5,000</strong> total coverage</li>
-          <li>Repair first. Replace if repair isn&rsquo;t enough.</li>
-          <li>24/7 claim filing &middot; same-day processing</li>
-          <li><strong>Repair Safety Net included</strong> &mdash; member rates on labor, parts, and coordinated repairs</li>
-        </ul>
-
-        <div class="cfg-price">
-          <div class="cfg-eq" role="group" aria-label="Stain + Structure plans in your cart">
-            <span class="cfg-eq-box">
-              <span class="cfg-eq-k">Per plan</span>
-              <span class="cfg-eq-v">$19.99<small>/month</small></span>
+        <!-- Card B (existing monthly SKU: cov stain) -->
+        <article class="plan-card" data-cov="stain">
+          <h3>Stain Protection, monthly</h3>
+          <div class="plan-price">$9.99<small> /month</small></div>
+          <p class="plan-oneliner">Food, drink, ink, pet stains &middot; up to $5,000 per plan &middot; Safety Net included</p>
+          <div class="plan-qty" role="group" aria-label="Number of Stain Protection plans">
+            <span class="plan-qty-label">Plans</span>
+            <span class="cfg-count-ctl">
+              <button type="button" id="cmp-stain-dec" aria-label="One fewer Stain plan">&minus;</button>
+              <span class="cmp-count" id="cmp-stain-count" aria-live="polite">0</span>
+              <button type="button" id="cmp-stain-inc" aria-label="One more Stain plan">+</button>
             </span>
-            <span class="cfg-eq-op" aria-hidden="true">&times;</span>
-            <span class="cfg-eq-box">
-              <span class="cfg-eq-k">Plans</span>
-              <span class="cfg-count-ctl">
-                <button type="button" id="cmp-mech-dec" aria-label="One fewer Stain + Structure plan">&minus;</button>
-                <span class="cmp-count" id="cmp-mech-count" aria-live="polite">0</span>
-                <button type="button" id="cmp-mech-inc" aria-label="One more Stain + Structure plan">+</button>
-              </span>
-            </span>
-            <span class="cfg-eq-op" aria-hidden="true">=</span>
-            <span class="cfg-eq-box cfg-eq-total">
-              <span class="cfg-eq-k">Total</span>
-              <span class="cfg-eq-v"><span id="cmp-mech-total">$0.00</span><small>/month</small></span>
+            <span class="plan-qty-total"><span id="cmp-stain-total">$0.00</span><small>/month</small></span>
+          </div>
+          <!-- Quiet link, not a filled button: adds max(1, shown) and opens the drawer -->
+          <button type="button" id="cmp-stain-checkout" class="plan-choose">Choose this instead</button>
+        </article>
+
+        <!-- Card C · 3-year pay-once. Visually complete, NOT purchasable ("Coming soon")
+             until the variable-price endpoint exists (Adrian). Slider + input live-update
+             the DISPLAYED price only; nothing reaches the cart or the payload. -->
+        <!-- aria-disabled lives on the inert CONTROLS, not the card: the price input +
+             slider are live (display-only calculator), so the card itself isn't disabled -->
+        <article class="plan-card plan-card-soon" data-plan="year3-once">
+          <h3>3-year plan, pay once</h3>
+          <div class="plan-price"><span id="c3-price">$250</span><small> one payment &middot; up to $5,000 per plan</small></div>
+          <label class="plan-retail-label" for="c3-retail">What you paid, or plan to spend</label>
+          <input type="text" class="plan-retail-input" id="c3-retail" value="$2500" inputmode="numeric" autocomplete="off">
+          <input type="range" class="plan-slider" id="c3-slider" min="500" max="5000" step="50" value="2500" aria-label="Purchase price, 500 to 5,000 dollars">
+          <p class="plan-caption">From $199 &middot; Safety Net incl. &middot; need &gt;$5,000? Add a 2nd plan.</p>
+          <div class="plan-qty" role="group" aria-label="Number of 3-year plans (coming soon)">
+            <span class="plan-qty-label">Plans</span>
+            <span class="cfg-count-ctl">
+              <button type="button" disabled aria-label="One fewer 3-year plan">&minus;</button>
+              <span class="cmp-count">0</span>
+              <button type="button" disabled aria-label="One more 3-year plan">+</button>
             </span>
           </div>
-        </div>
-        <div class="cfg-cta-row cmp-cta-row">
-          <button type="button" id="cmp-mech-save" class="btn btn-accent">Save to cart <span class="arrow">&rarr;</span></button>
-          <button type="button" id="cmp-mech-checkout" class="btn btn-ghost">Checkout</button>
-        </div>
-        <!-- DTC-1: add-on row (used-furniture membership + kits) removed with the killed sections -->
-      </article>
+          <span class="plan-choose-row">
+            <button type="button" class="plan-choose" disabled aria-disabled="true">Choose this instead</button>
+            <span class="plan-soon-pill">Coming soon</span>
+          </span>
+        </article>
+
+      </div>
     </div>
-    <p class="plans-fine reveal">Available for new furniture purchased from any store in the last 60 days. To activate coverage include your sales order# and zip code at checkout &mdash; a valid sales receipt is required to activate coverage. Coverage is month to month paid in advance, start 30 days after you pay the monthly fee, please read the <a href="/terms/" target="_blank" rel="noopener" class="js-plan-terms">terms and conditions</a> before purchasing, not available in all states.</p>
+
+    <!-- Maya door #1 (spec v10 §4): quiet link → same behavior as the floating chat button -->
+    <p class="plans-ask reveal"><button type="button" id="plans-ask-maya" class="plan-choose" style="margin-top:0">Not sure which plan? Ask Maya</button></p>
+
+    <!-- Legal copy pending owner/Adrian sign-off — build as written (spec v10 §4) -->
+    <p class="plans-fine reveal">Coverage starts 30 days after your delivery date &middot; receipt needed before coverage starts &middot; not available in all states &middot; <a href="/terms/" target="_blank" rel="noopener" class="js-plan-terms">terms</a></p>
   </div>
 </section>
 
@@ -1328,7 +1298,7 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
       <div class="footer-col">
         <h4>Program</h4>
         <ul>
-          <li><a href="#compare">Protection plans</a></li>
+          <li><a href="#plans">Protection plans</a></li>
           <li><a href="#faq">FAQ</a></li>
         </ul>
       </div>
@@ -3421,86 +3391,124 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
         clearTimeout(cfgSavedTimer);
         cfgSavedTimer = setTimeout(function(){ cfgSaved.hidden = true; }, 4000);
       }
-      var next = document.getElementById('compare');
+      var next = document.getElementById('plans');   /* DTC-3: section renamed #compare → #plans */
       if(next) next.scrollIntoView({ behavior:'smooth', block:'start' });
     });
   }
 
-  /* ── Comparison cards: two fixed MONTHLY plans (Stain / Mechanical), SYNCED with the hero build via
-     the shared cart. Each card's stepper is a LIVE editor of that plan's monthly cart line (keyed
-     cov+monthly); the hero stepper edits the very same line, so the two always show one shared count.
-     Editing a card reflects back into the hero (reflectToHero): the count syncs and the hero coverage
-     toggle auto-switches to the edited card. */
+  /* ── DTC-3 · Plans cards A + B: two fixed MONTHLY plans on the EXISTING SKUs
+     (A = stain-mech, B = stain), synced with the shared cart. Once a card's line is
+     in the cart its stepper is a LIVE editor of that line (single source of truth,
+     unchanged behavior). NEW: while the line is NOT in the cart the stepper edits a
+     local `pending` count only — card A seeds pending=1 (spec: default qty 1) so it
+     reads as pre-selected without writing a phantom cart line; the CTA then adds the
+     displayed count. Card C (3-year pay-once) is display-only — see planC() below. */
   (function compareCards(){
     var TERM = 'monthly';
-    [{ cov:'stain', pre:'cmp-stain' }, { cov:'stain-mech', pre:'cmp-mech' }].forEach(function(c){
+    [{ cov:'stain-mech', pre:'cmp-mech', def:1 }, { cov:'stain', pre:'cmp-stain', def:0 }].forEach(function(c){
       var countEl  = document.getElementById(c.pre + '-count');
       var decBtn   = document.getElementById(c.pre + '-dec');
       var incBtn   = document.getElementById(c.pre + '-inc');
       var totalEl  = document.getElementById(c.pre + '-total');
-      var article  = document.querySelector('.compare-col[data-cov="' + c.cov + '"]');
-      if(!article) return;
-      var selType = 'furniture';   /* label por defecto del type (el dropdown se reemplazó por el Coverage Assistant) */
+      var article  = document.querySelector('.plan-card[data-cov="' + c.cov + '"]');
+      if(!article || !countEl || !decBtn || !incBtn) return;
+      var selType = 'furniture';   /* type label default (the dropdown was replaced by the Coverage Assistant) */
+      var pending = c.def;         /* displayed count while this plan's line is NOT in the cart */
 
       function base(){ return PLANS.monthly.base[c.cov]; }
-      /* Identidad de línea = cov+term (type es etiqueta, NO identidad — ver CLAUDE.md). Reusa findLine
-         para que la card nunca difiera de savedItems/drawer (elimina el footgun del param `type`). */
+      /* Line identity = cov+term (type is a label, NOT identity — see CLAUDE.md). Reuses findLine
+         so the card can never disagree with savedItems/drawer. */
       function lineFor(){ return findLine(c.cov, TERM); }
-      function add(){ cartAdd(c.cov, TERM, selType, 1); render(); updateCartBadge(); reflectToHero(c.cov); }
-      function sub(){
+      function inc(){
+        if(lineFor()){ cartAdd(c.cov, TERM, selType, 1); render(); updateCartBadge(); reflectToHero(c.cov); }
+        else { pending = Math.min(MAX_COUNT, pending + 1); render(); }   /* not in cart yet → local only */
+      }
+      function dec(){
         var line = lineFor();
-        if(!line) return;
+        if(!line){ pending = Math.max(c.def, pending - 1); render(); return; }
         line.count -= 1;
-        if(line.count <= 0) savedItems.splice(savedItems.indexOf(line), 1);
+        if(line.count <= 0){ savedItems.splice(savedItems.indexOf(line), 1); pending = c.def; }
         else line.price = base() * line.count;
         persistCart();
         render(); updateCartBadge(); reflectToHero(c.cov);
       }
-      if(incBtn) incBtn.addEventListener('click', add);
-      if(decBtn) decBtn.addEventListener('click', sub);
+      if(incBtn) incBtn.addEventListener('click', inc);
+      if(decBtn) decBtn.addEventListener('click', dec);
 
-      /* CTA row (hero parity, so the user can buy without scrolling back up):
-         - "Save to cart": ensure this plan is in the cart (add 1 if the stepper is at 0). The
-           confirmation is the existing "already in your cart" line; no-op when already added.
-         - "Checkout": ensure ≥1, then point the cart drawer at THIS plan (reflectToHero) and open it
-           → Stripe. Single-plan flow, same as the hero (multi-line checkout is the future cart pass). */
-      var saveBtn = document.getElementById(c.pre + '-save');
-      var saveHTML = saveBtn ? saveBtn.innerHTML : '';   /* "Save to cart →" original, para restaurar */
+      /* DTC-3: ONE CTA per card — A "Add to cart" (the section's only filled button),
+         B "Choose this instead" (quiet link). Same behavior for both: ensure this plan is
+         in the cart (adding the displayed count, min 1, when the line is new), point the
+         drawer at THIS plan (reflectToHero) and open it. The old separate "Save to cart"
+         button is gone with the old markup. */
       var checkoutBtn = document.getElementById(c.pre + '-checkout');
-      function save(){
-        if(cartCount(c.cov, TERM) < 1){ cartAdd(c.cov, TERM, selType, 1); render(); updateCartBadge(); reflectToHero(c.cov); }
-      }
       function checkout(){
-        if(cartCount(c.cov, TERM) < 1){ cartAdd(c.cov, TERM, selType, 1); render(); updateCartBadge(); }
+        if(!lineFor()){ cartAdd(c.cov, TERM, selType, Math.max(1, pending)); render(); updateCartBadge(); }
         reflectToHero(c.cov);   /* the drawer reads hero state → show this plan */
         openCart();
       }
-      if(saveBtn) saveBtn.addEventListener('click', save);
       if(checkoutBtn) checkoutBtn.addEventListener('click', checkout);
 
       function render(){
         var line = lineFor();   /* a monthly line of this coverage drives the displayed type + count */
         if(line) selType = line.type;
-        var count = line ? line.count : 0;
-        countEl.textContent = String(count);
-        totalEl.textContent = fmt(base() * count);
-        decBtn.disabled = count <= 0;
-        incBtn.disabled = count >= MAX_COUNT;
-        /* "Save to cart" → "✓ In cart" (deshabilitado) cuando el plan ya está en el carrito. El estado
-           vive en el MISMO botón → no inserta el viejo <p> que estiraba la card (Doug ~17:00). El
-           stepper de cantidad y "Checkout" siguen activos. */
-        if(saveBtn){
-          var inCart = count > 0;
-          saveBtn.disabled = inCart;
-          saveBtn.classList.toggle('btn-incart', inCart);
-          saveBtn.innerHTML = inCart ? '&#10003; In cart' : saveHTML;
-        }
-        article.classList.toggle('in-cart', count > 0);
+        var shown = line ? line.count : pending;
+        countEl.textContent = String(shown);
+        if(totalEl) totalEl.textContent = fmt(base() * shown);
+        /* No line yet → dec stops at the card default (A never displays below 1). */
+        decBtn.disabled = line ? false : pending <= c.def;
+        incBtn.disabled = shown >= MAX_COUNT;
+        article.classList.toggle('in-cart', !!line);
       }
       compareCardRenderers.push(render);
       render();
     });
   })();
+
+  /* ── DTC-3 · Plan C (3-year, pay once): visually complete, NOT purchasable ("Coming
+     soon") until the variable-price endpoint exists (Adrian). The price input and the
+     slider live-update the DISPLAYED one-time price only — nothing reaches the cart,
+     savedItems or the /api/create-checkout-session payload. */
+  (function planC(){
+    var input   = document.getElementById('c3-retail');
+    var slider  = document.getElementById('c3-slider');
+    var priceEl = document.getElementById('c3-price');
+    if(!input || !slider || !priceEl) return;
+    var MIN_RETAIL = 500, MAX_RETAIL = 5000;
+    function clampRetail(n){
+      if(isNaN(n)) n = 2500;
+      return Math.max(MIN_RETAIL, Math.min(MAX_RETAIL, n));
+    }
+    /* Placeholder pricing, RAP curve TBD — DTC-3 */
+    function priceFor(retail){ return Math.max(199, retail * 0.10); }
+    function renderC(retail){ priceEl.textContent = '$' + Math.round(priceFor(retail)); }
+    slider.addEventListener('input', function(){
+      var v = parseInt(slider.value, 10);
+      input.value = '$' + v;
+      renderC(v);
+    });
+    input.addEventListener('input', function(){
+      var v = parseInt(String(input.value).replace(/[^0-9]/g, ''), 10);
+      if(isNaN(v)) return;                     /* mid-edit (empty/"$") → wait for blur */
+      var c2 = clampRetail(v);
+      slider.value = String(c2);
+      renderC(c2);
+    });
+    input.addEventListener('blur', function(){  /* normalize what's typed back to "$N" in range */
+      var v = clampRetail(parseInt(String(input.value).replace(/[^0-9]/g, ''), 10));
+      input.value = '$' + v;
+      slider.value = String(v);
+      renderC(v);
+    });
+    renderC(2500);
+  })();
+
+  /* ── DTC-3 · Maya door #1: quiet link under the plan cards → same behavior as the
+     floating chat button (general chat open, no coverage prefill). */
+  var plansAskMaya = document.getElementById('plans-ask-maya');
+  if(plansAskMaya) plansAskMaya.addEventListener('click', function(){
+    var cb = document.getElementById('chat-btn');
+    if(cb) cb.click();
+  });
 
   /* Hydrate the hero from the persisted cart. The hero state defaults to stain/monthly, but the
      saved line may be a different coverage (e.g. stain-mech) or term — in which case the default
