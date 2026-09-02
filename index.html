@@ -297,7 +297,12 @@ em.gold{font-style:italic;color:var(--gold);font-weight:500}
    full-width, Get Help demoted to a centered text link.
    ============================================================ */
 .hero{position:relative;background:var(--paper);overflow:hidden}
-.hero-media{height:200px;background-image:url(assets/hero-mobile.webp);background-size:cover;background-position:center;background-repeat:no-repeat}
+/* DTC-7 v11.2: band height tracks the 932x590 crop's native aspect
+   (590/932 = 63.3vw — zero crop up to ~410px viewports), capped at 260px;
+   past the cap, cover + center-top crops only the bottom of the frame
+   (dog's lower body), never the faces at the top. The plain 247px height
+   (native at 390w) is the fallback for browsers without min(). */
+.hero-media{height:247px;height:min(63.3vw,260px);background-image:url(assets/hero-mobile.webp);background-size:cover;background-position:center top;background-repeat:no-repeat}
 .hero-inner{position:relative;z-index:1;width:100%}
 .hero-copy{padding:30px 0 44px}
 .hero-headline{margin:0 0 16px;font-size:clamp(2.1rem,3.4vw,3.3rem);line-height:1.04;letter-spacing:-.03em;font-variation-settings:"opsz" 96}
