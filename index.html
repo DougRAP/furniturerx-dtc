@@ -851,7 +851,7 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
     <ol class="how-steps">
       <li><span class="how-num" aria-hidden="true">1</span>Pick your plan</li>
       <li><span class="how-num" aria-hidden="true">2</span>2-minute checkout</li>
-      <li><span class="how-num" aria-hidden="true">3</span>Add delivery date &amp; receipt now, or later from your dashboard</li>
+      <li><span class="how-num" aria-hidden="true">3</span>Add your delivery date now, or later from your dashboard</li>
     </ol>
     <p class="how-secure">Secure checkout by Stripe. Cancel anytime.</p>
     <button type="button" id="how-checkout-cta" class="btn btn-accent">Start checkout <span class="arrow">&rarr;</span></button>
@@ -869,7 +869,7 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
     <details class="faq-item">
       <summary>Can I buy before I&rsquo;ve picked my furniture?</summary>
       <div class="faq-answer">
-        <p>Yes. Buy the plan now and add your delivery date and receipt later from your dashboard. Coverage applies to new, undamaged furniture from any store, added within 60 days of delivery &mdash; and starts 30 days after your delivery date.</p>
+        <p>Yes. Buy the plan now and add your delivery date later from your dashboard. Coverage applies to new, undamaged furniture from any store, added within 60 days of delivery. Your receipt is needed before coverage starts, and coverage begins 30 days after your delivery date.</p>
       </div>
     </details>
 
@@ -958,7 +958,6 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
       <button type="button" id="cart-clear" class="cart-clear" hidden>Empty cart</button>
       <form id="cart-form" novalidate>
         <p class="cart-hint">Tell us about yourself &mdash; this is how we&rsquo;ll reach you for plan updates and claims.</p>
-        <p class="cart-warn">Inaccurate information may inactivate your subscription.</p>
         <div class="cart-field">
           <label for="cart-name">First name and last name</label>
           <input id="cart-name" name="name" type="text" autocomplete="name" placeholder="First and Last Name" required>
@@ -1057,6 +1056,9 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
         <p class="cart-fine" id="cart-membership-fine" hidden>Covers every piece of furniture in your home &mdash; new, old, online, inherited, or custom. Billed monthly in advance &middot; cancel anytime. <a href="/terms/" target="_blank" rel="noopener">Terms &amp; conditions</a>.</p>
         <!-- KIOSK-3 (Doug 02-jul 20:44 a 20:58): el gate de calidad del dato — Stripe no valida
              dirección vs tarjeta, así que la confirmación del cliente es el único control -->
+        <!-- DTC-6: warning moved from the top of the form to sit right above the accuracy
+             checkbox it explains (same .cart-warn styling; checkbox logic untouched) -->
+        <p class="cart-warn" style="margin:14px 0 -8px">Inaccurate information may inactivate your subscription.</p>
         <label class="cart-accuracy" for="cart-accuracy">
           <input type="checkbox" id="cart-accuracy"> I read the information above and it is accurate
         </label>
@@ -3062,7 +3064,12 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
         if(line) selType = line.type;
         var shown = line ? line.count : pending;
         countEl.textContent = String(shown);
-        if(totalEl) totalEl.textContent = fmt(base() * shown);
+        if(totalEl){
+          totalEl.textContent = fmt(base() * shown);
+          /* DTC-6: at qty 0 (card B's resting state) hide the whole total ("$0.00 /month"
+             reads like a price); it reappears as soon as the count reaches 1. */
+          totalEl.parentNode.style.display = shown >= 1 ? '' : 'none';
+        }
         /* No line yet → dec stops at the card default (A never displays below 1). */
         decBtn.disabled = line ? false : pending <= c.def;
         incBtn.disabled = shown >= MAX_COUNT;
@@ -3095,19 +3102,21 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
       input.value = '$' + v;
       renderC(v);
     });
+    /* DTC-6: shared input→slider sync (the input and blur handlers had the same
+       normalize → clamp → sync → renderC shape). writeBack=true also normalizes the
+       typed text to "$N" (blur only — rewriting mid-keystroke would fight the caret). */
+    function parseRetail(){ return parseInt(String(input.value).replace(/[^0-9]/g, ''), 10); }
+    function syncFromInput(writeBack){
+      var clamped = clampRetail(parseRetail());
+      if(writeBack) input.value = '$' + clamped;
+      slider.value = String(clamped);
+      renderC(clamped);
+    }
     input.addEventListener('input', function(){
-      var v = parseInt(String(input.value).replace(/[^0-9]/g, ''), 10);
-      if(isNaN(v)) return;                     /* mid-edit (empty/"$") → wait for blur */
-      var c2 = clampRetail(v);
-      slider.value = String(c2);
-      renderC(c2);
+      if(isNaN(parseRetail())) return;         /* mid-edit (empty/"$") → wait for blur */
+      syncFromInput(false);
     });
-    input.addEventListener('blur', function(){  /* normalize what's typed back to "$N" in range */
-      var v = clampRetail(parseInt(String(input.value).replace(/[^0-9]/g, ''), 10));
-      input.value = '$' + v;
-      slider.value = String(v);
-      renderC(v);
-    });
+    input.addEventListener('blur', function(){ syncFromInput(true); });   /* normalize what's typed back to "$N" in range */
     renderC(2500);
   })();
 
@@ -3200,9 +3209,9 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
   }
   function openChat(){
     if(chatPanel.classList.contains('open')){ chatInput.focus(); return; }
-    /* Apertura GENERAL (no desde una card): chat normal, sin lead de cobertura. */
+    /* DTC-4: GENERAL open (not from a card): plain chat, no coverage lead. */
     covTier = null;
-    covConvId = null;                                        /* chat general → el server NO lo persiste como lead de cobertura */
+    covConvId = null;                                        /* general chat → the server does NOT persist it as a coverage lead */
     chatOpen();
   }
   var chatCloseBtn = document.getElementById('chat-close');
