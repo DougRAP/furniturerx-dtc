@@ -277,25 +277,67 @@ em.gold{font-style:italic;color:var(--gold);font-weight:500}
 .cart-success .success-call a{color:var(--orange);font-weight:700;text-decoration:none;white-space:nowrap}
 
 /* ============================================================
-   HERO + CONFIGURATOR
+   DTC-2 · HERO — photo anchored right at full strength, paper
+   gradient seam over the empty cushion, text column left. The
+   old kiosk hero rules (grid/price/proof) were cannibalized —
+   this block replaces them. Mobile (<768px): art-directed photo
+   band ABOVE the text, no gradient, no overlay.
    ============================================================ */
-.hero{padding:clamp(48px,6vw,80px) 0 clamp(40px,5vw,64px);background:var(--paper);position:relative;overflow:hidden}
-.hero-grid{display:grid;grid-template-columns:1fr;gap:48px;align-items:center}
-.hero-copy{max-width:620px}
-.hero-copy .eyebrow{margin-bottom:22px;color:var(--scarlet)}
-.hero-headline{margin-bottom:18px;font-size:clamp(2.34rem,5.85vw,4.95rem);font-variation-settings:"opsz" 36;font-feature-settings:"liga" 0,"dlig" 0}
-.hero-lead{font-size:clamp(1.1rem,1.7vw,1.35rem);line-height:1.45;color:var(--ink-65);margin:0 0 14px;max-width:540px}
-.hero-price{font-family:var(--display);font-size:clamp(2.6rem,6.1vw,4.65rem);line-height:1;letter-spacing:-.025em;margin:0 0 28px;font-variation-settings:"opsz" 96}
-.hero-price em.accent{color:var(--scarlet)}
-.hero-price-lead{display:block;font-family:var(--body);font-weight:500;font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-65);margin-bottom:8px}
-
-.hero-proof{
-  display:inline-flex;flex-direction:column;align-items:flex-start;gap:5px;
-  padding:12px 20px;background:var(--paper);border:1px solid var(--ink);
-  border-radius:18px;font-size:.875rem;font-weight:500;margin-bottom:32px;
+.hero{position:relative;background:var(--paper);overflow:hidden}
+.hero-media{height:200px;background-image:url(assets/hero-mobile.webp);background-size:cover;background-position:center;background-repeat:no-repeat}
+.hero-inner{position:relative;z-index:1;width:100%}
+.hero-copy{padding:30px 0 44px}
+.hero-headline{margin:0 0 18px;font-size:clamp(2.4rem,4.6vw,4.2rem);line-height:1;letter-spacing:-.03em;font-variation-settings:"opsz" 96}
+.hero-lead{font-size:clamp(1.1rem,1.7vw,1.35rem);line-height:1.45;color:var(--ink-65);margin:0 0 28px;max-width:540px}
+@media (min-width:768px){
+  .hero{min-height:clamp(520px,60vh,600px);display:flex;align-items:center}
+  /* Two background layers on one element: photo height-fit + right-anchored
+     (so its left edge — the empty cushion — meets the seam), and a
+     left-to-right wash of --paper on top: solid to ~55% of the band,
+     transparent by ~66%, photo full-strength in the right third. */
+  .hero-media{position:absolute;top:0;left:0;right:0;bottom:0;height:auto;
+    background-image:linear-gradient(90deg,var(--paper) 0%,var(--paper) 55%,rgba(255,255,255,0) 66%),url(assets/hero-desktop.webp);
+    background-size:auto,auto 100%;
+    background-position:0 0,right center;
+    background-repeat:no-repeat,no-repeat}
+  .hero-copy{max-width:55%;padding:48px 0}
 }
-.hero-proof .proof-line{color:var(--ink-80)}
-.hero-proof strong{font-weight:700}
+
+/* ============================================================
+   DTC-2 · INVOICE STRIP — page background, hairline rules top +
+   bottom, nothing clickable. Sentence left, invoice card right.
+   ============================================================ */
+.invoice-strip{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:clamp(40px,5vw,64px) 0}
+.invoice-grid{display:grid;grid-template-columns:1fr;gap:36px;align-items:center}
+.invoice-statement{font-family:var(--display);font-weight:500;font-size:clamp(1.5rem,2.6vw,2rem);line-height:1.18;letter-spacing:-.022em;color:var(--ink);margin:0 0 12px;font-variation-settings:"opsz" 96}
+.invoice-sub{font-size:clamp(1rem,1.4vw,1.125rem);line-height:1.55;color:var(--ink-65);margin:0}
+.invoice-card{max-width:400px;margin:0 auto;background:var(--paper);border:1px solid var(--rule-strong);border-radius:3px;box-shadow:var(--shadow-card);padding:26px 28px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;line-height:1.5;color:var(--ink)}
+.invoice-eyebrow{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45);margin:0 0 16px}
+.invoice-row{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin:0 0 8px}
+.invoice-dots{flex:1;border-bottom:1px dotted var(--rule-strong);transform:translateY(-3px)}
+.invoice-total{display:flex;align-items:baseline;justify-content:space-between;gap:8px;border-top:1px solid var(--rule);margin-top:12px;padding-top:12px;font-weight:700}
+.invoice-hassle{font-family:var(--body);font-size:.8125rem;line-height:1.5;color:var(--ink-65);margin:16px 0 0}
+@media (min-width:880px){
+  .invoice-grid{grid-template-columns:1.2fr 1fr;gap:64px}
+  .invoice-card{margin-left:auto;margin-right:0}
+}
+
+/* ============================================================
+   DTC-2 · TRUST STRIP — one line of muted text, nothing clickable,
+   no fill, no heading. Hairlines come from the neighbors (invoice
+   strip border-bottom above, #compare border-top below) so bands
+   share single rules. Mobile: compact 2×2 grid, middots hidden.
+   ============================================================ */
+.trust-strip{padding:22px 0}
+.trust-items{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:12px 20px;font-size:.8438rem;line-height:1.4;color:var(--ink-65)}
+.trust-star{color:var(--gold)}
+@media (min-width:768px){
+  .trust-strip{display:flex;align-items:center;min-height:66px;padding:0}
+  .trust-strip .container{width:100%}
+  .trust-items{display:flex;justify-content:center;align-items:center}
+  .trust-items li{white-space:nowrap}
+  .trust-items li+li::before{content:"\00B7";color:var(--ink-45);margin:0 clamp(14px,2.2vw,28px)}
+}
 
 .hiw-title{font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45);margin:14px 0 8px}
 .hiw-steps{list-style:none;counter-reset:hiw;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
@@ -900,7 +942,6 @@ details.faq-item summary:focus-visible{outline:2px solid var(--orange);outline-o
   .refer-inner{flex-direction:row;align-items:center;justify-content:space-between;gap:36px}
 }
 @media (min-width:880px){
-  .hero-grid{grid-template-columns:1.05fr 1fr;gap:64px;align-items:start}
   .control-grid{grid-template-columns:repeat(4,1fr)}
   .footer-grid{grid-template-columns:1.6fr 1fr 1fr 1fr;gap:48px}
   .footer-base{flex-direction:row;justify-content:space-between;align-items:center}
@@ -1022,22 +1063,52 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
 <main id="main">
 
 
-<!-- TRUST -->
-<section class="trust" aria-label="RAP trust">
+<!-- DTC-2 · HERO — four elements only: photo, H1, price line, one button.
+     Photo is a background layer (never an <img> in flow); the button is the
+     hero's only interactive element. -->
+<section class="hero" aria-label="Protect your furniture">
+  <div class="hero-media" aria-hidden="true"></div>
+  <div class="container hero-inner">
+    <div class="hero-copy">
+      <h1 class="hero-headline">Protect the sofa before you buy it.</h1>
+      <p class="hero-lead">$19.99 a month. Starts the day it&rsquo;s delivered. Cancel anytime.</p>
+      <a href="#plans" class="btn btn-accent">Protect my furniture</a>
+    </div>
+  </div>
+</section>
+
+<!-- DTC-2 · INVOICE STRIP — nothing clickable.
+     Figures are PLACEHOLDERS pending RAP claims data (owner). The
+     "typical quote" label is load-bearing — keep it. -->
+<section class="invoice-strip" aria-label="What one repair costs">
   <div class="container">
-    <div class="trust-grid">
-      <div class="trust-lead">
-        <span class="eyebrow">4.5 stars on Google &middot; Trusted by 2M+ households</span>
-        <h2 class="h-section">2M households trust <em class="gold">our service.</em></h2>
-        <p>US-based service that handles every step &mdash; file a claim in moments through our app, 24/7. No hold music.</p>
+    <div class="invoice-grid">
+      <div class="invoice-lead">
+        <p class="invoice-statement">This is what one repair costs without a plan.</p>
+        <p class="invoice-sub">We find the technician, book the visit, and pay the bill.</p>
       </div>
-      <div class="trust-stats">
-        <div class="trust-stat"><div class="num">4.5<span class="star">&#9733;</span></div><div class="lbl">Average RAP service rating across the network</div></div>
-        <div class="trust-stat"><div class="num">24/7</div><div class="lbl">Claim filing via app &mdash; takes minutes, no hold music</div></div>
-        <div class="trust-stat"><div class="num">Same day</div><div class="lbl">Most claims processed in hours, not weeks</div></div>
-        <div class="trust-stat"><div class="num">2M+</div><div class="lbl">Households in the RAP service network</div></div>
+      <div class="invoice-card">
+        <p class="invoice-eyebrow">Upholstery repair &middot; typical quote</p>
+        <div class="invoice-row"><span>Trip charge</span><span class="invoice-dots" aria-hidden="true"></span><span>$89</span></div>
+        <div class="invoice-row"><span>Labor, 2 hrs</span><span class="invoice-dots" aria-hidden="true"></span><span>$240</span></div>
+        <div class="invoice-row"><span>Re-web + fabric</span><span class="invoice-dots" aria-hidden="true"></span><span>$185</span></div>
+        <div class="invoice-total"><span>Total</span><span>$514</span></div>
+        <p class="invoice-hassle">&hellip;plus finding someone, three quotes, a weekday at home.</p>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- DTC-2 · TRUST STRIP — replaces the old RAP trust banner. One muted
+     text line, only the star carries color, nothing clickable. -->
+<section class="trust-strip" aria-label="Service facts">
+  <div class="container">
+    <ul class="trust-items">
+      <li>4.5<span class="trust-star">&#9733;</span> Google rating</li>
+      <li>24/7 claim filing</li>
+      <li>Same-day response on most claims</li>
+      <li>US-based repair network</li>
+    </ul>
   </div>
 </section>
 
@@ -1045,6 +1116,9 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
 
 <!-- COMPARISON -->
 <section class="compare" id="compare" aria-label="Comparison">
+  <!-- DTC-2: #plans anchor target for the hero CTA. Slice 3 renames this
+       section id="compare" → id="plans" and this span goes away. -->
+  <span id="plans"></span>
   <div class="container">
     <div class="compare-header reveal">
       <!-- DASH-5 (Doug 24-jun): recaptura; absoluto porque el kiosk es un site aparte (kiosk.furniturerx.net)
