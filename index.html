@@ -400,6 +400,10 @@ em.gold{font-style:italic;color:var(--gold);font-weight:500}
 .plan-caption{font-size:.75rem;color:var(--ink-45);line-height:1.5;margin:0 0 14px}
 /* Maya door #1 — quiet link under the grid, above the fine print */
 .plans-ask{margin-top:24px}
+/* DTC-8 (V12): quiet cross-link from #plans down to the Repair Safety Net band */
+.plans-used{margin-top:10px;font-size:.875rem;color:var(--ink-65)}
+.plans-used a{color:var(--ink-65)}
+.plans-used a:hover{color:var(--ink)}
 .plans-fine{margin-top:14px;font-size:.75rem;color:var(--ink-45);line-height:1.6;max-width:760px}
 .plans-fine a{color:var(--ink-65);text-decoration:underline;text-decoration-color:var(--rule-strong);text-underline-offset:2px}
 .plans-fine a:hover{color:var(--ink);text-decoration-color:var(--ink)}
@@ -414,6 +418,16 @@ em.gold{font-style:italic;color:var(--gold);font-weight:500}
 @media (min-width:680px){
   .how-steps{flex-direction:row;column-gap:34px}
 }
+
+/* DTC-8 (V12) · Repair Safety Net band — quiet, page background, NOT reversed.
+   One border-top hairline (matches #how-checkout above; #faq below brings its
+   own, so no bottom rule = no doubles). Restrained type: the H2 sits well below
+   .h-section scale so the band never competes with #plans. */
+.safety-net{border-top:1px solid var(--rule);padding:clamp(40px,5vw,64px) 0}
+.safety-net-h{font-size:clamp(1.5rem,2.6vw,2.125rem);line-height:1.1;margin:0 0 14px}
+.safety-net-lead{font-size:1.0625rem;line-height:1.6;color:var(--ink-80);margin:0 0 12px}
+.safety-net-price{font-size:.9375rem;color:var(--ink-65);margin:0 0 22px}
+.safety-net-fine{font-size:.8125rem;color:var(--ink-45);margin:16px 0 0}
 
 /* Feature list folded down from the removed #compare cards (orange check bullets) —
    reused by plan card A (DTC-3). DTC-5: .cmp-for reaped (markup gone). */
@@ -704,11 +718,14 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
 <!-- DTC-7 · HERO — photo is a background layer (never an <img> in flow).
      Owner copy verbatim: H1, lead, two support lines. CTA row: the filled
      primary sells (orange = purchase action); Get Help is a quiet exit to
-     the service site, same target as the header's Get Service link. -->
+     the service site, same target as the header's Get Service link.
+     DTC-8 (V12): eyebrow above the H1, owner copy verbatim — muted ink
+     variant, clearly subordinate to the H1 at every width. -->
 <section class="hero" aria-label="Protect your furniture">
   <div class="hero-media" aria-hidden="true"></div>
   <div class="container hero-inner">
     <div class="hero-copy">
+      <p class="eyebrow eyebrow-ink">PLANS FOR NEW &amp; USED FURNITURE</p>
       <h1 class="hero-headline">The sofa hasn&rsquo;t arrived. <span class="nowrap">But life is waiting.</span></h1>
       <p class="hero-lead">Protect your new furniture for <span class="nowrap">$19.99/month.</span> <span class="nowrap">Cancel anytime.</span></p>
       <p class="hero-sub">Sign up before you shop. Payments begin <span class="nowrap">at delivery.</span></p>
@@ -824,13 +841,14 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
     <!-- Maya door #1 (spec v10 §4): quiet link → same behavior as the floating chat button -->
     <p class="plans-ask reveal"><button type="button" id="plans-ask-maya" class="plan-choose" style="margin-top:0">Not sure which plan? Ask Maya</button></p>
 
+    <!-- DTC-8 (V12): quiet cross-link to the standalone membership band below -->
+    <p class="plans-used reveal">Have used furniture? <a href="#safety-net">See the Repair Safety Net &darr;</a></p>
+
     <!-- Legal copy pending owner/Adrian sign-off — build as written (spec v10 §4) -->
     <p class="plans-fine reveal">Coverage starts 30 days after your delivery date &middot; receipt needed before coverage starts &middot; not available in all states &middot; <a href="/terms/" target="_blank" rel="noopener" class="js-plan-terms">terms</a></p>
   </div>
 </section>
 
-
-<!-- DTC-1: standalone membership section removed; becomes a callout inside plan cards (later slice) -->
 
 <!-- DTC-4 (spec v10 §5): How-checkout-works — short strip, no form. Second entrance to the SAME
      checkout drawer (no auto-add: an empty cart still opens it, matching the header cart button). -->
@@ -843,6 +861,24 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
     </ol>
     <p class="how-secure">Secure checkout by Stripe. Cancel anytime.</p>
     <button type="button" id="how-checkout-cta" class="btn btn-accent">Start checkout <span class="arrow">&rarr;</span></button>
+  </div>
+</section>
+
+<!-- DTC-8 (V12) · REPAIR SAFETY NET — the standalone membership band returns (owner
+     reversed the DTC-1 removal): the $19.99/mo PAID membership for furniture the
+     customer already owns. Quiet band on the page background; the CTA is .btn-quiet
+     by owner call even though it's a purchase action (must not compete with #plans).
+     #mem-add-btn re-arms the kept-and-guarded membershipButtons() wiring: add →
+     "✓ In cart" → same drawer. Payload untouched — membership: savedMembership
+     already ships. -->
+<section class="safety-net" id="safety-net" aria-label="Repair Safety Net membership">
+  <div class="container container-narrow reveal">
+    <p class="eyebrow eyebrow-ink">USED FURNITURE?</p>
+    <h2 class="safety-net-h">Repair Safety Net, on its own.</h2>
+    <p class="safety-net-lead">For furniture you already own &mdash; Marketplace finds, inherited pieces &mdash; no receipt or delivery date needed. When something breaks, we find the technician, book the visit, and you pay member rates for the repair.</p>
+    <p class="safety-net-price"><span class="nowrap">$19.99/month</span> &middot; included free for 3 months with any protection plan</p>
+    <button type="button" id="mem-add-btn" class="btn btn-quiet">Add membership</button>
+    <p class="safety-net-fine">A service membership, not coverage &mdash; repairs are billed to you at member rates.</p>
   </div>
 </section>
 
@@ -2884,6 +2920,10 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
     if(!wrap || !list) return;
     while(list.firstChild) list.removeChild(list.firstChild);
     wrap.hidden = !savedMembership;
+    /* DTC-8 (V12): the membership fine print lost its toggle when the kiosk membership
+       section was killed — re-wired here, the single place the line renders/unrenders. */
+    var fine = document.getElementById('cart-membership-fine');
+    if(fine) fine.hidden = !savedMembership;
     if(!savedMembership){ updateCartTotal(); return; }
     var li = document.createElement('li'); li.className = 'cart-line membership';
     var rm = document.createElement('button');
