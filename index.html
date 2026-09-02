@@ -108,6 +108,9 @@ button{font:inherit;cursor:pointer}
 
 .container{width:100%;max-width:var(--container);margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter)}
 .container-narrow{max-width:var(--container-narrow)}
+/* DTC-7: glue for tight phrases (price+unit, short idioms) so lines
+   never break inside them — the phrase drops to the next line whole. */
+.nowrap{white-space:nowrap}
 
 .eyebrow{font-family:var(--body);font-weight:600;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:0 0 18px;display:inline-block}
 .eyebrow-ink{color:var(--ink-65)}
@@ -332,7 +335,9 @@ em.gold{font-style:italic;color:var(--gold);font-weight:500}
 .trust-strip{background:var(--navy-deep);padding:9px 0}
 .trust-items{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:8px 16px;font-size:.8438rem;line-height:1.4;color:rgba(255,255,255,.85)}
 .trust-star{color:var(--gold)}
-@media (min-width:768px){
+/* DTC-7: one-line row from 880px (not 768) — at 768 the four nowrap items
+   + middot gaps overflow the container by ~2px; 768-879 keeps the 2x2 grid. */
+@media (min-width:880px){
   .trust-strip{display:flex;align-items:center;min-height:52px;padding:0}
   .trust-strip .container{width:100%}
   .trust-items{display:flex;justify-content:center;align-items:center}
@@ -699,9 +704,9 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
   <div class="hero-media" aria-hidden="true"></div>
   <div class="container hero-inner">
     <div class="hero-copy">
-      <h1 class="hero-headline">The sofa hasn&rsquo;t arrived. But life is waiting.</h1>
-      <p class="hero-lead">Protect your new furniture for $19.99 a month. Cancel anytime.</p>
-      <p class="hero-sub">Sign up before you shop. Payments begin at delivery.</p>
+      <h1 class="hero-headline">The sofa hasn&rsquo;t arrived. <span class="nowrap">But life is waiting.</span></h1>
+      <p class="hero-lead">Protect your new furniture for <span class="nowrap">$19.99/month.</span> <span class="nowrap">Cancel anytime.</span></p>
+      <p class="hero-sub">Sign up before you shop. Payments begin <span class="nowrap">at delivery.</span></p>
       <p class="hero-sub">Accidents happen, and repairs are expensive.</p>
       <div class="hero-cta">
         <a href="#plans" class="btn btn-accent">Protect my furniture</a>
