@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Accessibility — FurnitureRx</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23d4541e'/%3E%3Ctext x='32' y='45' font-family='Georgia,serif' font-size='36' font-style='italic' font-weight='600' fill='%23fff' text-anchor='middle'%3ERx%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* DTC-1: placeholder stub page — minimal inline copy of the site tokens + header/footer.
+   Standalone on purpose (spec "Placeholder pages"); index.html stays single-page. */
+:root{
+  --paper:#ffffff; --ink:#0e1418;
+  --ink-80:rgba(14,20,24,.82); --ink-65:rgba(14,20,24,.65); --ink-45:rgba(14,20,24,.45);
+  --orange:#d4541e; --rule:#e6e8eb; --rule-strong:#c8ccd1;
+  --display:"Fraunces",Georgia,serif; --body:"Inter",system-ui,-apple-system,sans-serif;
+  --container:1200px; --gutter:clamp(20px,4vw,40px);
+  --ease:cubic-bezier(.2,.6,.2,1); --t-fast:160ms;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;font-family:var(--body);font-size:16px;line-height:1.55;color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased}
+[hidden]{display:none!important}
+.container{width:100%;max-width:var(--container);margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter)}
+
+/* Header (same bar as the main site) */
+.site-header{position:relative;background:var(--paper);border-bottom:1px solid var(--rule);z-index:50}
+.site-header-inner{display:flex;align-items:center;height:56px;gap:14px}
+.logo{display:flex;align-items:baseline;text-decoration:none}
+.logo .mark{font-family:var(--display);font-weight:600;font-size:1.5rem;color:var(--ink);letter-spacing:-.02em}
+.site-nav{display:none;align-items:center;gap:28px;margin-left:auto}
+.site-nav a{font-size:.875rem;font-weight:500;color:var(--ink-65);text-decoration:none;transition:color var(--t-fast) var(--ease)}
+.site-nav a:hover{color:var(--ink)}
+.dash-pill{display:none;align-items:center;margin-left:20px;padding:8px 18px;border:1px solid var(--ink);border-radius:99px;background:transparent;color:var(--ink);font-size:.875rem;font-weight:600;line-height:1;text-decoration:none;white-space:nowrap;transition:background-color var(--t-fast) var(--ease)}
+.dash-pill:hover{background:rgba(14,20,24,.05)}
+.dash-icon-btn{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;margin-left:auto;border:1px solid var(--ink);border-radius:50%;background:transparent;color:var(--ink);flex:none}
+.dash-icon-btn svg{width:18px;height:18px}
+.menu-btn{background:transparent;border:0;padding:9px;margin:-9px -9px -9px 0;display:flex;flex-direction:column;gap:5px;cursor:pointer;flex:none}
+.menu-btn span{display:block;width:22px;height:2px;background:var(--ink)}
+.menu-panel{position:absolute;left:0;right:0;top:100%;background:var(--paper);border-bottom:1px solid var(--rule);box-shadow:0 16px 32px rgba(14,20,24,.08);z-index:55}
+.menu-panel a{display:block;padding:16px var(--gutter);font-size:1rem;font-weight:500;color:var(--ink);text-decoration:none;border-top:1px solid var(--rule)}
+@media (min-width:768px){
+  .site-nav{display:flex}
+  .dash-pill{display:inline-flex}
+  .dash-icon-btn,.menu-btn{display:none}
+  .menu-panel{display:none!important}
+}
+
+/* Body + footer */
+main{padding:clamp(64px,10vw,140px) 0}
+h1{font-family:var(--display);font-weight:500;font-size:clamp(2rem,4.5vw,3.5rem);letter-spacing:-.025em;line-height:1.05;margin:0 0 18px}
+.stub-line{font-size:clamp(1.05rem,1.5vw,1.2rem);color:var(--ink-65);margin:0;max-width:640px}
+.site-footer{border-top:1px solid var(--rule);padding:28px 0}
+.site-footer-inner{display:flex;flex-wrap:wrap;gap:10px 24px;align-items:center;justify-content:space-between;font-size:.8125rem;color:var(--ink-65)}
+.site-footer a{color:var(--ink-65);text-decoration:none}
+.site-footer a:hover{color:var(--ink)}
+.site-footer nav{display:flex;flex-wrap:wrap;gap:10px 18px}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container site-header-inner">
+    <a href="/" class="logo" aria-label="FurnitureRx home"><span class="mark">FurnitureRx</span></a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="/">Home</a>
+      <a href="https://5starservice.net/" target="_blank" rel="noopener">Get Service</a>
+      <a href="/shop-furniture/">Shop Furniture</a>
+      <a href="/cleaning-kit/">Cleaning Kit</a>
+    </nav>
+    <a href="https://www.furniturerx.net/dashboard" class="dash-pill">My Dashboard</a>
+    <a href="https://www.furniturerx.net/dashboard" class="dash-icon-btn" aria-label="My Dashboard">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </a>
+    <button type="button" class="menu-btn" id="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="menu-panel">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="menu-panel" id="menu-panel" aria-label="Mobile navigation" hidden>
+    <a href="/">Home</a>
+    <a href="https://5starservice.net/" target="_blank" rel="noopener">Get Service</a>
+    <a href="/shop-furniture/">Shop Furniture</a>
+    <a href="/cleaning-kit/">Cleaning Kit</a>
+  </nav>
+</header>
+
+<main>
+  <div class="container">
+    <h1>Accessibility</h1>
+    <p class="stub-line">Our accessibility statement is coming soon. Need help with this site? Call us at 1-833-395-7824.</p>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container site-footer-inner">
+    <span>Administered by Risk Assurance Partners</span>
+    <nav aria-label="Footer">
+      <a href="/terms/">Coverage terms</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="/accessibility/">Accessibility</a>
+      <a href="https://www.furniturerx.net/dashboard">Log in</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+/* DTC-1: hamburger panel (same behavior as the main site header) */
+(function(){
+  var menuBtn = document.getElementById('menu-btn');
+  var menuPanel = document.getElementById('menu-panel');
+  if(!menuBtn || !menuPanel) return;
+  function closeMenuPanel(){
+    if(!menuPanel.hidden){ menuPanel.hidden = true; menuBtn.setAttribute('aria-expanded','false'); }
+  }
+  menuBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    var opening = menuPanel.hidden;
+    menuPanel.hidden = !opening;
+    menuBtn.setAttribute('aria-expanded', opening ? 'true' : 'false');
+  });
+  menuPanel.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', closeMenuPanel); });
+  document.addEventListener('click', function(e){
+    if(!menuPanel.hidden && !menuPanel.contains(e.target)) closeMenuPanel();
+  });
+  window.addEventListener('scroll', closeMenuPanel, { passive:true });
+})();
+</script>
+
+</body>
+</html>

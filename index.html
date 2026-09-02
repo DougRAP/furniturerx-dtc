@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="kiosk">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -160,43 +160,43 @@ em.gold{font-style:italic;color:var(--gold);font-weight:500}
 .link-inline:hover{color:var(--ink);text-decoration-color:var(--ink)}
 
 /* ============================================================
-   UTILITY BAR + NAV
+   HEADER (DTC-1) — one bar ~56px, page background, hairline
+   bottom border, NOT sticky. Desktop: logo left; muted text
+   links + outlined "My Dashboard" pill right. Mobile (<768px):
+   logo left; dashboard icon button + hamburger right, panel
+   drops full-width under the bar.
    ============================================================ */
-.utility{background:var(--navy-deep);color:rgba(255,255,255,.85);font-size:.8125rem;letter-spacing:.04em;padding:10px 0;text-align:center;position:relative;z-index:60}
-.utility strong{color:#fff;font-weight:600}
-.utility .dot{color:var(--gold);margin:0 8px}
-
-.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid transparent;padding:18px 0;transition:padding var(--t-med) var(--ease),border-color var(--t-med) var(--ease),box-shadow var(--t-med) var(--ease)}
-.nav.scrolled{border-bottom-color:var(--rule);padding:13px 0;box-shadow:0 6px 24px rgba(14,20,24,.04)}
-.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:24px}
+.site-header{position:relative;background:var(--paper);border-bottom:1px solid var(--rule);z-index:50}
+.site-header-inner{display:flex;align-items:center;height:56px;gap:14px}
 .logo{display:flex;align-items:baseline;gap:12px;text-decoration:none}
 .logo .mark{font-family:var(--display);font-weight:600;font-size:1.5rem;color:var(--ink);letter-spacing:-.02em;font-variation-settings:"opsz" 24}
 .logo .mark em{font-style:italic;color:var(--orange);font-weight:500}
 .logo .tag{font-size:.6875rem;color:var(--ink-65);letter-spacing:.14em;text-transform:uppercase;font-weight:500}
 
-.nav-links{display:none;list-style:none;padding:0;margin:0;gap:32px;align-items:center}
-.nav-links a{font-size:.9rem;color:var(--ink);text-decoration:none;font-weight:500;transition:color var(--t-fast) var(--ease)}
-.nav-links a:hover{color:var(--orange)}
-.nav-cta{display:flex;align-items:center;gap:14px}
-.nav-cart{position:relative;display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border:1px solid var(--rule);border-radius:50%;background:var(--paper);color:var(--ink);cursor:pointer;transition:border-color var(--t-fast) var(--ease),color var(--t-fast) var(--ease)}
-.nav-cart:hover{border-color:var(--ink);color:var(--orange)}
-.nav-cart-count{position:absolute;top:-4px;right:-4px;min-width:18px;height:18px;padding:0 4px;border-radius:9px;background:var(--orange);color:#fff;font-size:.68rem;font-weight:700;line-height:18px;text-align:center;font-family:var(--body)}
 /* hidden SIEMPRE gana: sin esto, cualquier regla con display (.btn, .cart-deliver label, etc.)
    re-mostraba elementos con hidden — el radio de email y el botón email-cart "ocultos" seguían
    visibles. Sustituye los parches por-selector que se venían acumulando. */
 [hidden]{display:none!important}
 
-.nav-toggle{background:transparent;border:0;padding:8px;margin:-8px;display:flex;flex-direction:column;gap:5px;cursor:pointer}
-.nav-toggle span{display:block;width:22px;height:2px;background:var(--ink)}
-
-.nav-drawer{position:fixed;top:0;right:0;width:min(85%,360px);height:100vh;background:var(--paper);z-index:100;padding:80px 28px 32px;transform:translateX(100%);transition:transform var(--t-med) var(--ease);box-shadow:-20px 0 40px rgba(14,20,24,.12);overflow-y:auto}
-.nav-drawer.open{transform:translateX(0)}
-.nav-drawer-close{position:absolute;top:18px;right:18px;background:transparent;border:0;padding:10px;font-size:26px;line-height:1;color:var(--ink);cursor:pointer}
-.nav-drawer ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:2px}
-.nav-drawer a{display:block;padding:16px 0;font-family:var(--display);font-weight:500;font-size:1.5rem;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--rule);letter-spacing:-.015em}
-.nav-drawer .drawer-cta{margin-top:24px}
-.nav-backdrop{position:fixed;inset:0;background:rgba(14,20,24,.4);z-index:90;opacity:0;pointer-events:none;transition:opacity var(--t-med) var(--ease)}
-.nav-backdrop.open{opacity:1;pointer-events:auto}
+.site-nav{display:none;align-items:center;gap:28px;margin-left:auto}
+.site-nav a{font-size:.875rem;font-weight:500;color:var(--ink-65);text-decoration:none;transition:color var(--t-fast) var(--ease)}
+.site-nav a:hover{color:var(--ink)}
+/* My Dashboard — the only styled element in the bar (outlined pill) */
+.dash-pill{display:none;align-items:center;margin-left:20px;padding:8px 18px;border:1px solid var(--ink);border-radius:99px;background:transparent;color:var(--ink);font-size:.875rem;font-weight:600;line-height:1;text-decoration:none;white-space:nowrap;transition:background-color var(--t-fast) var(--ease)}
+.dash-pill:hover{background:rgba(14,20,24,.05)}
+/* Mobile: outlined circle icon button to the dashboard + hamburger */
+.dash-icon-btn{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;margin-left:auto;border:1px solid var(--ink);border-radius:50%;background:transparent;color:var(--ink);flex:none}
+.dash-icon-btn svg{width:18px;height:18px}
+.menu-btn{background:transparent;border:0;padding:9px;margin:-9px -9px -9px 0;display:flex;flex-direction:column;gap:5px;cursor:pointer;flex:none}
+.menu-btn span{display:block;width:22px;height:2px;background:var(--ink)}
+.menu-panel{position:absolute;left:0;right:0;top:100%;background:var(--paper);border-bottom:1px solid var(--rule);box-shadow:0 16px 32px rgba(14,20,24,.08);z-index:55}
+.menu-panel a{display:block;padding:16px var(--gutter);font-size:1rem;font-weight:500;color:var(--ink);text-decoration:none;border-top:1px solid var(--rule)}
+@media (min-width:768px){
+  .site-nav{display:flex}
+  .dash-pill{display:inline-flex}
+  .dash-icon-btn,.menu-btn{display:none}
+  .menu-panel{display:none!important}
+}
 
 /* CART / CHECKOUT slide-out (CHK-1) */
 .cart-backdrop{position:fixed;inset:0;background:rgba(14,20,24,.42);z-index:110;opacity:0;pointer-events:none;transition:opacity var(--t-med) var(--ease)}
@@ -900,7 +900,6 @@ details.faq-item summary:focus-visible{outline:2px solid var(--orange);outline-o
   .refer-inner{flex-direction:row;align-items:center;justify-content:space-between;gap:36px}
 }
 @media (min-width:880px){
-  .nav-cta{display:flex}   /* DOUG-2: hamburguesa también en desktop — labels más descriptivos (call 06-jul, intencional) */
   .hero-grid{grid-template-columns:1.05fr 1fr;gap:64px;align-items:start}
   .control-grid{grid-template-columns:repeat(4,1fr)}
   .footer-grid{grid-template-columns:1.6fr 1fr 1fr 1fr;gap:48px}
@@ -992,50 +991,33 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
 </head>
 <body>
 
-<div class="utility">
-  <strong>Furniture protection from $9.99/mo</strong> <span class="dot">·</span> Cancel&nbsp;anytime
-</div>
-
-<header class="nav" id="nav">
-  <div class="container nav-inner">
+<!-- DTC-1: new one-bar header (spec "Header (LOCKED)"). Not sticky; hairline rule below. -->
+<header class="site-header" id="site-header">
+  <div class="container site-header-inner">
     <a href="/" class="logo" aria-label="FurnitureRx home">
       <span class="mark">FurnitureRx</span>
-      <span class="tag">Powered by RAP</span>
     </a>
-    <nav aria-label="Primary">
-      <ul class="nav-links">
-        <li><a href="#compare">Protection Plans</a></li>
-        <li><a href="#kits">Care Kits</a></li>
-        <li><a href="#membership">Uncovered Repairs</a></li>
-        <li><a href="#faq">FAQ</a></li>
-      </ul>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="/">Home</a>
+      <a href="https://5starservice.net/" target="_blank" rel="noopener">Get Service</a>
+      <a href="/shop-furniture/">Shop Furniture</a>
+      <a href="/cleaning-kit/">Cleaning Kit</a>
     </nav>
-    <div class="nav-cta">
-      <button type="button" class="nav-cart" id="nav-cart" aria-label="Open cart">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-        <span class="nav-cart-count" id="nav-cart-count" hidden>0</span>
-      </button>
-    </div>
-    <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer">
+    <a href="https://www.furniturerx.net/dashboard" class="dash-pill">My Dashboard</a>
+    <a href="https://www.furniturerx.net/dashboard" class="dash-icon-btn" aria-label="My Dashboard">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </a>
+    <button type="button" class="menu-btn" id="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="menu-panel">
       <span></span><span></span><span></span>
     </button>
   </div>
+  <nav class="menu-panel" id="menu-panel" aria-label="Mobile navigation" hidden>
+    <a href="/">Home</a>
+    <a href="https://5starservice.net/" target="_blank" rel="noopener">Get Service</a>
+    <a href="/shop-furniture/">Shop Furniture</a>
+    <a href="/cleaning-kit/">Cleaning Kit</a>
+  </nav>
 </header>
-
-<div class="nav-backdrop" id="nav-backdrop" hidden></div>
-<aside class="nav-drawer" id="nav-drawer" aria-label="Mobile navigation" hidden>
-  <button class="nav-drawer-close" id="nav-drawer-close" aria-label="Close menu">&times;</button>
-  <ul>
-    <li><a href="#compare">Protection Plans</a></li>
-    <li><a href="#kits">Care Kits</a></li>
-    <li><a href="#membership">Uncovered Repairs</a></li>
-    <li><a href="#faq">FAQ</a></li>
-    <li><a href="https://5starservice.net/" target="_blank" rel="noopener">File a Claim</a></li>
-    <li><a href="#" id="drawer-cust-login">Customer login</a></li>
-    <li><a href="#" id="drawer-dealer-login">Dealer login</a></li>
-    <li><a href="#faq" id="drawer-chat-cta">Questions?</a></li>
-  </ul>
-</aside>
 
 <main id="main">
 
@@ -1093,7 +1075,7 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
           <li>Built for fabric, leather, vinyl, wood, rugs, and more</li>
           <li>We clean or repair first &mdash; replace it if we can&rsquo;t fix it</li>
           <li>24/7 claim filing &middot; same-day processing</li>
-          <li><strong>Repair Safety Net included</strong> &mdash; member rates on labor, parts, and coordinated repairs; <a href="#membership">learn more</a></li>
+          <li><strong>Repair Safety Net included</strong> &mdash; member rates on labor, parts, and coordinated repairs</li>
         </ul>
 
         <div class="cfg-price">
@@ -1122,13 +1104,7 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
           <button type="button" id="cmp-stain-save" class="btn btn-accent">Save to cart <span class="arrow">&rarr;</span></button>
           <button type="button" id="cmp-stain-checkout" class="btn btn-ghost">Checkout</button>
         </div>
-        <div class="cmp-addons">
-          <span class="cmp-addons-label">Add to your cart</span>
-          <div class="cmp-addons-row">
-            <a href="#membership" class="btn-addon">Cover your used furniture <small>$19.99/mo</small></a>
-            <a href="#kits" class="btn-addon">Browse kits <small>from $49.99</small></a>
-          </div>
-        </div>
+        <!-- DTC-1: add-on row (used-furniture membership + kits) removed with the killed sections -->
       </article>
 
       <article class="compare-col plan-offer" data-cov="stain-mech">
@@ -1149,7 +1125,7 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
           <li><strong>$5,000</strong> total coverage</li>
           <li>Repair first. Replace if repair isn&rsquo;t enough.</li>
           <li>24/7 claim filing &middot; same-day processing</li>
-          <li><strong>Repair Safety Net included</strong> &mdash; member rates on labor, parts, and coordinated repairs; <a href="#membership">learn more</a></li>
+          <li><strong>Repair Safety Net included</strong> &mdash; member rates on labor, parts, and coordinated repairs</li>
         </ul>
 
         <div class="cfg-price">
@@ -1178,72 +1154,15 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
           <button type="button" id="cmp-mech-save" class="btn btn-accent">Save to cart <span class="arrow">&rarr;</span></button>
           <button type="button" id="cmp-mech-checkout" class="btn btn-ghost">Checkout</button>
         </div>
-        <div class="cmp-addons">
-          <span class="cmp-addons-label">Add to your cart</span>
-          <div class="cmp-addons-row">
-            <a href="#membership" class="btn-addon">Cover your used furniture <small>$19.99/mo</small></a>
-            <a href="#kits" class="btn-addon">Browse kits <small>from $49.99</small></a>
-          </div>
-        </div>
+        <!-- DTC-1: add-on row (used-furniture membership + kits) removed with the killed sections -->
       </article>
     </div>
-    <p class="plans-fine reveal">Available for new furniture purchased from an authorized dealer in the last 60 days. To activate coverage include your sales order# and zip code at checkout &mdash; a valid sales receipt is required to activate coverage. Coverage is month to month paid in advance, start 30 days after you pay the monthly fee, please read the <a href="/terms/" target="_blank" rel="noopener" class="js-plan-terms">terms and conditions</a> before purchasing, not available in all states.</p>
+    <p class="plans-fine reveal">Available for new furniture purchased from any store in the last 60 days. To activate coverage include your sales order# and zip code at checkout &mdash; a valid sales receipt is required to activate coverage. Coverage is month to month paid in advance, start 30 days after you pay the monthly fee, please read the <a href="/terms/" target="_blank" rel="noopener" class="js-plan-terms">terms and conditions</a> before purchasing, not available in all states.</p>
   </div>
 </section>
 
 
-<!-- MEMBERSHIP -->
-<section class="membership" id="membership">
-  <div class="container">
-    <div class="mem-intro reveal">
-      <span class="eyebrow eyebrow-orange">FurnitureRx Repair Concierge</span>
-      <h2 class="h-section">Keep your furniture looking new with <em class="accent">Repair Concierge.</em></h2>
-      <p class="lead">Repair Concierge helps you care for your furniture with professional damage triage, access to our skilled repair network, repair coordination, and member rates on repair labor and parts costs.</p>
-    </div>
-
-    <article class="mem-card reveal">
-      <header class="mem-card-head">
-        <span class="kicker">FurnitureRx Repair Safety Net</span>
-        <h3>Managed repair help for furniture you <em class="accent">own, buy, or sell.</em></h3>
-        <div class="price">
-          <span class="amt">$19.99</span>
-          <span class="per">/ month</span>
-        </div>
-        <div class="price-sub">For furniture in your home now, furniture you buy later, and secondhand finds from online or local sellers.</div>
-      </header>
-
-      <div class="mem-card-body">
-        <div class="copy">
-          <h4>What you get</h4>
-          <p><strong>Professional triage</strong> &mdash; we help identify the damage, repair options, and likely next step.</p>
-          <p><strong>Managed repair network</strong> &mdash; we source skilled technicians, coordinate the work, and stay involved through the repair.</p>
-          <p><strong>Buy direct pricing</strong> &mdash; leverage our purchasing power and negotiated rates and save on repair, labor, and parts costs. Avoid high retail cleaning and repairs charged by national cleaning services.</p>
-          <p><strong>Repair instead of replace</strong> &mdash; keep good furniture in service longer, including used, inherited, marketplace, and online purchases.</p>
-          <p><a href="#" class="link-inline js-gift-coupon"><strong>Gift coupon codes</strong></a> &mdash; members can request and purchase a one-month code for a friend or online furniture buyer.</p>
-        </div>
-
-        <div class="copy">
-          <h4>Helpful for</h4>
-          <ul class="mem-benefits">
-            <li><strong>Holiday cleaning</strong> &mdash; before and after the holidays, at rates better than local cleaning companies, with concierge-managed service</li>
-            <li><strong>Touch-ups &amp; repairs</strong> &mdash; nicks, scratches, loose joints, wobbly legs, worn upholstery</li>
-            <li><strong>Marketplace finds</strong> &mdash; repair support for Facebook Marketplace, local-seller, and secondhand furniture</li>
-            <li><strong>Online purchases</strong> &mdash; setup, assembly, touch-up, and repair help for direct-to-door buys</li>
-            <li><strong>Setup &amp; assembly</strong> &mdash; help with beds, dining, sectionals, storage, and built-to-order pieces</li>
-            <li><strong>Moving &amp; rearranging</strong> &mdash; member pricing for move-in, move-out, room resets, and heavy-piece repositioning</li>
-            <li><strong>Priority service</strong> &mdash; faster scheduling, preferred windows, and member-first support</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="mem-card-foot">
-        <button type="button" class="btn btn-accent" id="mem-add-btn">Add Repair Safety Net &middot; $19.99/mo <span class="arrow">&rarr;</span></button>
-        <button type="button" class="btn btn-ghost" id="mem-details-link">See membership details</button>
-        <a href="#" class="link-inline js-gift-coupon">Request a gift coupon code <span class="arrow">&rarr;</span></a>
-      </div>
-    </article>
-  </div>
-</section>
+<!-- DTC-1: standalone membership section removed; becomes a callout inside plan cards (later slice) -->
 
 <!-- FAQ -->
 <section class="faq" id="faq" style="background: var(--paper-cool); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);">
@@ -1318,118 +1237,7 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
   </div>
 </section>
 
-<!-- CARE KITS -->
-<section class="kits" id="kits">
-  <div class="container">
-    <div class="kits-intro reveal">
-      <span class="eyebrow eyebrow-orange">While you&rsquo;re here</span>
-      <h2 class="h-section">Care kits, <em class="accent">in a box.</em></h2>
-      <p class="lead" style="max-width:620px">Member-grade cleaning and conditioning, but no subscription required. The same products our technicians carry on service calls.</p>
-    </div>
-
-    <div class="kits-grid reveal">
-      <article class="kit-card">
-        <div class="kit-image">
-          <img src="kit_assets/wood.jpg" alt="Wood care kit — cleaner, polish, and microfiber cloth" loading="lazy" width="600" height="480">
-          <!-- DEPRECATED placeholder (replaced by kit_assets/wood.jpg): <svg viewBox="0 0 64 64" fill="none" stroke="currentColor"><circle cx="32" cy="32" r="22"/><circle cx="32" cy="32" r="16"/><circle cx="32" cy="32" r="10"/><circle cx="32" cy="32" r="4"/></svg> -->
-          <!-- DEPRECATED fake-packaging overlay (superseded by real kit_assets photo):
-          <div class="kit-pkg">
-            <div>
-              <div class="pkg-logo"><span class="star">&#9733;</span>5 STAR SERVICE</div>
-              <div class="pkg-title">Wood<small>Clean &middot; Polish</small></div>
-            </div>
-            <div class="pkg-band"></div>
-          </div>
-          -->
-        </div>
-        <div class="kit-body">
-          <span class="kit-tag">Wood care kit</span>
-          <h3>Clean &amp; polish for every wood piece.</h3>
-          <p class="kit-desc">Cleaner, polish, and microfiber cloth. Removes dirt, grease, and grime. Restores lustre and conditions wood. Works on modern, vintage, and antique pieces.</p>
-          <div class="kit-foot">
-            <span class="kit-price">$49.99</span>
-            <span class="cfg-count-ctl" role="group" aria-label="Wood Care Kit quantity">
-              <button type="button" class="kit-dec" aria-label="One fewer Wood Care Kit">&minus;</button>
-              <span class="cmp-count kit-count" aria-live="polite">0</span>
-              <button type="button" class="kit-inc" aria-label="One more Wood Care Kit">+</button>
-            </span>
-          </div>
-          <div class="cfg-cta-row cmp-cta-row">
-            <button type="button" class="btn btn-accent kit-add-btn" data-kit="Wood Care Kit">Add to cart <span class="arrow">&rarr;</span></button>
-            <button type="button" class="btn btn-ghost kit-checkout-btn" data-kit="Wood Care Kit">Checkout</button>
-          </div>
-        </div>
-      </article>
-
-      <article class="kit-card">
-        <div class="kit-image fabric">
-          <img src="kit_assets/fabric.jpg" alt="Fabric & upholstery care kit — stain remover, protectant spray, and brush applicator" loading="lazy" width="600" height="480">
-          <!-- DEPRECATED placeholder (replaced by kit_assets/fabric.jpg): <svg viewBox="0 0 64 64" fill="none" stroke="currentColor"><path d="M8 16h48v32H8z"/><path d="M8 24h48M8 32h48M8 40h48"/><path d="M16 16v32M28 16v32M40 16v32M52 16v32"/></svg> -->
-          <!-- DEPRECATED fake-packaging overlay (superseded by real kit_assets photo):
-          <div class="kit-pkg">
-            <div>
-              <div class="pkg-logo"><span class="star">&#9733;</span>5 STAR SERVICE</div>
-              <div class="pkg-title">Fabric<small>Clean &middot; Protect</small></div>
-            </div>
-            <div class="pkg-band"></div>
-          </div>
-          -->
-        </div>
-        <div class="kit-body">
-          <span class="kit-tag">Fabric &amp; upholstery</span>
-          <h3>Lift stains. Protect against the next one.</h3>
-          <p class="kit-desc">Stain remover, protectant spray, and brush applicator. Safe for most upholstery, cushions, and decorative fabrics. Built for the spill that always happens at dinner.</p>
-          <div class="kit-foot">
-            <span class="kit-price">$49.99</span>
-            <span class="cfg-count-ctl" role="group" aria-label="Fabric Care Kit quantity">
-              <button type="button" class="kit-dec" aria-label="One fewer Fabric Care Kit">&minus;</button>
-              <span class="cmp-count kit-count" aria-live="polite">0</span>
-              <button type="button" class="kit-inc" aria-label="One more Fabric Care Kit">+</button>
-            </span>
-          </div>
-          <div class="cfg-cta-row cmp-cta-row">
-            <button type="button" class="btn btn-accent kit-add-btn" data-kit="Fabric Care Kit">Add to cart <span class="arrow">&rarr;</span></button>
-            <button type="button" class="btn btn-ghost kit-checkout-btn" data-kit="Fabric Care Kit">Checkout</button>
-          </div>
-        </div>
-      </article>
-
-      <article class="kit-card">
-        <div class="kit-image leather">
-          <img src="kit_assets/leather.jpg" alt="Leather care kit — cleaner, conditioner, and applicator pads" loading="lazy" width="600" height="480">
-          <!-- DEPRECATED placeholder (replaced by kit_assets/leather.jpg): <svg viewBox="0 0 64 64" fill="none" stroke="currentColor"><path d="M12 20c0-6 8-10 20-10s20 4 20 10v24c0 6-8 10-20 10s-20-4-20-10z"/><path d="M12 32c0-6 8-10 20-10s20 4 20 10"/></svg> -->
-          <!-- DEPRECATED fake-packaging overlay (superseded by real kit_assets photo):
-          <div class="kit-pkg">
-            <div>
-              <div class="pkg-logo"><span class="star">&#9733;</span>5 STAR SERVICE</div>
-              <div class="pkg-title">Leather<small>Clean &middot; Condition</small></div>
-            </div>
-            <div class="pkg-band"></div>
-          </div>
-          -->
-        </div>
-        <div class="kit-body">
-          <span class="kit-tag">Leather care kit</span>
-          <h3>Keep leather supple. Avoid the cracks.</h3>
-          <p class="kit-desc">Leather cleaner, conditioner, and applicator pads. Restores moisture, prevents cracking, and refreshes color. Works on aniline, pigmented, and bonded leathers.</p>
-          <div class="kit-foot">
-            <span class="kit-price">$49.99</span>
-            <span class="cfg-count-ctl" role="group" aria-label="Leather Care Kit quantity">
-              <button type="button" class="kit-dec" aria-label="One fewer Leather Care Kit">&minus;</button>
-              <span class="cmp-count kit-count" aria-live="polite">0</span>
-              <button type="button" class="kit-inc" aria-label="One more Leather Care Kit">+</button>
-            </span>
-          </div>
-          <div class="cfg-cta-row cmp-cta-row">
-            <button type="button" class="btn btn-accent kit-add-btn" data-kit="Leather Care Kit">Add to cart <span class="arrow">&rarr;</span></button>
-            <button type="button" class="btn btn-ghost kit-checkout-btn" data-kit="Leather Care Kit">Checkout</button>
-          </div>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
-
+<!-- DTC-1: care kits section removed (kill list); kits payload contract kept (sends kits: []) -->
 
 </main>
 
@@ -1440,34 +1248,29 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
         <a href="/" class="logo"><span class="mark">FurnitureRx</span></a>
         <p class="footer-tagline">A subscription protection and repair-help program administered by Risk Assurance Partners.</p>
       </div>
+      <!-- DTC-1: minimal footer patch — dead links (#membership, #kits, Dealer login) removed;
+           Log in points at the customer dashboard; Privacy/Accessibility wired to the new stubs.
+           Full footer rebuild is slice 5. -->
       <div class="footer-col">
         <h4>Program</h4>
         <ul>
           <li><a href="#compare">Protection plans</a></li>
-          <li><a href="#membership">Membership</a></li>
-          <li><a href="#kits">Care kits</a></li>
           <li><a href="#faq">FAQ</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Account</h4>
         <ul>
-          <!-- FOOT-1b: Log in cableado al login real (AUTH-1); File a claim/Manage/Concierge siguen esperando insumos -->
-          <li><a href="https://www.furniturerx.net/account.html">Customer login</a></li>
-          <li><a href="https://portal.furniturerx.net/">Dealer login</a></li>
-          <li><a>File a claim</a></li>
-          <li><a>Manage coverage</a></li>
-          <li><a>Contact concierge</a></li>
+          <li><a href="https://www.furniturerx.net/dashboard">Log in</a></li>
+          <li><a href="https://5starservice.net/" target="_blank" rel="noopener">File a claim</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Legal</h4>
         <ul>
-          <!-- FOOT-1a: ToS/Privacy/Accessibility sin href hasta recibir los textos legales (LEG-1/2/3) -->
-          <li><a>Terms of service</a></li>
-          <li><a>Privacy policy</a></li>
           <li><a href="/terms/" target="_blank" rel="noopener" class="js-plan-terms">Coverage terms</a></li>
-          <li><a>Accessibility</a></li>
+          <li><a href="/privacy/">Privacy policy</a></li>
+          <li><a href="/accessibility/">Accessibility</a></li>
         </ul>
       </div>
     </div>
@@ -1480,7 +1283,7 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
 
 <div class="sticky-mobile" id="sticky-mobile">
   <button type="button" id="sticky-cta" class="btn btn-accent">Add plan <span class="arrow">&rarr;</span></button>
-  <a href="#kits" class="btn btn-quiet">Add kit</a>
+  <!-- DTC-1: "Add kit" link removed with the care kits section -->
 </div>
 
 <!-- CART / CHECKOUT slide-out (CHK-1) -->
@@ -1501,12 +1304,7 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
         <div class="cart-kits-title">Plans</div>
         <ul id="cart-plans-list"></ul>
       </div>
-      <div id="cart-kits" hidden>
-        <div class="cart-kits-title">Care kits</div>
-        <ul id="cart-kits-list"></ul>
-        <!-- BE-5 (14-ago): el cliente paga S&H + tax de los kits; el total de abajo ya los incluye. -->
-        <p class="cart-kits-note">Shipped to your door &mdash; $11.00 shipping &amp; handling per kit and 6% sales tax are included in the one-time total.</p>
-      </div>
+      <!-- DTC-1: kit cart UI removed (kill list); the payload still sends kits: [] -->
       <div id="cart-membership" hidden>
         <div class="cart-kits-title">Repair Safety Net</div>
         <ul id="cart-membership-list"></ul>
@@ -1516,20 +1314,6 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
         <span id="cart-total-val" class="cart-total-val"></span>
       </div>
       <button type="button" id="cart-clear" class="cart-clear" hidden>Empty cart</button>
-      <div id="cart-membership-extras" hidden>
-        <label class="cart-kit-add" for="cart-kit-toggle">
-          <input type="checkbox" id="cart-kit-toggle">
-          <span>Add a care kit <small>$49.99 one-time</small></span>
-        </label>
-        <div class="cart-field" id="cart-kit-type-field" hidden>
-          <label for="cart-kit-type">Which kit?</label>
-          <select id="cart-kit-type">
-            <option value="Wood Care Kit">Wood care kit</option>
-            <option value="Fabric Care Kit">Fabric care kit</option>
-            <option value="Leather Care Kit">Leather care kit</option>
-          </select>
-        </div>
-      </div>
       <form id="cart-form" novalidate>
         <p class="cart-hint">Tell us about yourself &mdash; this is how we&rsquo;ll reach you for plan updates and claims.</p>
         <p class="cart-warn">Inaccurate information may inactivate your subscription.</p>
@@ -1611,7 +1395,7 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
           <!-- LEG-4 (Doug 08-jul): UN solo link a T&C — la frase TNC-7 (02-jul) cierra el párrafo
                ("that stranded sentence belongs on the end of that paragraph… you're making a real
                paragraph"). Sigue dentro de #cart-receipt-fields: se oculta sola en carritos solo-kit. -->
-          <p class="cart-fine">Eligibility: new furniture from an authorized dealer within the last 60 days; a valid sales receipt is required to activate. Billed monthly in advance &middot; coverage starts 30 days after payment &middot; not available in all states. Read the <a href="/terms/" target="_blank" rel="noopener" class="js-plan-terms">terms and conditions</a> of this plan before you purchase.</p>
+          <p class="cart-fine">Eligibility: new furniture from any store within the last 60 days; a valid sales receipt is required to activate. Billed monthly in advance &middot; coverage starts 30 days after payment &middot; not available in all states. Read the <a href="/terms/" target="_blank" rel="noopener" class="js-plan-terms">terms and conditions</a> of this plan before you purchase.</p>
         </div>
         <!-- PORT-9 (método B, Doug 15-jul): referral code del dealer — atribuye la venta y su
              comisión; opcional. La verdad la re-resuelve el server (resolveAttribution). -->
@@ -1620,7 +1404,7 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
           <input id="cart-referral" name="referral_code" type="text" autocomplete="off" maxlength="24" placeholder="e.g. GAL-7K2M">
           <p class="cart-note" id="cart-referral-msg" aria-live="polite" hidden></p>
         </div>
-        <p class="cart-fine" id="cart-membership-fine" hidden>Covers every piece of furniture in your home &mdash; new, old, online, inherited, or custom. Billed monthly in advance &middot; cancel anytime. <a href="#" id="memterms-drawer-link">Terms &amp; conditions</a>.</p>
+        <p class="cart-fine" id="cart-membership-fine" hidden>Covers every piece of furniture in your home &mdash; new, old, online, inherited, or custom. Billed monthly in advance &middot; cancel anytime. <a href="/terms/" target="_blank" rel="noopener">Terms &amp; conditions</a>.</p>
         <!-- KIOSK-3 (Doug 02-jul 20:44 a 20:58): el gate de calidad del dato — Stripe no valida
              dirección vs tarjeta, así que la confirmación del cliente es el único control -->
         <label class="cart-accuracy" for="cart-accuracy">
@@ -1675,213 +1459,8 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
   </div>
 </aside>
 
-<div class="kit-toast" id="kit-toast" role="status" aria-live="polite">
-  <span class="check">&#10003;</span><span id="kit-toast-text">Added.</span>
-</div>
 
-<!-- MEMBERSHIP TERMS & CONDITIONS POPUP -->
-<div class="terms-backdrop" id="memterms-backdrop" hidden></div>
-<div class="terms-modal" id="memterms-modal" role="dialog" aria-modal="true" aria-labelledby="memterms-title" hidden>
-  <div class="terms-head">
-    <h3 id="memterms-title">Repair Membership Terms &amp; Conditions</h3>
-    <button class="terms-close" id="memterms-close" type="button" aria-label="Close">&times;</button>
-  </div>
-  <div class="terms-body">
-    <p class="terms-meta"><strong>Effective Date:</strong> [Insert Date]<br>
-      <strong>Program Name:</strong> Furniture-Rx Repair Membership / Repair Safety Net<br>
-      <strong>Administrator:</strong> Risk Assurance Partners, doing business as Furniture-Rx, referred to as &ldquo;Furniture-Rx,&rdquo; &ldquo;RAP,&rdquo; &ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our.&rdquo;</p>
-    <p>These Membership Terms explain what the Furniture-Rx Repair Membership includes, how member repair rates work, how service is scheduled and paid for, and what is not included.</p>
-    <p>Please read these terms before joining. By purchasing, activating, using, or continuing a Furniture-Rx Repair Membership, you agree to these Membership Terms.</p>
-
-    <h4>1. What the Furniture-Rx Repair Membership Is</h4>
-    <p>The Furniture-Rx Repair Membership is a monthly service-access membership for furniture care, repair coordination, and discounted service rates.</p>
-    <p>The membership gives you access to Furniture-Rx&rsquo;s repair coordination team, technician network, member pricing, repair scheduling support, parts assistance, furniture care guidance, and related service benefits.</p>
-    <p>The membership is designed to help you repair, maintain, assemble, move, touch up, and care for furniture in your home.</p>
-
-    <h4>2. What the Membership Is Not</h4>
-    <p>The Furniture-Rx Repair Membership is not an insurance policy, not a warranty, not a service contract, and not a protection plan.</p>
-    <p>The membership does not promise to repair or replace furniture for free. It does not reimburse you for furniture damage. It does not create coverage for stains, rips, burns, mechanical failure, electrical failure, accidents, misuse, wear and tear, or any other loss.</p>
-    <p>If you purchase a separate Furniture-Rx protection plan, that protection plan will have its own separate terms, limits, exclusions, eligibility rules, and claim process. The membership and any protection plan are separate products.</p>
-
-    <h4>3. Monthly Membership Fee</h4>
-    <p>The standalone membership price is <strong>$19.99 per month</strong>, unless a different price is shown to you at checkout or in your account.</p>
-    <p>Membership fees are billed monthly in advance to your card on file. Your membership renews automatically each month until canceled.</p>
-    <p>If the membership is included with a Furniture-Rx protection plan or offered as a promotional benefit, the promotional terms shown at checkout or in your plan materials will control the length and scope of the included membership period.</p>
-
-    <h4>4. What Members Receive</h4>
-    <p>As an active member, you receive access to membership benefits that may include:</p>
-    <ul>
-      <li>access to Furniture-Rx&rsquo;s repair coordination team;</li>
-      <li>access to Furniture-Rx&rsquo;s vetted technician network where available;</li>
-      <li>discounted member repair rates;</li>
-      <li>repair scheduling and coordination;</li>
-      <li>assistance sourcing or identifying furniture parts;</li>
-      <li>furniture care guidance;</li>
-      <li>cleaning, touch-up, repair, assembly, moving, and service coordination;</li>
-      <li>dashboard access for service history and membership information;</li>
-      <li>priority service handling where available;</li>
-      <li>access to member-only offers or care products; and</li>
-      <li>help coordinating customer-paid service when a protection plan does not cover the issue or when you do not have a protection plan.</li>
-    </ul>
-    <p>Membership benefits are subject to technician availability, service area, parts availability, provider participation, and the type and condition of the furniture.</p>
-
-    <h4>5. Discounted Member Rates</h4>
-    <p>Your membership gives you access to discounted member rates for eligible repair and service work.</p>
-    <p>Member rates may apply to labor, trip charges, diagnostic charges, repair coordination, and other eligible services as shown at booking or in your service estimate.</p>
-    <p>Discounts may vary by location, service type, technician, partner provider, furniture type, and availability. Unless we specifically say otherwise, discounts do not apply to taxes, government fees, shipping, special-order parts, manufacturer charges, third-party fees, hazardous conditions, or non-standard work.</p>
-    <p>Furniture-Rx does not promise that member rates will be the lowest rate available in the market. The benefit is access to our managed network, service coordination, and discounted Furniture-Rx member pricing.</p>
-
-    <h4>6. Customer-Paid Service</h4>
-    <p>The membership does not include free repair service unless a specific free or included benefit is expressly shown in writing.</p>
-    <p>Most service is customer-paid. This means you are responsible for paying for technician labor, trip charges, diagnostic fees, parts, materials, shipping, taxes, and any other approved charges related to the service.</p>
-    <p>Before service is performed, we will generally provide a price, estimate, rate schedule, or explanation of expected charges. Some charges may depend on what the technician finds during diagnosis or inspection.</p>
-
-    <h4>7. Card on File and Auto-Charge Authorization</h4>
-    <p>A valid payment card must remain on file to use the membership and to book service.</p>
-    <p>By scheduling service, approving a service estimate, authorizing a technician visit, ordering parts, or using a membership service benefit, you authorize Furniture-Rx, RAP, our payment processor, and our service partners, as applicable, to automatically charge your card on file for all approved charges.</p>
-    <p>Approved charges may include:</p>
-    <ul>
-      <li>monthly membership fees;</li>
-      <li>trip or diagnostic fees;</li>
-      <li>labor charges;</li>
-      <li>parts and materials;</li>
-      <li>shipping or handling;</li>
-      <li>special-order items;</li>
-      <li>care kits or related products;</li>
-      <li>taxes and applicable fees;</li>
-      <li>cancellation, missed appointment, or no-access fees if disclosed; and</li>
-      <li>any other service charges you approve.</li>
-    </ul>
-    <p>Service cannot be scheduled or continued unless you agree to keep a valid card on file and authorize automatic charges for approved service amounts.</p>
-
-    <h4>8. All Sales Are Final</h4>
-    <p>All membership fees, service charges, diagnostic fees, trip charges, parts, materials, care kits, special-order items, and other authorized purchases are final and non-refundable, except where a refund is required by law or expressly approved by Furniture-Rx in writing.</p>
-    <p>Canceling your membership stops future monthly membership charges. It does not refund prior membership fees, the current billing period, completed services, scheduled services already performed, approved parts, ordered materials, care kits, or any other authorized charges.</p>
-
-    <h4>9. Cancellations</h4>
-    <p>You may cancel your membership at any time through your dashboard, by contacting Furniture-Rx support, or through any cancellation method we make available.</p>
-    <p>Cancellation takes effect at the end of your then-current paid monthly billing period. You will continue to have access to membership benefits until the end of that period.</p>
-    <p>We do not provide prorated refunds for partial months unless required by law.</p>
-    <p>If you cancel and later rejoin, your new membership will be subject to the pricing, benefits, and terms then in effect.</p>
-
-    <h4>10. Failed Payments</h4>
-    <p>If your payment fails, we may pause or cancel your membership, suspend access to member rates, delay service, cancel scheduled appointments, or require payment before service continues.</p>
-    <p>You remain responsible for any unpaid membership fees, service charges, parts, materials, or other approved amounts.</p>
-
-    <h4>11. Service Area and Availability</h4>
-    <p>Membership benefits are available only where Furniture-Rx or its service partners can reasonably provide service.</p>
-    <p>Some locations may not have in-home technician service. In those areas, we may offer remote support, referral assistance, parts guidance, mail-in options, or other alternatives where available.</p>
-    <p>We do not guarantee same-day service, specific appointment windows, specific technicians, or availability of parts. Service timing depends on your location, technician capacity, furniture type, parts availability, weather, safety conditions, and other factors.</p>
-
-    <h4>12. Eligible Furniture</h4>
-    <p>The membership may be used for many types of household furniture, including new, old, online, local, inherited, custom, marketplace, and previously owned items.</p>
-    <p>Eligible service categories may include sofas, chairs, sectionals, recliners, beds, dining furniture, tables, case goods, upholstery, leather, wood furniture, rugs, mattresses, lighting, and related household furniture items.</p>
-    <p>We may decline service for items that are unsafe, unsanitary, infested, structurally unstable, counterfeit, illegally modified, contaminated, inaccessible, outside our service scope, or not reasonably repairable.</p>
-
-    <h4>13. Examples of Services We May Help Coordinate</h4>
-    <p>Depending on availability and service area, Furniture-Rx may help coordinate:</p>
-    <ul>
-      <li>furniture touch-ups;</li>
-      <li>minor repairs;</li>
-      <li>scratch, nick, and scuff repair;</li>
-      <li>upholstery repair;</li>
-      <li>leather touch-up;</li>
-      <li>wood repair and polishing;</li>
-      <li>loose joint or wobbly leg repair;</li>
-      <li>furniture assembly;</li>
-      <li>bed frame assembly;</li>
-      <li>room-to-room furniture moving;</li>
-      <li>light furniture rearranging;</li>
-      <li>repair of online purchases;</li>
-      <li>repair of marketplace purchases;</li>
-      <li>parts identification or sourcing;</li>
-      <li>cleaning or spot-treatment guidance;</li>
-      <li>manufacturer warranty documentation help;</li>
-      <li>service contract claim documentation help; and</li>
-      <li>furniture care recommendations.</li>
-    </ul>
-    <p>The exact services available may change over time.</p>
-
-    <h4>14. Parts and Materials</h4>
-    <p>Parts and materials are not included in the membership fee unless we specifically say otherwise in writing.</p>
-    <p>You are responsible for the cost of parts, materials, shipping, special orders, and related charges. Some parts may be unavailable, discontinued, delayed, custom-made, or subject to manufacturer restrictions.</p>
-    <p>Special-order parts, custom materials, color-matched items, and ordered goods are final sale once ordered.</p>
-
-    <h4>15. Manufacturer Warranties and Other Plans</h4>
-    <p>Furniture-Rx may help you gather information, photos, receipts, and documentation for a manufacturer warranty or third-party service contract claim.</p>
-    <p>That help does not guarantee that the manufacturer, retailer, insurer, warranty company, or service contract provider will approve your claim.</p>
-    <p>Membership does not create coverage under any manufacturer warranty, retailer warranty, insurance policy, protection plan, or service contract.</p>
-
-    <h4>16. Relationship to Furniture-Rx Protection Plans</h4>
-    <p>Some Furniture-Rx protection plans may include Repair Safety Net membership benefits for a stated period.</p>
-    <p>If your protection claim is not covered, denied, excluded, outside the claim limit, or related to an item that is not covered, your membership may still give you access to member rates for customer-paid service.</p>
-    <p>You remain responsible for paying for any customer-paid service that is not covered under a separate protection plan.</p>
-
-    <h4>17. Your Responsibilities</h4>
-    <p>To use the membership, you agree to:</p>
-    <ul>
-      <li>provide accurate contact, address, furniture, and payment information;</li>
-      <li>keep a valid card on file;</li>
-      <li>provide safe access to the furniture and service area;</li>
-      <li>secure pets and children during service visits;</li>
-      <li>disclose known hazards, infestations, contamination, structural instability, or prior attempted repairs;</li>
-      <li>review and approve service charges before work begins when approval is requested;</li>
-      <li>pay all approved charges;</li>
-      <li>be present or provide authorized access during service windows;</li>
-      <li>follow reasonable care instructions; and</li>
-      <li>treat Furniture-Rx staff, technicians, and partners respectfully.</li>
-    </ul>
-    <p>We may refuse or stop service if conditions are unsafe, access is not available, payment is not authorized, or service is outside the membership scope.</p>
-
-    <h4>18. Independent Technicians and Service Partners</h4>
-    <p>Furniture-Rx may provide service through employees, independent technicians, subcontractors, local partners, vendors, or third-party service providers.</p>
-    <p>We coordinate the service experience, but some work may be performed by independent providers. Availability, pricing, methods, and timing may vary by provider and location.</p>
-
-    <h4>19. No Guarantee of Repair Outcome</h4>
-    <p>Furniture repair can be affected by age, material, construction, prior damage, prior repair attempts, wear, discontinued parts, color variation, dye lots, leather or fabric type, wood finish, environmental conditions, and manufacturer design.</p>
-    <p>We will make reasonable efforts to coordinate appropriate service, but we do not guarantee that every item can be repaired, restored, matched, cleaned, stabilized, or returned to like-new condition.</p>
-
-    <h4>20. Missed Appointments and No-Access Visits</h4>
-    <p>If a technician arrives and cannot access the home, furniture, building, room, or service area, or if you miss a confirmed appointment, we may charge a missed appointment, trip, or diagnostic fee if disclosed before booking.</p>
-
-    <h4>21. Changes to Membership Benefits</h4>
-    <p>We may update membership benefits, rates, service areas, participating providers, discounts, and available services over time.</p>
-    <p>Changes will apply going forward and will not reduce any specific service already approved and paid for.</p>
-    <p>If we materially change the monthly membership price, we will provide notice before the new price applies, unless the change is caused by taxes, law, or third-party fees.</p>
-
-    <h4>22. Promotions and Included Membership Periods</h4>
-    <p>If you receive the membership free or at a discount through a Furniture-Rx protection plan, dealer offer, referral offer, or promotion, the offer has no cash value and cannot be exchanged for cash.</p>
-    <p>Promotional memberships end when the stated promotional period ends, when the related protection plan ends, or as otherwise disclosed in the offer.</p>
-    <p>If automatic renewal after a promotional period applies, it will only apply if disclosed and accepted at checkout or in your account.</p>
-
-    <h4>23. Account, Dashboard, and Communications</h4>
-    <p>You may receive service updates, membership notices, appointment reminders, payment notices, and account communications by email, text message, phone, dashboard notification, or other contact method you provide.</p>
-    <p>Message and data rates may apply.</p>
-    <p>You are responsible for keeping your account information current.</p>
-
-    <h4>24. Privacy</h4>
-    <p>Our collection and use of personal information are governed by our Privacy Policy. By using the membership, you agree that we may use your information to administer your membership, process payments, coordinate service, communicate with you, manage claims or service requests, improve the program, and comply with legal obligations.</p>
-
-    <h4>25. Limitation of Liability</h4>
-    <p>To the maximum extent allowed by law, Furniture-Rx is not responsible for indirect, incidental, special, consequential, punitive, or lost-value damages.</p>
-    <p>Our responsibility for any membership-related issue will not exceed the membership fees you paid to us during the three months before the issue occurred, except where a different limit is required by law.</p>
-    <p>This limitation does not limit any rights you may have under applicable consumer protection law.</p>
-
-    <h4>26. Termination by Furniture-Rx</h4>
-    <p>We may suspend or terminate your membership if you fail to pay, misuse the program, provide false information, abuse staff or technicians, create unsafe service conditions, violate these terms, or use the membership for commercial or resale purposes without our written approval.</p>
-
-    <h4>27. Governing Terms</h4>
-    <p>These Membership Terms apply only to the Furniture-Rx Repair Membership. Separate terms may apply to protection plans, care kits, website use, privacy, payment processing, promotions, referrals, and other products or services.</p>
-    <p>If there is a conflict between these Membership Terms and a separate written protection plan, the protection plan terms control for protection claims and covered losses. These Membership Terms control for membership access, discounted service, repair coordination, and customer-paid service.</p>
-
-    <h4>28. Questions</h4>
-    <p>Questions about the Furniture-Rx Repair Membership can be directed to:</p>
-    <p><strong>Furniture-Rx / Risk Assurance Partners</strong><br>
-      [Insert support email]<br>
-      [Insert phone number]<br>
-      [Insert mailing address or support URL]</p>
-  </div>
-</div>
+<!-- DTC-1: embedded membership T&C modal removed; terms live at /terms/ -->
 
 <!-- CHAT WIDGET -->
 <div class="chat-panel" id="chat-panel" role="dialog" aria-label="Chat with us">
@@ -1948,18 +1527,6 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
   <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 6L6 18M6 6l12 12"/></svg>
 </button>
 
-<!-- "My dashboard" (variante B, 08-jul): el dashboard se abre en el TELÉFONO del cliente vía QR.
-     La tablet es compartida y la sesión vive en el site principal: aquí nunca se loguea nadie. -->
-<div class="dashqr-backdrop" id="dashqr-backdrop" hidden>
-  <div class="dashqr-card" role="dialog" aria-modal="true" aria-label="Log in">
-    <button type="button" class="dashqr-close" id="dashqr-close" aria-label="Close">&times;</button>
-    <h3 id="dashqr-title">Your dashboard, on your phone</h3>
-    <p class="dashqr-sub" id="dashqr-sub">Scan with your phone to see your plans, receipts and billing. Sign in with the email from your purchase.</p>
-    <div class="dashqr-box" id="dashqr-box" aria-hidden="true"></div>
-    <p class="dashqr-url"><a id="dashqr-url" href="https://www.furniturerx.net/dashboard" target="_blank" rel="noopener">furniturerx.net/dashboard</a></p>
-  </div>
-</div>
-
 <!-- ISS-14: modal de confirmación con estilo (reemplaza window.confirm). Reusa .dashqr-* + .btn.
      Lo abre openConfirm({title,body,confirmLabel,cancelLabel,onConfirm}); lo reusa DEC-4. -->
 <div class="dashqr-backdrop" id="confirm-backdrop" hidden>
@@ -1970,31 +1537,6 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
       <button type="button" class="btn btn-quiet" id="confirm-no"></button>
       <button type="button" class="btn btn-accent" id="confirm-yes"></button>
     </div>
-  </div>
-</div>
-
-<!-- GIFT-1 (F6): overlay de gift coupon — el comprador elige producto, deja SU email y paga.
-     El total es SOLO display; el server (create-gift-checkout) recalcula el cobro real. -->
-<div class="gift-backdrop" id="gift-backdrop" hidden>
-  <div class="gift-card" role="dialog" aria-modal="true" aria-label="Gift FurnitureRx coverage">
-    <button type="button" class="gift-close" id="gift-close" aria-label="Close">&times;</button>
-    <h3>Gift FurnitureRx coverage</h3>
-    <p class="gift-sub">Give 3 months, on you. The code arrives by email, ready to forward.</p>
-    <div class="gift-field">
-      <label for="gift-tier">What to gift</label>
-      <select id="gift-tier">
-        <option value="stain" selected>Stain Protection &middot; $9.99/mo</option>
-        <option value="stain-mech">Stain + Structure Protection &middot; $19.99/mo</option>
-        <option value="membership">Repair Safety Net membership &middot; $19.99/mo</option>
-      </select>
-    </div>
-    <p class="gift-total" id="gift-total">3 months &middot; total $29.97</p>
-    <div class="gift-field">
-      <label for="gift-email">Your email</label>
-      <input id="gift-email" type="email" placeholder="you@email.com" autocomplete="email">
-    </div>
-    <button type="button" class="btn btn-accent btn-block" id="gift-submit">Continue to payment</button>
-    <p class="gift-msg" id="gift-msg" aria-live="polite" hidden></p>
   </div>
 </div>
 
@@ -2031,131 +1573,32 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
   /* Backend writes go through Netlify Functions with the service_role key (see
      /.netlify/functions/create-lead). The browser holds NO Supabase credentials. */
 
-  // NAV
-  var nav = document.getElementById('nav');
-  var navToggle = document.getElementById('nav-toggle');
-  var navDrawer = document.getElementById('nav-drawer');
-  var navDrawerClose = document.getElementById('nav-drawer-close');
-  var navBackdrop = document.getElementById('nav-backdrop');
-
-  function openDrawer(){
-    navDrawer.hidden = false; navBackdrop.hidden = false;
-    requestAnimationFrame(function(){ navDrawer.classList.add('open'); navBackdrop.classList.add('open'); });
-    navToggle.setAttribute('aria-expanded','true');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeDrawer(){
-    navDrawer.classList.remove('open'); navBackdrop.classList.remove('open');
-    navToggle.setAttribute('aria-expanded','false');
-    document.body.style.overflow = '';
-    setTimeout(function(){ navDrawer.hidden = true; navBackdrop.hidden = true; }, 280);
-  }
-  navToggle.addEventListener('click', openDrawer);
-  navDrawerClose.addEventListener('click', closeDrawer);
-  navBackdrop.addEventListener('click', closeDrawer);
-  navDrawer.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', closeDrawer); });
-  /* DOUG-2: "Questions?" del drawer abre el chat de Maya (fallback no-JS: #faq) */
-  var drawerChatCta = document.getElementById('drawer-chat-cta');
-  if(drawerChatCta) drawerChatCta.addEventListener('click', function(e){ e.preventDefault(); var cb = document.getElementById('chat-btn'); if(cb) cb.click(); });
-  /* Ago-10 (Doug): "My dashboard" se partió en Customer login + Dealer login. Ambos abren ESTE
-     overlay con un QR a su destino (cliente→dashboard, dealer→portal): la tablet es compartida y
-     la sesión no vive en este dominio, así que el destino se abre en SU teléfono O tocando el QR/
-     URL (ambos clicables). Base: E3 (08-jul) + KIOSK-20. */
-  var DASHBOARD_URL = 'https://www.furniturerx.net/dashboard';
-  var PORTAL_URL = 'https://portal.furniturerx.net/';
-  var dashqrBackdrop = document.getElementById('dashqr-backdrop');
-  var dashqrClose = document.getElementById('dashqr-close');
-  var dashqrBox = document.getElementById('dashqr-box');
-  var dashqrTitle = document.getElementById('dashqr-title');
-  var dashqrSub = document.getElementById('dashqr-sub');
-  var dashqrUrl = document.getElementById('dashqr-url');
-  var dashqrShown = null;                          /* URL ya pintada en el QR: regenerar solo al cambiar de destino */
-  function closeDashQr(){ if(dashqrBackdrop) dashqrBackdrop.hidden = true; }
-  function openDashQr(opts){
-    closeDrawer();                                 /* reusa el cierre del nav drawer */
-    if(dashqrTitle) dashqrTitle.textContent = opts.title;
-    if(dashqrSub) dashqrSub.textContent = opts.sub;
-    if(dashqrUrl){ dashqrUrl.href = opts.url; dashqrUrl.textContent = opts.label; }   /* URL clicable en la tablet */
-    if(dashqrBackdrop) dashqrBackdrop.hidden = false;
-    if(dashqrBox && dashqrShown !== opts.url){      /* (re)genera el QR solo si cambió el destino */
-      dashqrShown = opts.url;
-      loadQrLib().then(function(){
-        var a = document.createElement('a');        /* QR clicable: escanear con el teléfono O tocarlo en la tablet */
-        a.href = opts.url; a.target = '_blank'; a.rel = 'noopener';
-        a.innerHTML = qrSvg(opts.url, 220);         /* qrSvg = única salida innerHTML confiable */
-        dashqrBox.replaceChildren(a);
-      }).catch(function(){ dashqrShown = null; /* sin lib: la URL clicable de abajo basta; reintenta al reabrir */ });
+  // DTC-1: header menu — mobile hamburger panel. Closes on link tap, outside tap, or scroll.
+  var menuBtn = document.getElementById('menu-btn');
+  var menuPanel = document.getElementById('menu-panel');
+  function closeMenuPanel(){
+    if(menuPanel && !menuPanel.hidden){
+      menuPanel.hidden = true;
+      if(menuBtn) menuBtn.setAttribute('aria-expanded','false');
     }
   }
-  var CUST_LOGIN = { url: DASHBOARD_URL, label: 'furniturerx.net/dashboard', title: 'Your dashboard, on your phone', sub: 'Scan or tap to see your plans, receipts and billing. Sign in with the email from your purchase.' };
-  var DEALER_LOGIN = { url: PORTAL_URL, label: 'portal.furniturerx.net', title: 'Your dealer portal, on your phone', sub: 'Scan or tap to open your reseller portal and sign in.' };
-  var drawerCust = document.getElementById('drawer-cust-login');
-  var drawerDealer = document.getElementById('drawer-dealer-login');
-  if(dashqrBackdrop){
-    if(drawerCust) drawerCust.addEventListener('click', function(e){ e.preventDefault(); openDashQr(CUST_LOGIN); });
-    if(drawerDealer) drawerDealer.addEventListener('click', function(e){ e.preventDefault(); openDashQr(DEALER_LOGIN); });
-    if(dashqrClose) dashqrClose.addEventListener('click', closeDashQr);
-    dashqrBackdrop.addEventListener('click', function(ev){ if(ev.target === dashqrBackdrop) closeDashQr(); });
-  }
-  /* GIFT-1 (F6): los links .js-gift-coupon abren el overlay de regalo (mismo patrón que dashqr).
-     El total pintado es SOLO display — el server (create-gift-checkout) recalcula el cobro real
-     a partir de {email, tier}; aquí solo se valida lo mínimo para no mandar basura obvia. */
-  var GIFT_MONTHS = 3;
-  var GIFT_CENTS = { stain: 999, 'stain-mech': 1999, membership: 1999 };   /* espejo display de _lib/gift.mjs */
-  var giftBackdrop = document.getElementById('gift-backdrop');
-  var giftClose = document.getElementById('gift-close');
-  var giftTier = document.getElementById('gift-tier');
-  var giftTotal = document.getElementById('gift-total');
-  var giftEmail = document.getElementById('gift-email');
-  var giftSubmit = document.getElementById('gift-submit');
-  var giftMsg = document.getElementById('gift-msg');
-  var giftSubmitLabel = giftSubmit ? giftSubmit.textContent : '';
-  function giftSetMsg(text){ if(giftMsg){ giftMsg.textContent = text || ''; giftMsg.hidden = !text; } }
-  function giftRecalc(){
-    var cents = (GIFT_CENTS[giftTier.value] || 0) * GIFT_MONTHS;
-    giftTotal.textContent = GIFT_MONTHS + ' months · total $' + (cents / 100).toFixed(2);
-  }
-  function closeGift(){ giftBackdrop.hidden = true; }
-  if(giftBackdrop && giftTier && giftTotal && giftEmail && giftSubmit){
-    document.querySelectorAll('.js-gift-coupon').forEach(function(g){
-      g.addEventListener('click', function(e){
-        e.preventDefault();
-        if(navDrawer && navDrawer.classList.contains('open')) closeDrawer();
-        giftSetMsg('');
-        giftRecalc();
-        giftBackdrop.hidden = false;
-      });
+  if(menuBtn && menuPanel){
+    menuBtn.addEventListener('click', function(e){
+      e.stopPropagation();   /* keep the document outside-tap handler from instantly re-closing it */
+      var opening = menuPanel.hidden;
+      menuPanel.hidden = !opening;
+      menuBtn.setAttribute('aria-expanded', opening ? 'true' : 'false');
     });
-    giftTier.addEventListener('change', giftRecalc);
-    giftClose.addEventListener('click', closeGift);
-    giftBackdrop.addEventListener('click', function(ev){ if(ev.target === giftBackdrop) closeGift(); });
-    giftSubmit.addEventListener('click', function(){
-      var email = (giftEmail.value || '').trim();
-      /* validación ligera (no vacío + '@'); la de verdad vive en el server */
-      if(!email || email.indexOf('@') < 0){ giftSetMsg('Add your email so we can send the code.'); giftEmail.focus(); return; }
-      giftSetMsg('');
-      giftSubmit.disabled = true;
-      giftSubmit.textContent = 'Opening payment…';
-      fetch('/api/create-gift-checkout', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: email, tier: giftTier.value })
-      }).then(function(res){
-        if(res.status === 503) return { unavailable: true };
-        if(!res.ok) return {};
-        return res.json().then(function(d){ return d || {}; }, function(){ return {}; });
-      }, function(){ return {}; }).then(function(d){
-        if(d.url){ location.assign(d.url); return; }   /* navega: el botón se queda deshabilitado a propósito */
-        giftSetMsg(d.unavailable ? "Gifts aren't available just yet." : 'Something went wrong, try again.');
-        giftSubmit.disabled = false;
-        giftSubmit.textContent = giftSubmitLabel;
-      });
+    menuPanel.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', closeMenuPanel); });
+    document.addEventListener('click', function(e){
+      if(!menuPanel.hidden && !menuPanel.contains(e.target)) closeMenuPanel();
     });
   }
 
-  var navScrolled = false;
+  /* DTC-1: the header is no longer sticky/shrinking — scroll only drives the mobile sticky CTA
+     (and dismisses the header menu panel). */
   function onScroll(){
-    var s = window.scrollY > 60;
-    if(s !== navScrolled){ navScrolled = s; nav.classList.toggle('scrolled', s); }
+    closeMenuPanel();
     var sticky = document.getElementById('sticky-mobile');
     if(sticky){ sticky.classList.toggle('show', window.scrollY > 600); }
   }
@@ -2743,100 +2186,10 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
   /* PORT-10: SSO portal→kiosk. Un ?pt= (handoff one-time, TTL 120s) se canjea por una sesión
      de 12h; el token vive en sessionStorage y viaja como kiosk_session en el checkout → el
      server atribuye el dealer DESDE EL TOKEN (método A). El kiosk sigue 100% público sin sesión. */
+  /* DTC-1: dealer SSO (?pt= redeem, "Selling as" badge, sales-mode return strip) removed.
+     kioskSession stays declared and never set -> `kiosk_session` serializes to undefined and
+     drops out of the checkout payload JSON, exactly as before without a dealer session. */
   var kioskSession = null;
-  (function kioskSSO(){
-    function showBadge(name, hideDash){
-      var b = document.getElementById('kiosk-session-badge');
-      if(!b){
-        b = document.createElement('div');
-        b.id = 'kiosk-session-badge';
-        b.style.cssText = 'position:fixed;bottom:12px;left:12px;z-index:80;background:#12213a;color:#fff;font:600 12px/1 Inter,system-ui,sans-serif;padding:8px 12px;border-radius:999px;box-shadow:0 4px 14px rgba(0,0,0,.25)';
-        document.body.appendChild(b);
-      }
-      /* KIOSK-20 (Doug 16-jul: "if I am in the kiosk and I click dashboard, it takes me
-         here"): con sesión de dealer, el badge trae el link de vuelta al portal. Pestaña
-         nueva: la tablet no pierde el kiosk. Sin sesión no existe el badge → kiosk público
-         intacto (el "dashboard" del cliente sigue siendo su propio link más arriba).
-         KIOSK-22: en modo sales_mode (URL de venta sin login) el link Dashboard se OCULTA
-         (Doug: "dashboard access... not sales mode"). El badge "Selling as" se queda. */
-      b.replaceChildren(document.createTextNode('Selling as ' + (name || 'your store') + (hideDash ? '' : '  ·  ')));
-      if(!hideDash){
-        var dl = document.createElement('a');
-        dl.href = 'https://portal.furniturerx.net/';
-        dl.target = '_blank'; dl.rel = 'noopener';
-        dl.textContent = 'Dashboard ↗';
-        dl.style.cssText = 'color:#ffd98a;text-decoration:none;font-weight:800';
-        b.appendChild(dl);
-      }
-      /* PORT-9b: con sesión, la atribución es del TOKEN (A gana sobre B server-side) → el campo
-         de referral code se OCULTA: tecleado aquí se ignoraría y su feedback mentiría. */
-      var rf = document.getElementById('cart-referral-field');
-      if(rf) rf.hidden = true;
-      var rm = document.getElementById('cart-referral-msg');
-      if(rm) rm.hidden = true;
-    }
-    /* KIOSK-23 (Doug 28-aug: "can we add a home button ... that navs back to the
-       Bailey's site only where the subscription site is opened using the Bailey's
-       subscription link"): return strip above the nav + drawer menu entry, ONLY
-       when the sales-mode session carries return_url (per-dealer data on
-       sales_mode_links; no value -> nothing is rendered and the kiosk stays
-       untouched). The URL comes from the DB via the handoff, never from a query
-       param (open redirect). The nav is sticky top:0 -> its top gets offset by
-       the strip height so both stay visible at all times. */
-    /* KIOSK-23b: the same sales link doubles as the in-store tablet QR/bookmark,
-       where the customer never saw the destination site -> "Back to" reads wrong.
-       Neutral "Go to <return_label>" (configurable per link), org_name as
-       fallback. */
-    function showReturn(name, url, label){
-      if(!url || !/^https:\/\//.test(url)) return;
-      label = 'Go to ' + (label || name || 'your store');
-      if(!document.getElementById('kiosk-return-strip')){
-        var strip = document.createElement('div');
-        strip.id = 'kiosk-return-strip';
-        strip.style.cssText = 'position:sticky;top:0;z-index:60;background:#12213a;text-align:center;padding:9px 12px';
-        var a = document.createElement('a');
-        a.href = url;
-        a.textContent = label;
-        a.style.cssText = 'color:#ffd98a;font:700 13px/1 Inter,system-ui,sans-serif;text-decoration:none;letter-spacing:.02em';
-        strip.appendChild(a);
-        document.body.insertBefore(strip, document.body.firstChild);
-        var nav = document.getElementById('nav');
-        var offset = function(){ if(nav) nav.style.top = strip.offsetHeight + 'px'; };
-        offset();
-        window.addEventListener('resize', offset);
-      }
-      var ul = document.querySelector('#nav-drawer ul');
-      if(ul && !document.getElementById('drawer-return-link')){
-        var li = document.createElement('li');
-        var da = document.createElement('a');
-        da.id = 'drawer-return-link';
-        da.href = url;
-        da.textContent = label;
-        li.appendChild(da);
-        ul.appendChild(li);
-      }
-    }
-    try {
-      var saved = JSON.parse(sessionStorage.getItem('frx_kiosk_session') || 'null');
-      if(saved && saved.session && Date.parse(saved.expires_at) > Date.now()){
-        kioskSession = saved.session; showBadge(saved.org_name, saved.sales_mode);
-        if(saved.sales_mode) showReturn(saved.org_name, saved.return_url, saved.return_label);
-      }
-    } catch(e){ /* sessionStorage bloqueado → kiosk público normal */ }
-    var pt = new URLSearchParams(location.search).get('pt');
-    if(!pt) return;
-    fetch('/api/portal-app-redeem', {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ token: pt })
-    }).then(function(r){ return r.ok ? r.json() : null; }).then(function(d){
-      if(!d || !d.session) return;                       /* handoff vencido/usado → kiosk público */
-      kioskSession = d.session;
-      try { sessionStorage.setItem('frx_kiosk_session', JSON.stringify(d)); } catch(e){}
-      showBadge(d.org_name, d.sales_mode);
-      if(d.sales_mode) showReturn(d.org_name, d.return_url, d.return_label);  /* KIOSK-23 */
-      try { history.replaceState(null, '', location.pathname); } catch(e){}   /* limpia ?pt= */
-    }).catch(function(){ /* fail-soft */ });
-  })();
 
   /* PORT-9: feedback en vivo del referral code (fail-soft; la verdad la decide el server). */
   (function referralFeedback(){
@@ -4330,32 +3683,7 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
   });
 
 
-  // MEMBERSHIP TERMS popup: opened from "See membership details" + the drawer's membership T&C link.
-  var memtermsModal = document.getElementById('memterms-modal');
-  var memtermsBackdrop = document.getElementById('memterms-backdrop');
-  var memtermsCloseBtn = document.getElementById('memterms-close');
-  function memtermsOpen(e){
-    if(e) e.preventDefault();
-    if(!memtermsModal) return;
-    memtermsModal.hidden = false; memtermsBackdrop.hidden = false;
-    requestAnimationFrame(function(){ memtermsModal.classList.add('open'); memtermsBackdrop.classList.add('open'); });
-    document.body.style.overflow = 'hidden';
-    setTimeout(function(){ if(memtermsCloseBtn) memtermsCloseBtn.focus(); }, 300);
-  }
-  function memtermsClose(){
-    if(!memtermsModal) return;
-    memtermsModal.classList.remove('open'); memtermsBackdrop.classList.remove('open');
-    /* keep scroll locked if the cart drawer is still open underneath (terms can open from it) */
-    document.body.style.overflow = (cartPanel && !cartPanel.hidden) ? 'hidden' : '';
-    setTimeout(function(){ memtermsModal.hidden = true; memtermsBackdrop.hidden = true; }, 280);
-  }
-  var memDetailsLink = document.getElementById('mem-details-link');
-  var memtermsDrawerLink = document.getElementById('memterms-drawer-link');
-  if(memDetailsLink) memDetailsLink.addEventListener('click', memtermsOpen);
-  if(memtermsDrawerLink) memtermsDrawerLink.addEventListener('click', memtermsOpen);
-  if(memtermsCloseBtn) memtermsCloseBtn.addEventListener('click', memtermsClose);
-  if(memtermsBackdrop) memtermsBackdrop.addEventListener('click', memtermsClose);
-  document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && memtermsModal && !memtermsModal.hidden) memtermsClose(); });
+  /* DTC-1: membership T&C modal JS removed with the modal; terms link goes to /terms/ */
 
   /* ── PHONE HANDOFF (single-QR, phone side). Runs INSTEAD of the whole kiosk/D2C boot (see the guard near
      the top, which returns early). Self-contained: it only touches #phone-* nodes + the hoisted helpers
