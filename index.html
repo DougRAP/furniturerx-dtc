@@ -451,9 +451,42 @@ em.gold{font-style:italic;color:var(--gold);font-weight:500}
 /* DTC-5: dead CSS reaped — referral perk strip (.refer-*), control tiles (.control-*),
    old navy trust banner (.trust, .trust-grid/-stats/-dash-lead + dashLeadBob keyframes),
    dashboard mock (.dash-grid/.dash-mock/.dash-item…), standalone membership card
-   (.membership, .mem-*), care kits strip (.kits, .kit-*, .kit-toast). Their markup was
-   removed in slices 1-3; header .dash-pill/.dash-icon-btn and the drawer's
-   .cart-line.membership are separate and stay. */
+   (.membership, .mem-*). Their markup was removed in slices 1-3; header
+   .dash-pill/.dash-icon-btn and the drawer's .cart-line.membership are separate and
+   stay. The care kits strip left in that reap too — restored below in V14. */
+
+/* ============================================================
+   CARE KITS (DTC-10, V14) — the kiosk kits strip returns (owner:
+   kits + membership live at the bottom of this page). Restored from
+   the kiosk baseline with two adaptations: no background fill (page
+   rule: sections separate with spacing + a hairline, the navy trust
+   band is the only reversed band) and no rules for the deprecated
+   placeholder svg / fake-packaging overlay (that markup was stripped).
+   ============================================================ */
+.kits{border-top:1px solid var(--rule);padding:clamp(40px,5vw,72px) 0 var(--sp-section)}
+.kits-intro{max-width:1040px;margin-bottom:var(--sp-block)}
+.kits-intro p{margin-top:18px;max-width:640px}
+.kits-grid{display:grid;grid-template-columns:1fr;gap:18px}
+.kit-card{background:var(--paper);border:1px solid var(--rule);border-radius:4px;padding:0;display:flex;flex-direction:column;overflow:hidden;transition:transform var(--t-med) var(--ease),box-shadow var(--t-med) var(--ease)}
+.kit-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-card)}
+.kit-image{aspect-ratio:5/4;background:#eef1f5;position:relative;overflow:hidden;border-bottom:1px solid var(--rule)}
+.kit-image.fabric{background:#e8edf3}
+.kit-image.leather{background:#e6e9ee}
+.kit-image img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.kit-body{padding:24px;display:flex;flex-direction:column;gap:8px;flex:1}
+.kit-body .kit-tag{font-size:.6875rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--orange);font-family:var(--body)}
+.kit-body h3{font-family:var(--display);font-weight:500;font-size:1.375rem;letter-spacing:-.015em;margin:0;font-variation-settings:"opsz" 24}
+.kit-body .kit-desc{font-size:.875rem;color:var(--ink-65);line-height:1.5;margin:6px 0 12px;flex:1}
+.kit-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:14px;border-top:1px solid var(--rule)}
+.kit-price{font-family:var(--display);font-weight:500;font-size:1.5rem;letter-spacing:-.018em;color:var(--ink);font-variation-settings:"opsz" 32}
+/* Two-up CTA row under each kit card (the kiosk #compare cards' row; on this page
+   only the kit cards use it, so it returns with them). */
+.cfg-cta-row{display:flex;gap:8px}
+.cfg-cta-row .btn{flex:1}
+.cmp-cta-row{margin-top:18px}
+.kit-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:14px 22px;border-radius:99px;font-size:.875rem;font-weight:500;box-shadow:var(--shadow-lift);opacity:0;pointer-events:none;transition:opacity var(--t-med) var(--ease),transform var(--t-med) var(--ease);z-index:80;font-family:var(--body);max-width:90vw}
+.kit-toast.show{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto}
+.kit-toast .check{color:var(--gold);margin-right:8px;font-weight:700}
 
 /* ============================================================
    FAQ (DTC-5) — 4 items, no heading, no fill: spacing + a single
@@ -471,17 +504,26 @@ details.faq-item summary:hover{color:var(--orange)}
 details.faq-item summary:focus-visible{outline:2px solid var(--orange);outline-offset:2px;border-radius:2px}
 .faq-answer{padding:0 0 24px 0;font-size:1.0625rem;line-height:1.65;color:var(--ink-65)}
 
-/* DTC-5: dead CSS reaped — final dark CTA band (.final*), membership-mode drawer
-   extras (#cart-membership-extras, .cart-kit-add, #cart-kit-type-field) and the kit
-   cart-line variants (.cart-line.kit, #cart-kits, .cart-kits-note): their markup is
-   gone and renderCartKits() no-ops without #cart-kits-list. .cart-kits-title stays —
-   the drawer's "Plans" / "Repair Safety Net" list titles still use it. */
+/* DTC-5: dead CSS reaped — final dark CTA band (.final*). The drawer kit UI
+   (#cart-kits, .cart-kits-note, .cart-line.kit, #cart-membership-extras,
+   .cart-kit-add, #cart-kit-type-field) left in that reap too — restored in V14
+   with the #kits section. */
+
+/* Membership drawer extras (add a care kit from the drawer) */
+#cart-membership-extras{margin-bottom:18px}
+.cart-kit-add{display:flex;align-items:center;gap:10px;padding:14px 16px;border:1px solid var(--rule-strong);border-radius:4px;cursor:pointer;font-size:.95rem;color:var(--ink);background:var(--paper)}
+.cart-kit-add input{width:18px;height:18px;flex:none;accent-color:var(--orange);cursor:pointer}
+.cart-kit-add small{color:var(--ink-65);font-weight:500}
+#cart-kit-type-field{margin-top:14px}
+#cart-kit-type-field select{width:100%;font:inherit;font-size:.95rem;padding:12px 14px;border:1px solid var(--rule-strong);border-radius:3px;background:var(--paper);color:var(--ink)}
 
 /* Cart lines — summary-style cards with × top-right. The plan line reuses the old
-   #cart-plan-summary language (orange rim + cov/meta/price). */
-#cart-plans{margin:0 0 18px}
+   #cart-plan-summary language (orange rim + cov/meta/price); the kit line is the
+   quiet one-time variant. */
+#cart-plans, #cart-kits{margin:0 0 18px}
 .cart-kits-title{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-45);margin:0 0 8px}
-#cart-plans-list, #cart-membership-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.cart-kits-note{font-size:.72rem;color:var(--ink-45);margin:8px 0 0;line-height:1.5}
+#cart-plans-list, #cart-kits-list, #cart-membership-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
 .cart-line{position:relative;background:var(--paper-cool);border-left:var(--rim) solid var(--orange);border-radius:3px;padding:14px 42px 14px 16px}
 .cart-line .cov{font-weight:600;font-size:.95rem;color:var(--ink)}
 .cart-line .meta{font-size:.85rem;color:var(--ink-65);margin-top:4px}
@@ -489,6 +531,9 @@ details.faq-item summary:focus-visible{outline:2px solid var(--orange);outline-o
 .cart-line .price small{font-size:.78rem;color:var(--ink-65);font-family:var(--body);margin-left:5px;letter-spacing:0}
 .cart-line.membership{border-left-color:var(--gold)}
 .cart-line.membership .price{font-size:1.1rem;margin-top:3px}
+.cart-line.kit{border-left-color:var(--rule);padding:12px 40px 12px 14px}
+.cart-line.kit .cov{font-size:.9rem;font-weight:500}
+.cart-line.kit .price{font-size:1.1rem;margin-top:3px}
 #cart-pay .pay-sub{font-weight:400;font-size:.8em;opacity:.85;letter-spacing:0}
 /* KIOSK-20 (Doug 08-jul: "your CTA button should be secure pay through Stripe"): segunda línea del
    MISMO botón, fuente menor. ::after cubre los 5 caminos de JS que reescriben el innerHTML; el
@@ -605,7 +650,12 @@ details.faq-item summary:focus-visible{outline:2px solid var(--orange);outline-o
 /* ============================================================
    RESPONSIVE
    ============================================================ */
-/* DTC-5: the old 680px block (control/kits/final/mem/refer grids) died with its markup */
+/* DTC-5: the old 680px block (control/final/mem/refer grids) died with its markup.
+   DTC-10 (V14): the kits grid rule returns with the #kits section — same 680px
+   breakpoint the kiosk baseline used. */
+@media (min-width:680px){
+  .kits-grid{grid-template-columns:repeat(3,1fr)}
+}
 @media (min-width:880px){
   .footer-row{flex-direction:row;align-items:center;justify-content:space-between}
   .sticky-mobile{display:none}
@@ -702,7 +752,8 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
       <a href="/">Home</a>
       <a href="https://5starservice.net/" target="_blank" rel="noopener">Get Service</a>
       <a href="/shop-furniture/">Shop Furniture</a>
-      <a href="/cleaning-kit/">Cleaning Kit</a>
+      <!-- DTC-10 (V14): kits live on this page now — on-page anchor, no separate kit page -->
+      <a href="#kits">Cleaning Kit</a>
     </nav>
     <a href="https://www.furniturerx.net/dashboard" class="dash-pill">My Dashboard</a>
     <a href="https://www.furniturerx.net/dashboard" class="dash-icon-btn" aria-label="My Dashboard">
@@ -716,7 +767,7 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
     <a href="/">Home</a>
     <a href="https://5starservice.net/" target="_blank" rel="noopener">Get Service</a>
     <a href="/shop-furniture/">Shop Furniture</a>
-    <a href="/cleaning-kit/">Cleaning Kit</a>
+    <a href="#kits">Cleaning Kit</a>
   </nav>
 </header>
 
@@ -901,6 +952,93 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
   </div>
 </section>
 
+<!-- DTC-10 (V14) · CARE KITS — the kiosk kits strip returns (owner: kits and
+     membership live at the bottom of this page; no separate kit pages). With
+     #safety-net above, this is the "used furniture programs and kits" region the
+     #plans jump link points at. Cards restored from the kiosk baseline minus the
+     deprecated placeholder blocks; eyebrow switched to the muted ink variant
+     (orange stays a purchase-action accent — the filled Add-to-cart buttons). -->
+<section class="kits" id="kits">
+  <div class="container">
+    <div class="kits-intro reveal">
+      <span class="eyebrow eyebrow-ink">While you&rsquo;re here</span>
+      <h2 class="h-section">Care kits, <em class="accent">in a box.</em></h2>
+      <p class="lead" style="max-width:620px">Member-grade cleaning and conditioning, but no subscription required. The same products our technicians carry on service calls.</p>
+    </div>
+
+    <div class="kits-grid reveal">
+      <article class="kit-card">
+        <div class="kit-image">
+          <img src="kit_assets/wood.jpg" alt="Wood care kit — cleaner, polish, and microfiber cloth" loading="lazy" width="600" height="480">
+        </div>
+        <div class="kit-body">
+          <span class="kit-tag">Wood care kit</span>
+          <h3>Clean &amp; polish for every wood piece.</h3>
+          <p class="kit-desc">Cleaner, polish, and microfiber cloth. Removes dirt, grease, and grime. Restores lustre and conditions wood. Works on modern, vintage, and antique pieces.</p>
+          <div class="kit-foot">
+            <span class="kit-price">$49.99</span>
+            <span class="cfg-count-ctl" role="group" aria-label="Wood Care Kit quantity">
+              <button type="button" class="kit-dec" aria-label="One fewer Wood Care Kit">&minus;</button>
+              <span class="cmp-count kit-count" aria-live="polite">0</span>
+              <button type="button" class="kit-inc" aria-label="One more Wood Care Kit">+</button>
+            </span>
+          </div>
+          <div class="cfg-cta-row cmp-cta-row">
+            <button type="button" class="btn btn-accent kit-add-btn" data-kit="Wood Care Kit">Add to cart <span class="arrow">&rarr;</span></button>
+            <button type="button" class="btn btn-ghost kit-checkout-btn" data-kit="Wood Care Kit">Checkout</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="kit-card">
+        <div class="kit-image fabric">
+          <img src="kit_assets/fabric.jpg" alt="Fabric & upholstery care kit — stain remover, protectant spray, and brush applicator" loading="lazy" width="600" height="480">
+        </div>
+        <div class="kit-body">
+          <span class="kit-tag">Fabric &amp; upholstery</span>
+          <h3>Lift stains. Protect against the next one.</h3>
+          <p class="kit-desc">Stain remover, protectant spray, and brush applicator. Safe for most upholstery, cushions, and decorative fabrics. Built for the spill that always happens at dinner.</p>
+          <div class="kit-foot">
+            <span class="kit-price">$49.99</span>
+            <span class="cfg-count-ctl" role="group" aria-label="Fabric Care Kit quantity">
+              <button type="button" class="kit-dec" aria-label="One fewer Fabric Care Kit">&minus;</button>
+              <span class="cmp-count kit-count" aria-live="polite">0</span>
+              <button type="button" class="kit-inc" aria-label="One more Fabric Care Kit">+</button>
+            </span>
+          </div>
+          <div class="cfg-cta-row cmp-cta-row">
+            <button type="button" class="btn btn-accent kit-add-btn" data-kit="Fabric Care Kit">Add to cart <span class="arrow">&rarr;</span></button>
+            <button type="button" class="btn btn-ghost kit-checkout-btn" data-kit="Fabric Care Kit">Checkout</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="kit-card">
+        <div class="kit-image leather">
+          <img src="kit_assets/leather.jpg" alt="Leather care kit — cleaner, conditioner, and applicator pads" loading="lazy" width="600" height="480">
+        </div>
+        <div class="kit-body">
+          <span class="kit-tag">Leather care kit</span>
+          <h3>Keep leather supple. Avoid the cracks.</h3>
+          <p class="kit-desc">Leather cleaner, conditioner, and applicator pads. Restores moisture, prevents cracking, and refreshes color. Works on aniline, pigmented, and bonded leathers.</p>
+          <div class="kit-foot">
+            <span class="kit-price">$49.99</span>
+            <span class="cfg-count-ctl" role="group" aria-label="Leather Care Kit quantity">
+              <button type="button" class="kit-dec" aria-label="One fewer Leather Care Kit">&minus;</button>
+              <span class="cmp-count kit-count" aria-live="polite">0</span>
+              <button type="button" class="kit-inc" aria-label="One more Leather Care Kit">+</button>
+            </span>
+          </div>
+          <div class="cfg-cta-row cmp-cta-row">
+            <button type="button" class="btn btn-accent kit-add-btn" data-kit="Leather Care Kit">Add to cart <span class="arrow">&rarr;</span></button>
+            <button type="button" class="btn btn-ghost kit-checkout-btn" data-kit="Leather Care Kit">Checkout</button>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
 <!-- DTC-5 · FAQ — exactly 4 accordion items (spec v10 §6). No section heading, no
      background fill: spacing + a single border-top hairline (the footer below brings
      its own border-top, so no bottom rule here = no doubles). Native <details>
@@ -939,8 +1077,6 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
   </div>
 </section>
 
-<!-- DTC-1: care kits section removed (kill list); kits payload contract kept (sends kits: []) -->
-
 </main>
 
 <!-- DTC-5 · Footer — compact single band per spec v10 ("Footer"): the admin line + four
@@ -962,7 +1098,8 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
 
 <div class="sticky-mobile" id="sticky-mobile">
   <button type="button" id="sticky-cta" class="btn btn-accent">Add plan <span class="arrow">&rarr;</span></button>
-  <!-- DTC-1: "Add kit" link removed with the care kits section -->
+  <!-- DTC-10 (V14): "Add kit" quiet link returns with the #kits section -->
+  <a href="#kits" class="btn btn-quiet">Add kit</a>
 </div>
 
 <!-- CART / CHECKOUT slide-out (CHK-1) -->
@@ -983,7 +1120,14 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
         <div class="cart-kits-title">Plans</div>
         <ul id="cart-plans-list"></ul>
       </div>
-      <!-- DTC-1: kit cart UI removed (kill list); the payload still sends kits: [] -->
+      <!-- DTC-10 (V14): kit cart lines return with the #kits section; renderCartKits()
+           (which survived the kill list) re-arms against this markup. -->
+      <div id="cart-kits" hidden>
+        <div class="cart-kits-title">Care kits</div>
+        <ul id="cart-kits-list"></ul>
+        <!-- BE-5: the customer pays kit S&H + tax; the total below already includes both. -->
+        <p class="cart-kits-note">Shipped to your door &mdash; $11.00 shipping &amp; handling per kit and 6% sales tax are included in the one-time total.</p>
+      </div>
       <div id="cart-membership" hidden>
         <div class="cart-kits-title">Repair Safety Net</div>
         <ul id="cart-membership-list"></ul>
@@ -999,6 +1143,22 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
         <span id="cart-total-val" class="cart-total-val"></span>
       </div>
       <button type="button" id="cart-clear" class="cart-clear" hidden>Empty cart</button>
+      <!-- DTC-10 (V14): membership-mode kit add-on restored as the baseline had it
+           (kept hidden; the surviving kitToggle listener re-arms against it). -->
+      <div id="cart-membership-extras" hidden>
+        <label class="cart-kit-add" for="cart-kit-toggle">
+          <input type="checkbox" id="cart-kit-toggle">
+          <span>Add a care kit <small>$49.99 one-time</small></span>
+        </label>
+        <div class="cart-field" id="cart-kit-type-field" hidden>
+          <label for="cart-kit-type">Which kit?</label>
+          <select id="cart-kit-type">
+            <option value="Wood Care Kit">Wood care kit</option>
+            <option value="Fabric Care Kit">Fabric care kit</option>
+            <option value="Leather Care Kit">Leather care kit</option>
+          </select>
+        </div>
+      </div>
       <form id="cart-form" novalidate>
         <p class="cart-hint">Tell us about yourself &mdash; this is how we&rsquo;ll reach you for plan updates and claims.</p>
         <div class="cart-field">
@@ -1155,6 +1315,10 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
   </div>
 </aside>
 
+<!-- DTC-10 (V14): kit add confirmation toast (returns with the #kits section) -->
+<div class="kit-toast" id="kit-toast" role="status" aria-live="polite">
+  <span class="check">&#10003;</span><span id="kit-toast-text">Added.</span>
+</div>
 
 <!-- DTC-1: embedded membership T&C modal removed; terms live at /terms/ -->
 
@@ -3203,6 +3367,18 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
      que pasa a "✓ In cart" (deshabilitado) + "Checkout" que abre el carrito. Reemplaza el viejo
      "click = +1 + toast" (que agregaba de más por accidente). */
   (function kitCards(){
+    /* DTC-10 (V14): confirmation toast on the primary "Add to cart" only — the stepper's
+       live count is its own feedback, and the guarded add keeps the old over-adding bug out. */
+    var kitToastTimer = null;
+    function showKitToast(msg){
+      var toast = document.getElementById('kit-toast');
+      if(!toast) return;
+      var txt = document.getElementById('kit-toast-text');
+      if(txt) txt.textContent = msg;
+      toast.classList.add('show');
+      if(kitToastTimer) clearTimeout(kitToastTimer);
+      kitToastTimer = setTimeout(function(){ toast.classList.remove('show'); }, 2600);
+    }
     document.querySelectorAll('.kit-card').forEach(function(card){
       var addBtn = card.querySelector('.kit-add-btn');
       if(!addBtn) return;
@@ -3228,7 +3404,7 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
       }
       function sync(){ render(); renderCartKits(); updateCartBadge(); }   /* refresca card + drawer + badge */
 
-      addBtn.addEventListener('click', function(){ if(!savedKits[name]){ kitAdd(name); sync(); } });
+      addBtn.addEventListener('click', function(){ if(!savedKits[name]){ kitAdd(name); sync(); showKitToast(name + ' added to your cart.'); } });
       if(incBtn) incBtn.addEventListener('click', function(){ kitAdd(name); sync(); });
       if(decBtn) decBtn.addEventListener('click', function(){ kitRemove(name); sync(); });
       if(checkoutBtn) checkoutBtn.addEventListener('click', function(){ if(!savedKits[name]) kitAdd(name); sync(); openCart(); });
