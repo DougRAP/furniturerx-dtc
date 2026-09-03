@@ -434,8 +434,6 @@ em.gold{font-style:italic;color:var(--gold);font-weight:500}
 .safety-net-h{font-size:clamp(1.5rem,2.6vw,2.125rem);line-height:1.1;margin:0 0 14px}
 .plans-lead,
 .safety-net-lead{font-size:1.0625rem;line-height:1.6;color:var(--ink-80);margin:0 0 12px}
-/* .plans sits in a full-width container (no .container-narrow), so cap the lead. */
-.plans-lead{max-width:640px}
 .safety-net-price{font-size:.9375rem;color:var(--ink-65);margin:0 0 22px}
 .safety-net-fine{font-size:.8125rem;color:var(--ink-45);margin:16px 0 0}
 
@@ -773,9 +771,9 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
          H2/lead treatment via shared selectors (see CSS). Eligibility line
          below is unchanged. Step row (1·2·3) intentionally NOT in this commit. -->
     <div class="plans-head reveal">
-      <p class="eyebrow eyebrow-ink">Select your plan and get covered</p>
+      <p class="eyebrow eyebrow-ink">Select a plan for your new items and <span class="nowrap">get covered</span></p>
       <h2 class="plans-h">How it works</h2>
-      <p class="plans-lead">Pick a plan below and check out in about two minutes. Add your delivery date now or later from your dashboard &mdash; and when accidents happen, we find the technician, book the visit, and pay the bill.</p>
+      <p class="plans-lead">Pick a plan below and check out in about two minutes. Add your delivery date now at checkout or later from your dashboard &mdash; and when accidents happen, we find the technician, book the visit, and pay the bill.</p>
     </div>
 
     <!-- Eligibility line — replaces the old section header entirely (v9) -->
