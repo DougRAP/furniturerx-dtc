@@ -501,17 +501,8 @@ details.faq-item summary:focus-visible{outline:2px solid var(--orange);outline-o
 .faq-answer{padding:0 0 24px 0;font-size:1.0625rem;line-height:1.65;color:var(--ink-65)}
 
 /* DTC-5: dead CSS reaped — final dark CTA band (.final*). The drawer kit UI
-   (#cart-kits, .cart-kits-note, .cart-line.kit, #cart-membership-extras,
-   .cart-kit-add, #cart-kit-type-field) left in that reap too — restored in V14
-   with the #kits section. */
-
-/* Membership drawer extras (add a care kit from the drawer) */
-#cart-membership-extras{margin-bottom:18px}
-.cart-kit-add{display:flex;align-items:center;gap:10px;padding:14px 16px;border:1px solid var(--rule-strong);border-radius:4px;cursor:pointer;font-size:.95rem;color:var(--ink);background:var(--paper)}
-.cart-kit-add input{width:18px;height:18px;flex:none;accent-color:var(--orange);cursor:pointer}
-.cart-kit-add small{color:var(--ink-65);font-weight:500}
-#cart-kit-type-field{margin-top:14px}
-#cart-kit-type-field select{width:100%;font:inherit;font-size:.95rem;padding:12px 14px;border:1px solid var(--rule-strong);border-radius:3px;background:var(--paper);color:var(--ink)}
+   (#cart-kits, .cart-kits-note, .cart-line.kit) left in that reap too —
+   restored in V14 with the #kits section. */
 
 /* Cart lines — summary-style cards with × top-right. The plan line reuses the old
    #cart-plan-summary language (orange rim + cov/meta/price); the kit line is the
@@ -1138,22 +1129,6 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
         <span id="cart-total-val" class="cart-total-val"></span>
       </div>
       <button type="button" id="cart-clear" class="cart-clear" hidden>Empty cart</button>
-      <!-- DTC-10 (V14): membership-mode kit add-on restored as the baseline had it
-           (kept hidden; the surviving kitToggle listener re-arms against it). -->
-      <div id="cart-membership-extras" hidden>
-        <label class="cart-kit-add" for="cart-kit-toggle">
-          <input type="checkbox" id="cart-kit-toggle">
-          <span>Add a care kit <small>$49.99 one-time</small></span>
-        </label>
-        <div class="cart-field" id="cart-kit-type-field" hidden>
-          <label for="cart-kit-type">Which kit?</label>
-          <select id="cart-kit-type">
-            <option value="Wood Care Kit">Wood care kit</option>
-            <option value="Fabric Care Kit">Fabric care kit</option>
-            <option value="Leather Care Kit">Leather care kit</option>
-          </select>
-        </div>
-      </div>
       <form id="cart-form" novalidate>
         <p class="cart-hint">Tell us about yourself &mdash; this is how we&rsquo;ll reach you for plan updates and claims.</p>
         <div class="cart-field">
@@ -1788,8 +1763,6 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
   function kitsShTotal(){ return KIT_SH * kitCount(); }
   function kitsTaxTotal(){ return Math.round(kitsRetailTotal() * KIT_TAX_RATE * 100) / 100; }
   function kitsOneTimeTotal(){ return kitsRetailTotal() + kitsShTotal() + kitsTaxTotal(); }
-  var kitToggle = document.getElementById('cart-kit-toggle');
-  var kitTypeField = document.getElementById('cart-kit-type-field');
   var payBtnInit = document.getElementById('cart-pay');
   var PAY_HTML = payBtnInit ? payBtnInit.innerHTML : '';   /* original pay label */
 
@@ -1935,11 +1908,6 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
     renderMembershipBtns();
     updateCartBadge();
     openCart();
-  }
-  if(kitToggle){
-    kitToggle.addEventListener('change', function(){
-      if(kitTypeField) kitTypeField.hidden = !kitToggle.checked;
-    });
   }
   /* MEMBERSHIP BUTTONS — "Add Repair Safety Net" en la sección (#mem-add-btn) y, si existiera,
      el final-CTA (#final-membership, hoy solo en D2C). Agregan la membership como línea del
