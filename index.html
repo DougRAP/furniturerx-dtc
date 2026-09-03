@@ -364,6 +364,11 @@ em.gold{font-style:italic;color:var(--gold);font-weight:500}
    fill, so its edge is the separation.
    ============================================================ */
 .plans{padding:clamp(32px,4vw,56px) 0 var(--sp-section)}
+/* DTC-9: section head reuses the #safety-net H2/lead treatment — .plans-h and
+   .plans-lead are comma-joined onto .safety-net-h / .safety-net-lead below.
+   Gap before .plans-elig lives on the wrapper (the lead's own margin-bottom
+   is zeroed by the global p:last-child reset). */
+.plans-head{margin:0 0 26px}
 .plans-elig{font-size:.9rem;color:var(--ink-65);line-height:1.55;max-width:640px;margin:0 0 22px}
 .plans-grid{display:grid;grid-template-columns:1fr;gap:20px;align-items:stretch}
 .plans-col-side{display:flex;flex-direction:column;gap:20px}
@@ -424,8 +429,13 @@ em.gold{font-style:italic;color:var(--gold);font-weight:500}
    own, so no bottom rule = no doubles). Restrained type: the H2 sits well below
    .h-section scale so the band never competes with #plans. */
 .safety-net{border-top:1px solid var(--rule);padding:clamp(40px,5vw,64px) 0}
+/* DTC-9: .plans-h / .plans-lead share these treatments (see #plans head). */
+.plans-h,
 .safety-net-h{font-size:clamp(1.5rem,2.6vw,2.125rem);line-height:1.1;margin:0 0 14px}
+.plans-lead,
 .safety-net-lead{font-size:1.0625rem;line-height:1.6;color:var(--ink-80);margin:0 0 12px}
+/* .plans sits in a full-width container (no .container-narrow), so cap the lead. */
+.plans-lead{max-width:640px}
 .safety-net-price{font-size:.9375rem;color:var(--ink-65);margin:0 0 22px}
 .safety-net-fine{font-size:.8125rem;color:var(--ink-45);margin:16px 0 0}
 
@@ -759,6 +769,15 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
      complete but NOT purchasable until the variable-price endpoint exists. -->
 <section class="plans" id="plans" aria-label="Protection plans">
   <div class="container">
+    <!-- DTC-9: section head — eyebrow → H2 → lead; reuses the #safety-net
+         H2/lead treatment via shared selectors (see CSS). Eligibility line
+         below is unchanged. Step row (1·2·3) intentionally NOT in this commit. -->
+    <div class="plans-head reveal">
+      <p class="eyebrow eyebrow-ink">Select your plan and get covered</p>
+      <h2 class="plans-h">How it works</h2>
+      <p class="plans-lead">Pick a plan below and check out in about two minutes. Add your delivery date now or later from your dashboard &mdash; and when accidents happen, we find the technician, book the visit, and pay the bill.</p>
+    </div>
+
     <!-- Eligibility line — replaces the old section header entirely (v9) -->
     <p class="plans-elig reveal">For new, undamaged furniture from any store. Buy before you shop and add your delivery date later, or within 60 days of delivery.</p>
 
