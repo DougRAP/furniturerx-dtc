@@ -417,7 +417,6 @@ em.gold{font-style:italic;color:var(--gold);font-weight:500}
 .how-steps{list-style:none;margin:0 0 16px;padding:0;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:10px}
 .how-steps li{font-family:var(--display);font-weight:500;font-size:1.125rem;letter-spacing:-.01em;color:var(--ink)}
 .how-num{font-family:var(--body);font-weight:700;font-size:.72rem;letter-spacing:.1em;color:var(--ink-45);margin-right:9px;vertical-align:2px}
-.how-secure{font-size:.8125rem;color:var(--ink-65);margin:0 0 24px}
 @media (min-width:680px){
   .how-steps{flex-direction:row;column-gap:34px}
 }
@@ -438,7 +437,8 @@ em.gold{font-style:italic;color:var(--gold);font-weight:500}
    under 680px the "plan" word in the column heads is hidden (.pc-word) so
    heads stay inside the narrow columns — amount plus the muted price-context
    subline remain legible. */
-.compare-link{margin:0 0 18px}
+/* DTC-16 (V18.1): #compare-open now sits inline at the end of .plans-lead */
+.plans-lead .plan-choose{margin-top:0;font-size:inherit}
 .compare-table{width:100%;border-collapse:collapse;table-layout:fixed;margin:2px 0 18px}
 .compare-table col.pc-col{width:44px}
 .compare-table th,.compare-table td{padding:13px 2px}
@@ -916,22 +916,15 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
     <div class="plans-head reveal">
       <p class="eyebrow eyebrow-orange">Select a plan for your new items and <span class="nowrap">get covered</span></p>
       <h2 class="plans-h">How it works</h2>
-      <p class="plans-lead">Pick a plan below and check out in about two minutes. Add your delivery date now at checkout or later from your dashboard &mdash; and when accidents happen, file a claim 24/7 online or by phone and we&rsquo;ll help get your item repaired or replaced (subject to Plan terms). Your subscription payments start on the date your items are delivered (or picked up). Please read the Plan terms by clicking the Plan T&amp;C link below.</p>
-      <!-- DTC-15 (V18): step row + Stripe line MOVED here from #how-checkout
-           (same shared CSS for now — polish pass later, owner). -->
+      <!-- DTC-16 (V18.1): owner order — steps directly under the H2, paragraph after.
+           Steps CSS shared from the old #how-checkout strip (polish pass later). -->
       <ol class="how-steps">
         <li><span class="how-num" aria-hidden="true">1</span>Pick your plan</li>
         <li><span class="how-num" aria-hidden="true">2</span>2-minute checkout</li>
         <li><span class="how-num" aria-hidden="true">3</span>Add your delivery date now, or later from your dashboard</li>
       </ol>
-      <p class="how-secure">Secure checkout by Stripe. Cancel anytime.</p>
+      <p class="plans-lead">Pick a plan below and check out in about two minutes. Add your delivery date now at checkout or later from your dashboard &mdash; and when accidents happen, file a claim 24/7 online or by phone and we&rsquo;ll help get your item repaired or replaced (subject to Plan terms). Your subscription payments start on the date your items are delivered (or picked up). Please read the Plan terms by clicking the Plan T&amp;C link below. <button type="button" id="compare-open" class="plan-choose">Compare Coverage</button></p>
     </div>
-
-    <!-- DTC-14 (V17.1): the V17 accordion became a quiet trigger (owner) — button
-         styled like .link-inline, same pattern as #plans-ask-maya. Opens the
-         plan-comparison overlay (#compare-backdrop, with the other modals below).
-         Sits between the section head and the used/kits jump link. -->
-    <p class="compare-link reveal"><button type="button" id="compare-open" class="plan-choose" style="margin-top:0">Compare coverage in detail <span class="arrow">&rarr;</span></button></p>
 
     <!-- DTC-10: eligibility line replaced by the used-furniture/kits jump link (owner).
          Eligibility facts still live in the drawer fine print and FAQ. Anchor target
