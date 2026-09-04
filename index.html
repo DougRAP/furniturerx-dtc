@@ -427,23 +427,18 @@ em.gold{font-style:italic;color:var(--gold);font-weight:500}
 .plans-h{font-size:clamp(1.5rem,2.6vw,2.125rem);line-height:1.1;margin:0 0 14px}
 .plans-lead{font-size:1.0625rem;line-height:1.6;color:var(--ink-80);margin:0 0 12px}
 
-/* DTC-14 (V17): plan-comparison accordion — native <details> directly under the
-   #plans head, collapsed by default, zero JS. Interaction mirrors details.faq-item
-   (hidden marker, orange +/− ::after) but as its own .plans-compare variant:
-   the FAQ rules carry that section's headline scale and full-bleed borders,
-   which don't fit here. Inside: a real <table> (th scope) — hairline row
-   separators + generous padding only, no fills, no zebra. Mobile-first:
-   table-layout:fixed with three 44px plan columns (col.pc-col), the feature
-   column takes the rest; under 680px the "plan" word in the column heads is
-   hidden (.pc-word) so heads stay inside the narrow columns — amount plus the
-   muted price-context subline remain legible. */
-details.plans-compare{border-top:1px solid var(--rule-strong);border-bottom:1px solid var(--rule-strong);margin:0 0 22px}
-details.plans-compare summary{list-style:none;cursor:pointer;padding:15px 40px 15px 0;position:relative;font-family:var(--display);font-weight:500;font-size:1.125rem;letter-spacing:-.015em;color:var(--ink);line-height:1.25;transition:color var(--t-fast) var(--ease);font-variation-settings:"opsz" 24}
-details.plans-compare summary::-webkit-details-marker{display:none}
-details.plans-compare summary::after{content:"+";position:absolute;right:4px;top:50%;transform:translateY(-50%);font-family:var(--display);font-weight:400;font-size:1.5rem;color:var(--orange);transition:transform var(--t-med) var(--ease);line-height:1}
-details.plans-compare[open] summary::after{content:"\2212"}
-details.plans-compare summary:hover{color:var(--orange)}
-details.plans-compare summary:focus-visible{outline:2px solid var(--orange);outline-offset:2px;border-radius:2px}
+/* DTC-14 (V17.1): plan comparison — the V17 <details> accordion died (owner);
+   a quiet "Compare coverage in detail" trigger under the #plans head (button
+   element styled like .link-inline, same as .plan-choose / #plans-ask-maya)
+   now opens the table in a centered overlay (#compare-backdrop — .compare-card
+   sizing lives with the .gift-* modal rules it reuses). The table itself is
+   unchanged: real <table> (th scope), hairline row separators + generous
+   padding only, no fills, no zebra. Mobile-first: table-layout:fixed with
+   three 44px plan columns (col.pc-col), the feature column takes the rest;
+   under 680px the "plan" word in the column heads is hidden (.pc-word) so
+   heads stay inside the narrow columns — amount plus the muted price-context
+   subline remain legible. */
+.compare-link{margin:0 0 18px}
 .compare-table{width:100%;border-collapse:collapse;table-layout:fixed;margin:2px 0 18px}
 .compare-table col.pc-col{width:44px}
 .compare-table th,.compare-table td{padding:13px 2px}
@@ -646,6 +641,17 @@ details.faq-item summary:focus-visible{outline:2px solid var(--orange);outline-o
 .gift-field select:focus,.gift-field input:focus{outline:2px solid var(--orange);outline-offset:1px;border-color:var(--orange)}
 .gift-total{margin:0 0 16px;font-weight:700;font-size:.95rem;color:var(--ink)}
 .gift-msg{margin:10px 0 0;font-size:.875rem;line-height:1.5;color:var(--scarlet,#a8362a)}
+
+/* DTC-14 (V17.1): plan-comparison overlay reuses the gift modal chrome
+   (.gift-backdrop/.gift-card/.gift-close, like the ISS-14 confirm modal reuses
+   .dashqr-*); .compare-card only re-sizes the card for the table — wider sheet
+   on mobile than the gift's 420px cap, 50vw with a 640px floor on desktop,
+   capped height with internal scroll. Must sit AFTER .gift-card so the
+   overflow-y/width/padding overrides win. */
+.compare-card{width:min(92vw,640px);max-height:85vh;overflow-y:auto;padding:30px 18px 22px}
+@media (min-width:680px){
+  .compare-card{width:50vw;min-width:640px;padding:32px 28px 26px}
+}
 
 /* ============================================================
    FOOTER (DTC-5) — compact single band: admin line + four links
@@ -913,81 +919,11 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
       <p class="plans-lead">Pick a plan below and check out in about two minutes. Add your delivery date now at checkout or later from your dashboard &mdash; and when accidents happen, file a claim 24/7 online or by phone and we&rsquo;ll help get your item repaired or replaced (subject to Plan terms). Your subscription payments start on the date your items are delivered (or picked up). Please read the Plan terms by clicking the Plan T&amp;C link below.</p>
     </div>
 
-    <!-- DTC-14 (V17): plan-comparison accordion — collapsed by default, native
-         <details>, no JS. Real <table>, th scope for a11y; check/dash cells carry
-         role="img" labels for screen readers. Row copy is placeholder — owner
-         rewrites. Sits between the section head and the used/kits jump link. -->
-    <details class="plans-compare reveal">
-      <summary>Compare coverage in detail</summary>
-      <table class="compare-table" aria-label="Plan comparison">
-        <colgroup><col><col class="pc-col"><col class="pc-col"><col class="pc-col"></colgroup>
-        <thead>
-          <tr>
-            <th scope="col" aria-label="Feature"></th>
-            <th scope="col"><span class="pc-amt">$19.99<span class="pc-word"> plan</span></span><span class="pc-per">monthly</span></th>
-            <th scope="col"><span class="pc-amt">$9.99<span class="pc-word"> plan</span></span><span class="pc-per">monthly</span></th>
-            <th scope="col"><span class="pc-amt">3-year<span class="pc-word"> plan</span></span><span class="pc-per">pay once</span></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">Food, drink, ink, and pet stains</th>
-            <td><span class="ck" role="img" aria-label="Included"></span></td>
-            <td><span class="ck" role="img" aria-label="Included"></span></td>
-            <td><span class="ck" role="img" aria-label="Included"></span></td>
-          </tr>
-          <tr>
-            <th scope="row">Rips, tears, and burns</th>
-            <td><span class="ck" role="img" aria-label="Included"></span></td>
-            <td><span role="img" aria-label="Not included">&mdash;</span></td>
-            <td><span class="ck" role="img" aria-label="Included"></span></td>
-          </tr>
-          <tr>
-            <th scope="row">Mechanical and electrical failures</th>
-            <td><span class="ck" role="img" aria-label="Included"></span></td>
-            <td><span role="img" aria-label="Not included">&mdash;</span></td>
-            <td><span class="ck" role="img" aria-label="Included"></span></td>
-          </tr>
-          <tr>
-            <th scope="row">Up to $5,000 in coverage per plan</th>
-            <td><span class="ck" role="img" aria-label="Included"></span></td>
-            <td><span class="ck" role="img" aria-label="Included"></span></td>
-            <td><span class="ck" role="img" aria-label="Included"></span></td>
-          </tr>
-          <tr>
-            <th scope="row">We book and pay covered repairs</th>
-            <td><span class="ck" role="img" aria-label="Included"></span></td>
-            <td><span class="ck" role="img" aria-label="Included"></span></td>
-            <td><span class="ck" role="img" aria-label="Included"></span></td>
-          </tr>
-          <tr>
-            <th scope="row">Replacement if it can&rsquo;t be fixed</th>
-            <td><span class="ck" role="img" aria-label="Included"></span></td>
-            <td><span class="ck" role="img" aria-label="Included"></span></td>
-            <td><span class="ck" role="img" aria-label="Included"></span></td>
-          </tr>
-          <tr>
-            <th scope="row">24/7 claim filing, same-day response</th>
-            <td><span class="ck" role="img" aria-label="Included"></span></td>
-            <td><span class="ck" role="img" aria-label="Included"></span></td>
-            <td><span class="ck" role="img" aria-label="Included"></span></td>
-          </tr>
-          <tr>
-            <th scope="row">Repair Safety Net membership included</th>
-            <td><span class="ck" role="img" aria-label="Included"></span></td>
-            <td><span class="ck" role="img" aria-label="Included"></span></td>
-            <td><span class="ck" role="img" aria-label="Included"></span></td>
-          </tr>
-          <tr>
-            <th scope="row">One payment, three years of coverage</th>
-            <td><span role="img" aria-label="Not included">&mdash;</span></td>
-            <td><span role="img" aria-label="Not included">&mdash;</span></td>
-            <td><span class="ck" role="img" aria-label="Included"></span></td>
-          </tr>
-        </tbody>
-      </table>
-      <p class="compare-terms"><a href="/terms/" target="_blank" rel="noopener" class="link-inline">View full terms and conditions <span class="arrow">&rarr;</span></a></p>
-    </details>
+    <!-- DTC-14 (V17.1): the V17 accordion became a quiet trigger (owner) — button
+         styled like .link-inline, same pattern as #plans-ask-maya. Opens the
+         plan-comparison overlay (#compare-backdrop, with the other modals below).
+         Sits between the section head and the used/kits jump link. -->
+    <p class="compare-link reveal"><button type="button" id="compare-open" class="plan-choose" style="margin-top:0">Compare coverage in detail <span class="arrow">&rarr;</span></button></p>
 
     <!-- DTC-10: eligibility line replaced by the used-furniture/kits jump link (owner).
          Eligibility facts still live in the drawer fine print and FAQ. Anchor target
@@ -1616,6 +1552,87 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
   </div>
 </div>
 
+<!-- DTC-14 (V17.1): plan-comparison overlay — the V17 accordion table, unchanged,
+     now in a centered modal (owner: link + overlay). Reuses the gift modal chrome
+     (.gift-backdrop/.gift-card/.gift-close, show/hide-by-[hidden]); .compare-card
+     re-sizes the card for the table. Opened by #compare-open under the #plans head.
+     Check/dash cells carry role="img" labels for screen readers; row copy is
+     placeholder — owner rewrites. -->
+<div class="gift-backdrop" id="compare-backdrop" hidden>
+  <div class="gift-card compare-card" role="dialog" aria-modal="true" aria-labelledby="compare-title">
+    <button type="button" class="gift-close" id="compare-close" aria-label="Close">&times;</button>
+    <h3 id="compare-title">Compare coverage in detail</h3>
+    <table class="compare-table" aria-label="Plan comparison">
+      <colgroup><col><col class="pc-col"><col class="pc-col"><col class="pc-col"></colgroup>
+      <thead>
+        <tr>
+          <th scope="col" aria-label="Feature"></th>
+          <th scope="col"><span class="pc-amt">$19.99<span class="pc-word"> plan</span></span><span class="pc-per">monthly</span></th>
+          <th scope="col"><span class="pc-amt">$9.99<span class="pc-word"> plan</span></span><span class="pc-per">monthly</span></th>
+          <th scope="col"><span class="pc-amt">3-year<span class="pc-word"> plan</span></span><span class="pc-per">pay once</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Food, drink, ink, and pet stains</th>
+          <td><span class="ck" role="img" aria-label="Included"></span></td>
+          <td><span class="ck" role="img" aria-label="Included"></span></td>
+          <td><span class="ck" role="img" aria-label="Included"></span></td>
+        </tr>
+        <tr>
+          <th scope="row">Rips, tears, and burns</th>
+          <td><span class="ck" role="img" aria-label="Included"></span></td>
+          <td><span role="img" aria-label="Not included">&mdash;</span></td>
+          <td><span class="ck" role="img" aria-label="Included"></span></td>
+        </tr>
+        <tr>
+          <th scope="row">Mechanical and electrical failures</th>
+          <td><span class="ck" role="img" aria-label="Included"></span></td>
+          <td><span role="img" aria-label="Not included">&mdash;</span></td>
+          <td><span class="ck" role="img" aria-label="Included"></span></td>
+        </tr>
+        <tr>
+          <th scope="row">Up to $5,000 in coverage per plan</th>
+          <td><span class="ck" role="img" aria-label="Included"></span></td>
+          <td><span class="ck" role="img" aria-label="Included"></span></td>
+          <td><span class="ck" role="img" aria-label="Included"></span></td>
+        </tr>
+        <tr>
+          <th scope="row">We book and pay covered repairs</th>
+          <td><span class="ck" role="img" aria-label="Included"></span></td>
+          <td><span class="ck" role="img" aria-label="Included"></span></td>
+          <td><span class="ck" role="img" aria-label="Included"></span></td>
+        </tr>
+        <tr>
+          <th scope="row">Replacement if it can&rsquo;t be fixed</th>
+          <td><span class="ck" role="img" aria-label="Included"></span></td>
+          <td><span class="ck" role="img" aria-label="Included"></span></td>
+          <td><span class="ck" role="img" aria-label="Included"></span></td>
+        </tr>
+        <tr>
+          <th scope="row">24/7 claim filing, same-day response</th>
+          <td><span class="ck" role="img" aria-label="Included"></span></td>
+          <td><span class="ck" role="img" aria-label="Included"></span></td>
+          <td><span class="ck" role="img" aria-label="Included"></span></td>
+        </tr>
+        <tr>
+          <th scope="row">Repair Safety Net membership included</th>
+          <td><span class="ck" role="img" aria-label="Included"></span></td>
+          <td><span class="ck" role="img" aria-label="Included"></span></td>
+          <td><span class="ck" role="img" aria-label="Included"></span></td>
+        </tr>
+        <tr>
+          <th scope="row">One payment, three years of coverage</th>
+          <td><span role="img" aria-label="Not included">&mdash;</span></td>
+          <td><span role="img" aria-label="Not included">&mdash;</span></td>
+          <td><span class="ck" role="img" aria-label="Included"></span></td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="compare-terms"><a href="/terms/" target="_blank" rel="noopener" class="link-inline">View full terms and conditions <span class="arrow">&rarr;</span></a></p>
+  </div>
+</div>
+
 <script>
 (function(){
   'use strict';
@@ -2232,6 +2249,23 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
         giftSubmit.textContent = giftSubmitLabel;
       });
     });
+  }
+
+  /* DTC-14 (V17.1): the "Compare coverage in detail" trigger under the #plans head
+     opens the plan-comparison overlay — same show/hide-by-[hidden] wiring as the
+     gift overlay above (× + backdrop-click close; the gift pattern manages no
+     Esc close and no body scroll-lock, so neither does this). On open, focus
+     moves to the × so keyboard users land inside the dialog. */
+  var compareOpen = document.getElementById('compare-open');
+  var compareBackdrop = document.getElementById('compare-backdrop');
+  var compareClose = document.getElementById('compare-close');
+  if(compareOpen && compareBackdrop && compareClose){
+    compareOpen.addEventListener('click', function(){
+      compareBackdrop.hidden = false;
+      compareClose.focus();
+    });
+    compareClose.addEventListener('click', function(){ compareBackdrop.hidden = true; });
+    compareBackdrop.addEventListener('click', function(ev){ if(ev.target === compareBackdrop) compareBackdrop.hidden = true; });
   }
 
   function openCart(){
