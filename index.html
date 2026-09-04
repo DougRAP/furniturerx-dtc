@@ -107,7 +107,9 @@ a:hover{text-decoration-color:var(--ink)}
 button{font:inherit;cursor:pointer}
 
 .container{width:100%;max-width:var(--container);margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter)}
-.container-narrow{max-width:var(--container-narrow)}
+/* DTC-11 (V15): .container-narrow utility reaped — its only user was the slim V12
+   safety-net band, replaced by the full-width kiosk membership card. (:root token
+   stays — tokens are verbatim per ground rule.) */
 /* DTC-7: glue for tight phrases (price+unit, short idioms) so lines
    never break inside them — the phrase drops to the next line whole. */
 .nowrap{white-space:nowrap}
@@ -364,10 +366,9 @@ em.gold{font-style:italic;color:var(--gold);font-weight:500}
    fill, so its edge is the separation.
    ============================================================ */
 .plans{padding:clamp(32px,4vw,56px) 0 var(--sp-section)}
-/* DTC-9: section head reuses the #safety-net H2/lead treatment — .plans-h and
-   .plans-lead are comma-joined onto .safety-net-h / .safety-net-lead below.
-   Gap before .plans-elig lives on the wrapper (the lead's own margin-bottom
-   is zeroed by the global p:last-child reset). */
+/* DTC-9: section head — .plans-h / .plans-lead (defined below). Gap before
+   .plans-elig lives on the wrapper (the lead's own margin-bottom is zeroed by
+   the global p:last-child reset). */
 .plans-head{margin:0 0 26px}
 .plans-elig{font-size:.9rem;color:var(--ink-65);line-height:1.55;max-width:640px;margin:0 0 22px}
 .plans-grid{display:grid;grid-template-columns:1fr;gap:20px;align-items:stretch}
@@ -410,7 +411,7 @@ em.gold{font-style:italic;color:var(--gold);font-weight:500}
 .plans-fine a:hover{color:var(--ink);text-decoration-color:var(--ink)}
 
 /* DTC-4 (spec v10 §5): How-checkout-works strip — spacing + hairline only (top rule matches the
-   .plans pattern; #faq below brings its own border-top, so no bottom rule here = no double rules). */
+   .plans pattern; #kits below brings its own border-top, so no bottom rule here = no double rules). */
 .how-checkout{border-top:1px solid var(--rule);padding:clamp(40px,5vw,64px) 0;text-align:center}
 .how-steps{list-style:none;margin:0 0 16px;padding:0;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:10px}
 .how-steps li{font-family:var(--display);font-weight:500;font-size:1.125rem;letter-spacing:-.01em;color:var(--ink)}
@@ -420,18 +421,52 @@ em.gold{font-style:italic;color:var(--gold);font-weight:500}
   .how-steps{flex-direction:row;column-gap:34px}
 }
 
-/* DTC-8 (V12) · Repair Safety Net band — quiet, page background, NOT reversed.
-   One border-top hairline (matches #how-checkout above; #faq below brings its
-   own, so no bottom rule = no doubles). Restrained type: the H2 sits well below
-   .h-section scale so the band never competes with #plans. */
-.safety-net{border-top:1px solid var(--rule);padding:clamp(40px,5vw,64px) 0}
-/* DTC-9: .plans-h / .plans-lead share these treatments (see #plans head). */
-.plans-h,
-.safety-net-h{font-size:clamp(1.5rem,2.6vw,2.125rem);line-height:1.1;margin:0 0 14px}
-.plans-lead,
-.safety-net-lead{font-size:1.0625rem;line-height:1.6;color:var(--ink-80);margin:0 0 12px}
-.safety-net-price{font-size:.9375rem;color:var(--ink-65);margin:0 0 22px}
-.safety-net-fine{font-size:.8125rem;color:var(--ink-45);margin:16px 0 0}
+/* DTC-9 · #plans section head type (the slim V12 .safety-net band that used to
+   share these rules died in V15 — the full kiosk membership card replaced it). */
+.plans-h{font-size:clamp(1.5rem,2.6vw,2.125rem);line-height:1.1;margin:0 0 14px}
+.plans-lead{font-size:1.0625rem;line-height:1.6;color:var(--ink-80);margin:0 0 12px}
+
+/* ============================================================
+   MEMBERSHIP CARD (DTC-11, V15) — the FULL kiosk membership block
+   returns (owner reversed the slim V12 band): baseline rules restored
+   verbatim — signature 4px orange left rim, two-column body ≥680px.
+   Owner override for THIS region only: kiosk band treatment + orange
+   eyebrows are allowed here; fills must not spread to other sections.
+   ============================================================ */
+.membership{padding:var(--sp-block) 0 var(--sp-section);background:var(--paper);position:relative}
+.membership::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:var(--rule)}
+.mem-intro{max-width:1040px;margin-bottom:32px}
+.mem-intro h2{margin:18px 0 20px}
+.mem-intro .lead{max-width:640px}
+
+.mem-card{display:grid;grid-template-columns:1fr;gap:0;border:1px solid var(--rule);border-radius:4px;overflow:hidden;background:var(--paper);position:relative;box-shadow:var(--shadow-card)}
+.mem-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:var(--rim);background:var(--orange);z-index:2}
+
+.mem-card-head{padding:36px 36px 28px;border-bottom:1px solid var(--rule);display:flex;flex-direction:column;gap:8px}
+.mem-card-head .kicker{font-size:.6875rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--orange);font-family:var(--body)}
+.mem-card-head h3{font-size:clamp(1.75rem,3vw,2.5rem);letter-spacing:-.022em;line-height:1.02;margin:0;font-variation-settings:"opsz" 64}
+.mem-card-head .price{display:flex;align-items:baseline;gap:8px;margin-top:14px}
+.mem-card-head .price .amt{font-family:var(--display);font-weight:500;font-size:3rem;letter-spacing:-.025em;line-height:1;color:var(--ink);font-variation-settings:"opsz" 96}
+.mem-card-head .price .per{font-size:.95rem;color:var(--ink-65);font-weight:500}
+.mem-card-head .price-sub{font-size:.875rem;color:var(--ink-65)}
+
+.mem-card-body{padding:36px;display:grid;grid-template-columns:1fr;gap:36px}
+.mem-card-body .copy h4{font-family:var(--display);font-weight:500;font-size:1.25rem;letter-spacing:-.015em;margin:0 0 14px;font-variation-settings:"opsz" 24}
+.mem-card-body .copy p{font-size:.95rem;color:var(--ink-65);line-height:1.6}
+.mem-benefits{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:16px}
+.mem-benefits li{padding-left:32px;position:relative;font-size:.9375rem;color:var(--ink);line-height:1.5}
+.mem-benefits li::before{content:"";position:absolute;left:0;top:5px;width:18px;height:11px;border-left:2.5px solid var(--orange);border-bottom:2.5px solid var(--orange);transform:rotate(-45deg)}
+.mem-benefits li strong{font-weight:700}
+
+.mem-card-foot{padding:24px 36px;background:var(--paper-cool);border-top:1px solid var(--rule);display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+.mem-card-foot .note{font-size:.8125rem;color:var(--ink-65)}
+/* DTC-11 (V15) fix, not in baseline: .btn is white-space:nowrap, so the long
+   "Add Repair Safety Net · $19.99/mo" CTA's min-content blew the card's grid
+   track past the viewport at 360/390 (content clipped by the card's
+   overflow:hidden — latent in the kiosk too). Let foot buttons wrap and cap
+   the grid children's min-width so the card can never outgrow its container. */
+.mem-card > *{min-width:0}
+.mem-card-foot .btn{white-space:normal;line-height:1.3}
 
 /* Feature list folded down from the removed #compare cards (orange check bullets) —
    reused by plan card A (DTC-3). DTC-5: .cmp-for reaped (markup gone). */
@@ -446,20 +481,21 @@ em.gold{font-style:italic;color:var(--gold);font-weight:500}
 
 /* DTC-5: dead CSS reaped — referral perk strip (.refer-*), control tiles (.control-*),
    old navy trust banner (.trust, .trust-grid/-stats/-dash-lead + dashLeadBob keyframes),
-   dashboard mock (.dash-grid/.dash-mock/.dash-item…), standalone membership card
-   (.membership, .mem-*). Their markup was removed in slices 1-3; header
-   .dash-pill/.dash-icon-btn and the drawer's .cart-line.membership are separate and
-   stay. The care kits strip left in that reap too — restored below in V14. */
+   dashboard mock (.dash-grid/.dash-mock/.dash-item…). Header .dash-pill/.dash-icon-btn
+   and the drawer's .cart-line.membership are separate and stay. The care kits strip
+   left in that reap too (restored below in V14), and the standalone membership card
+   (.membership, .mem-*) as well — restored above in V15. */
 
 /* ============================================================
-   CARE KITS (DTC-10, V14) — the kiosk kits strip returns (owner:
-   kits + membership live at the bottom of this page). Restored from
-   the kiosk baseline with two adaptations: no background fill (page
-   rule: sections separate with spacing + a hairline, the navy trust
-   band is the only reversed band) and no rules for the deprecated
-   placeholder svg / fake-packaging overlay (that markup was stripped).
+   CARE KITS (DTC-10, V14; V15 restyle) — the kiosk kits strip. V15:
+   owner override for the kits+membership region — the kiosk paper-cool
+   background band returns (V14 had stripped it). One adaptation kept:
+   no rules for the deprecated placeholder svg / fake-packaging overlay
+   (that markup was stripped). No border-bottom: .membership below
+   brings its own ::before hairline, so the fill edge + that rule
+   separate the sections without doubling.
    ============================================================ */
-.kits{border-top:1px solid var(--rule);padding:clamp(40px,5vw,72px) 0 var(--sp-section)}
+.kits{padding:clamp(40px,5vw,72px) 0 var(--sp-section);background:var(--paper-cool);border-top:1px solid var(--rule)}
 .kits-intro{max-width:1040px;margin-bottom:var(--sp-block)}
 .kits-intro p{margin-top:18px;max-width:640px}
 .kits-grid{display:grid;grid-template-columns:1fr;gap:18px}
@@ -552,7 +588,21 @@ details.faq-item summary:focus-visible{outline:2px solid var(--orange);outline-o
 .confirm-actions{display:flex;gap:10px;margin-top:6px}
 .confirm-actions .btn{flex:1}
 
-/* DTC-5: dead CSS reaped — gift coupon overlay (.gift-*): markup + entry links left in slice 1. */
+/* DTC-11 (V15): gift coupon overlay returns with the membership card (same
+   show/hide-by-[hidden] pattern as .dashqr-*) — baseline .gift-* rules verbatim. */
+.gift-backdrop{position:fixed;inset:0;background:rgba(8,23,41,.5);z-index:150;display:flex;align-items:center;justify-content:center;padding:20px}
+.gift-card{position:relative;overflow:hidden;width:min(92vw,420px);background:var(--paper);border-radius:8px;box-shadow:0 24px 60px rgba(14,20,24,.28);padding:32px 28px 26px;text-align:left}
+.gift-card::before{content:"";position:absolute;left:0;right:0;top:0;height:var(--rim);background:var(--orange)}
+.gift-close{position:absolute;top:10px;right:12px;background:none;border:0;font-size:1.5rem;line-height:1;color:var(--ink-45);cursor:pointer;padding:6px}
+.gift-close:hover{color:var(--ink)}
+.gift-card h3{font-family:var(--display);font-weight:500;font-size:1.25rem;letter-spacing:-.015em;margin:0 0 8px;color:var(--ink);font-variation-settings:"opsz" 24}
+.gift-sub{font-size:.9rem;line-height:1.55;color:var(--ink-65);margin:0 0 18px}
+.gift-field{margin-bottom:14px}
+.gift-field label{display:block;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-45);margin-bottom:6px}
+.gift-field select,.gift-field input{width:100%;font-family:var(--body);font-size:.95rem;padding:12px 14px;border:1px solid var(--rule);border-radius:4px;background:var(--paper);color:var(--ink)}
+.gift-field select:focus,.gift-field input:focus{outline:2px solid var(--orange);outline-offset:1px;border-color:var(--orange)}
+.gift-total{margin:0 0 16px;font-weight:700;font-size:.95rem;color:var(--ink)}
+.gift-msg{margin:10px 0 0;font-size:.875rem;line-height:1.5;color:var(--scarlet,#a8362a)}
 
 /* ============================================================
    FOOTER (DTC-5) — compact single band: admin line + four links
@@ -637,11 +687,16 @@ details.faq-item summary:focus-visible{outline:2px solid var(--orange);outline-o
 /* ============================================================
    RESPONSIVE
    ============================================================ */
-/* DTC-5: the old 680px block (control/final/mem/refer grids) died with its markup.
-   DTC-10 (V14): the kits grid rule returns with the #kits section — same 680px
-   breakpoint the kiosk baseline used. */
+/* DTC-5: the old 680px block (control/final/refer grids) died with its markup.
+   DTC-10 (V14): the kits grid rule returned with the #kits section; DTC-11 (V15):
+   the mem-card rules return with the membership card — same 680px breakpoint the
+   kiosk baseline used. The foot gains wrap + a full-width .note row (the owner-kept
+   fine print sits below the baseline CTA row). */
 @media (min-width:680px){
   .kits-grid{grid-template-columns:repeat(3,1fr)}
+  .mem-card-body{grid-template-columns:1fr 1.1fr;gap:48px;align-items:start}
+  .mem-card-foot{flex-direction:row;align-items:center;justify-content:space-between;flex-wrap:wrap}
+  .mem-card-foot .note{flex-basis:100%}
 }
 @media (min-width:880px){
   .footer-row{flex-direction:row;align-items:center;justify-content:space-between}
@@ -805,9 +860,9 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
      complete but NOT purchasable until the variable-price endpoint exists. -->
 <section class="plans" id="plans" aria-label="Protection plans">
   <div class="container">
-    <!-- DTC-9: section head — eyebrow → H2 → lead; reuses the #safety-net
-         H2/lead treatment via shared selectors (see CSS). Eligibility line
-         below is unchanged. Step row (1·2·3) intentionally NOT in this commit. -->
+    <!-- DTC-9: section head — eyebrow → H2 → lead (.plans-h/.plans-lead, see CSS).
+         Eligibility line below is unchanged. Step row (1·2·3) intentionally NOT
+         in this commit. -->
     <div class="plans-head reveal">
       <p class="eyebrow eyebrow-ink">Select a plan for your new items and <span class="nowrap">get covered</span></p>
       <h2 class="plans-h">How it works</h2>
@@ -816,8 +871,8 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
 
     <!-- DTC-10: eligibility line replaced by the used-furniture/kits jump link (owner).
          Eligibility facts still live in the drawer fine print and FAQ. Anchor target
-         #safety-net = top of the used/kits region; kits section lands beside it (v14). -->
-    <p class="plans-elig reveal">For used furniture programs and kits, <a href="#safety-net">click here</a>.</p>
+         #kits = top of the used/kits region (V15: kits sit above the membership card). -->
+    <p class="plans-elig reveal">For used furniture programs and kits, <a href="#kits">click here</a>.</p>
 
     <div class="plans-grid reveal">
 
@@ -920,34 +975,16 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
   </div>
 </section>
 
-<!-- DTC-8 (V12) · REPAIR SAFETY NET — the standalone membership band returns (owner
-     reversed the DTC-1 removal): the $19.99/mo PAID membership for furniture the
-     customer already owns. Quiet band on the page background; the CTA is .btn-quiet
-     by owner call even though it's a purchase action (must not compete with #plans).
-     #mem-add-btn re-arms the kept-and-guarded membershipButtons() wiring: add →
-     "✓ In cart" → same drawer. Payload untouched — membership: savedMembership
-     already ships. -->
-<section class="safety-net" id="safety-net" aria-label="Repair Safety Net membership">
-  <div class="container container-narrow reveal">
-    <p class="eyebrow eyebrow-ink">USED FURNITURE?</p>
-    <h2 class="safety-net-h">Repair Safety Net, on its own.</h2>
-    <p class="safety-net-lead">For furniture you already own &mdash; Marketplace finds, inherited pieces &mdash; no receipt or delivery date needed. When something breaks, we find the technician, book the visit, and you pay member rates for the repair.</p>
-    <p class="safety-net-price"><span class="nowrap">$19.99/month</span> &middot; included free for 3 months with any protection plan</p>
-    <button type="button" id="mem-add-btn" class="btn btn-quiet">Add membership</button>
-    <p class="safety-net-fine">A service membership, not coverage &mdash; repairs are billed to you at member rates.</p>
-  </div>
-</section>
-
-<!-- DTC-10 (V14) · CARE KITS — the kiosk kits strip returns (owner: kits and
-     membership live at the bottom of this page; no separate kit pages). With
-     #safety-net above, this is the "used furniture programs and kits" region the
-     #plans jump link points at. Cards restored from the kiosk baseline minus the
-     deprecated placeholder blocks; eyebrow switched to the muted ink variant
-     (orange stays a purchase-action accent — the filled Add-to-cart buttons). -->
+<!-- DTC-10 (V14) · CARE KITS — the kiosk kits strip (owner: kits and membership
+     live at the bottom of this page; no separate kit pages). V15: kits moved ABOVE
+     the membership card — this is the top of the "used furniture programs and kits"
+     region the #plans jump link points at. Cards restored from the kiosk baseline
+     minus the deprecated placeholder blocks; V15 gives the section back its kiosk
+     look (paper-cool band + orange eyebrow) per owner override for this region. -->
 <section class="kits" id="kits">
   <div class="container">
     <div class="kits-intro reveal">
-      <span class="eyebrow eyebrow-ink">While you&rsquo;re here</span>
+      <span class="eyebrow eyebrow-orange">While you&rsquo;re here</span>
       <h2 class="h-section">Care kits, <em class="accent">in a box.</em></h2>
       <p class="lead" style="max-width:620px">Member-grade cleaning and conditioning, but no subscription required. The same products our technicians carry on service calls.</p>
     </div>
@@ -1022,6 +1059,69 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
         </div>
       </article>
     </div>
+  </div>
+</section>
+
+<!-- DTC-11 (V15) · MEMBERSHIP — the FULL kiosk membership block returns (owner
+     reversed the slim V12 band): baseline copy and structure verbatim — eyebrow,
+     H2 + lead, mem-card (orange rim, price, two-column What-you-get / Helpful-for
+     lists incl. the gift-coupon bullet) and the CTA row. Deviations: #mem-details-link
+     is now a LINK to /terms/ (the embedded memterms modal stays deleted), and the
+     owner-kept service-not-coverage fine print sits below the CTA row. #safety-net
+     stays as an alias anchor (old jump links / bookmarks). #mem-add-btn re-arms the
+     kept membershipButtons() wiring: add → "✓ In cart" → same drawer. Payload
+     untouched — membership: savedMembership already ships. -->
+<section class="membership" id="membership" aria-label="Repair Safety Net membership">
+  <span id="safety-net" aria-hidden="true"></span>
+  <div class="container">
+    <div class="mem-intro reveal">
+      <span class="eyebrow eyebrow-orange">FurnitureRx Repair Concierge</span>
+      <h2 class="h-section">Keep your furniture looking new with <em class="accent">Repair Concierge.</em></h2>
+      <p class="lead">Repair Concierge helps you care for your furniture with professional damage triage, access to our skilled repair network, repair coordination, and member rates on repair labor and parts costs.</p>
+    </div>
+
+    <article class="mem-card reveal">
+      <header class="mem-card-head">
+        <span class="kicker">FurnitureRx Repair Safety Net</span>
+        <h3>Managed repair help for furniture you <em class="accent">own, buy, or sell.</em></h3>
+        <div class="price">
+          <span class="amt">$19.99</span>
+          <span class="per">/ month</span>
+        </div>
+        <div class="price-sub">For furniture in your home now, furniture you buy later, and secondhand finds from online or local sellers.</div>
+      </header>
+
+      <div class="mem-card-body">
+        <div class="copy">
+          <h4>What you get</h4>
+          <p><strong>Professional triage</strong> &mdash; we help identify the damage, repair options, and likely next step.</p>
+          <p><strong>Managed repair network</strong> &mdash; we source skilled technicians, coordinate the work, and stay involved through the repair.</p>
+          <p><strong>Buy direct pricing</strong> &mdash; leverage our purchasing power and negotiated rates and save on repair, labor, and parts costs. Avoid high retail cleaning and repairs charged by national cleaning services.</p>
+          <p><strong>Repair instead of replace</strong> &mdash; keep good furniture in service longer, including used, inherited, marketplace, and online purchases.</p>
+          <p><a href="#" class="link-inline js-gift-coupon"><strong>Gift coupon codes</strong></a> &mdash; members can request and purchase a one-month code for a friend or online furniture buyer.</p>
+        </div>
+
+        <div class="copy">
+          <h4>Helpful for</h4>
+          <ul class="mem-benefits">
+            <li><strong>Holiday cleaning</strong> &mdash; before and after the holidays, at rates better than local cleaning companies, with concierge-managed service</li>
+            <li><strong>Touch-ups &amp; repairs</strong> &mdash; nicks, scratches, loose joints, wobbly legs, worn upholstery</li>
+            <li><strong>Marketplace finds</strong> &mdash; repair support for Facebook Marketplace, local-seller, and secondhand furniture</li>
+            <li><strong>Online purchases</strong> &mdash; setup, assembly, touch-up, and repair help for direct-to-door buys</li>
+            <li><strong>Setup &amp; assembly</strong> &mdash; help with beds, dining, sectionals, storage, and built-to-order pieces</li>
+            <li><strong>Moving &amp; rearranging</strong> &mdash; member pricing for move-in, move-out, room resets, and heavy-piece repositioning</li>
+            <li><strong>Priority service</strong> &mdash; faster scheduling, preferred windows, and member-first support</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mem-card-foot">
+        <button type="button" class="btn btn-accent" id="mem-add-btn">Add Repair Safety Net &middot; $19.99/mo <span class="arrow">&rarr;</span></button>
+        <a href="/terms/" target="_blank" rel="noopener" class="btn btn-ghost" id="mem-details-link">See membership details</a>
+        <a href="#" class="link-inline js-gift-coupon">Request a gift coupon code <span class="arrow">&rarr;</span></a>
+        <p class="note">A service membership, not coverage &mdash; repairs are billed to you at member rates.</p>
+      </div>
+    </article>
   </div>
 </section>
 
@@ -1367,6 +1467,32 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
       <button type="button" class="btn btn-quiet" id="confirm-no"></button>
       <button type="button" class="btn btn-accent" id="confirm-yes"></button>
     </div>
+  </div>
+</div>
+
+<!-- DTC-11 (V15, from GIFT-1): gift coupon overlay returns with the membership card —
+     the buyer picks a product, leaves THEIR email, and pays. The total shown is
+     display-only; the server (create-gift-checkout) recalculates the real charge. -->
+<div class="gift-backdrop" id="gift-backdrop" hidden>
+  <div class="gift-card" role="dialog" aria-modal="true" aria-label="Gift FurnitureRx coverage">
+    <button type="button" class="gift-close" id="gift-close" aria-label="Close">&times;</button>
+    <h3>Gift FurnitureRx coverage</h3>
+    <p class="gift-sub">Give 3 months, on you. The code arrives by email, ready to forward.</p>
+    <div class="gift-field">
+      <label for="gift-tier">What to gift</label>
+      <select id="gift-tier">
+        <option value="stain" selected>Stain Protection &middot; $9.99/mo</option>
+        <option value="stain-mech">Stain + Structure Protection &middot; $19.99/mo</option>
+        <option value="membership">Repair Safety Net membership &middot; $19.99/mo</option>
+      </select>
+    </div>
+    <p class="gift-total" id="gift-total">3 months &middot; total $29.97</p>
+    <div class="gift-field">
+      <label for="gift-email">Your email</label>
+      <input id="gift-email" type="email" placeholder="you@email.com" autocomplete="email">
+    </div>
+    <button type="button" class="btn btn-accent btn-block" id="gift-submit">Continue to payment</button>
+    <p class="gift-msg" id="gift-msg" aria-live="polite" hidden></p>
   </div>
 </div>
 
@@ -1930,6 +2056,63 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
     });
     renderMembershipBtns();   /* estado inicial (carrito hidratado desde localStorage) */
   })();
+
+  /* DTC-11 (V15, from GIFT-1): the .js-gift-coupon links open the gift overlay (same
+     show/hide-by-[hidden] pattern as the dashqr/confirm modals). The painted total is
+     display ONLY — the server (create-gift-checkout) recalculates the real charge from
+     {email, tier}; here we only validate the bare minimum so we don't send obvious
+     garbage. (The kiosk's close-the-nav-drawer guard was dropped — this page has no
+     nav drawer.) */
+  var GIFT_MONTHS = 3;
+  var GIFT_CENTS = { stain: 999, 'stain-mech': 1999, membership: 1999 };   /* display mirror of _lib/gift.mjs */
+  var giftBackdrop = document.getElementById('gift-backdrop');
+  var giftClose = document.getElementById('gift-close');
+  var giftTier = document.getElementById('gift-tier');
+  var giftTotal = document.getElementById('gift-total');
+  var giftEmail = document.getElementById('gift-email');
+  var giftSubmit = document.getElementById('gift-submit');
+  var giftMsg = document.getElementById('gift-msg');
+  var giftSubmitLabel = giftSubmit ? giftSubmit.textContent : '';
+  function giftSetMsg(text){ if(giftMsg){ giftMsg.textContent = text || ''; giftMsg.hidden = !text; } }
+  function giftRecalc(){
+    var cents = (GIFT_CENTS[giftTier.value] || 0) * GIFT_MONTHS;
+    giftTotal.textContent = GIFT_MONTHS + ' months · total $' + (cents / 100).toFixed(2);
+  }
+  function closeGift(){ giftBackdrop.hidden = true; }
+  if(giftBackdrop && giftTier && giftTotal && giftEmail && giftSubmit){
+    document.querySelectorAll('.js-gift-coupon').forEach(function(g){
+      g.addEventListener('click', function(e){
+        e.preventDefault();
+        giftSetMsg('');
+        giftRecalc();
+        giftBackdrop.hidden = false;
+      });
+    });
+    giftTier.addEventListener('change', giftRecalc);
+    giftClose.addEventListener('click', closeGift);
+    giftBackdrop.addEventListener('click', function(ev){ if(ev.target === giftBackdrop) closeGift(); });
+    giftSubmit.addEventListener('click', function(){
+      var email = (giftEmail.value || '').trim();
+      /* light validation (non-empty + '@'); the real one lives on the server */
+      if(!email || email.indexOf('@') < 0){ giftSetMsg('Add your email so we can send the code.'); giftEmail.focus(); return; }
+      giftSetMsg('');
+      giftSubmit.disabled = true;
+      giftSubmit.textContent = 'Opening payment…';
+      fetch('/api/create-gift-checkout', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email, tier: giftTier.value })
+      }).then(function(res){
+        if(res.status === 503) return { unavailable: true };
+        if(!res.ok) return {};
+        return res.json().then(function(d){ return d || {}; }, function(){ return {}; });
+      }, function(){ return {}; }).then(function(d){
+        if(d.url){ location.assign(d.url); return; }   /* navigates: the button stays disabled on purpose */
+        giftSetMsg(d.unavailable ? "Gifts aren't available just yet." : 'Something went wrong, try again.');
+        giftSubmit.disabled = false;
+        giftSubmit.textContent = giftSubmitLabel;
+      });
+    });
+  }
 
   function openCart(){
     /* B.4 (KIOSK-17): con un pago EN CURSO, reabrir REANUDA la espera (el QR/link siguen en el DOM)
