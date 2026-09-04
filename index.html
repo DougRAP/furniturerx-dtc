@@ -917,6 +917,14 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
       <p class="eyebrow eyebrow-orange">Select a plan for your new items and <span class="nowrap">get covered</span></p>
       <h2 class="plans-h">How it works</h2>
       <p class="plans-lead">Pick a plan below and check out in about two minutes. Add your delivery date now at checkout or later from your dashboard &mdash; and when accidents happen, file a claim 24/7 online or by phone and we&rsquo;ll help get your item repaired or replaced (subject to Plan terms). Your subscription payments start on the date your items are delivered (or picked up). Please read the Plan terms by clicking the Plan T&amp;C link below.</p>
+      <!-- DTC-15 (V18): step row + Stripe line MOVED here from #how-checkout
+           (same shared CSS for now — polish pass later, owner). -->
+      <ol class="how-steps">
+        <li><span class="how-num" aria-hidden="true">1</span>Pick your plan</li>
+        <li><span class="how-num" aria-hidden="true">2</span>2-minute checkout</li>
+        <li><span class="how-num" aria-hidden="true">3</span>Add your delivery date now, or later from your dashboard</li>
+      </ol>
+      <p class="how-secure">Secure checkout by Stripe. Cancel anytime.</p>
     </div>
 
     <!-- DTC-14 (V17.1): the V17 accordion became a quiet trigger (owner) — button
@@ -1020,13 +1028,9 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
 <!-- DTC-4 (spec v10 §5): How-checkout-works — short strip, no form. Second entrance to the SAME
      checkout drawer (no auto-add: an empty cart still opens it, matching the header cart button). -->
 <section class="how-checkout" id="how-checkout" aria-label="How checkout works">
+  <!-- DTC-15 (V18): steps + Stripe line moved into the #plans head; the strip
+       keeps only its Start-checkout button (owner revisits this section later). -->
   <div class="container reveal">
-    <ol class="how-steps">
-      <li><span class="how-num" aria-hidden="true">1</span>Pick your plan</li>
-      <li><span class="how-num" aria-hidden="true">2</span>2-minute checkout</li>
-      <li><span class="how-num" aria-hidden="true">3</span>Add your delivery date now, or later from your dashboard</li>
-    </ol>
-    <p class="how-secure">Secure checkout by Stripe. Cancel anytime.</p>
     <button type="button" id="how-checkout-cta" class="btn btn-accent">Start checkout <span class="arrow">&rarr;</span></button>
   </div>
 </section>
