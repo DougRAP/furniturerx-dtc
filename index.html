@@ -433,7 +433,9 @@ em.gold{font-style:italic;color:var(--gold);font-weight:500}
    Owner override for THIS region only: kiosk band treatment + orange
    eyebrows are allowed here; fills must not spread to other sections.
    ============================================================ */
-.membership{padding:var(--sp-block) 0 var(--sp-section);background:var(--paper);position:relative}
+/* DTC-12 (V15.1): two-zone banding — #kits + #membership form ONE continuous
+   paper-cool annex band (interior ::before hairline is the only seam). */
+.membership{padding:var(--sp-block) 0 var(--sp-section);background:var(--paper-cool);position:relative}
 .membership::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:var(--rule)}
 .mem-intro{max-width:1040px;margin-bottom:32px}
 .mem-intro h2{margin:18px 0 20px}
