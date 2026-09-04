@@ -115,7 +115,6 @@ button{font:inherit;cursor:pointer}
 .nowrap{white-space:nowrap}
 
 .eyebrow{font-family:var(--body);font-weight:600;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:0 0 18px;display:inline-block}
-.eyebrow-ink{color:var(--ink-65)}
 .eyebrow-orange{color:var(--orange)}
 
 .h-display{font-size:clamp(2.6rem,6.5vw,5.5rem);line-height:.98;letter-spacing:-.03em;font-weight:500}
@@ -173,10 +172,12 @@ em.gold{font-style:italic;color:var(--gold);font-weight:500}
    ============================================================ */
 .site-header{position:relative;background:var(--paper);border-bottom:1px solid var(--rule);z-index:50}
 .site-header-inner{display:flex;align-items:center;height:56px;gap:14px}
-.logo{display:flex;align-items:baseline;gap:12px;text-decoration:none}
-.logo .mark{font-family:var(--display);font-weight:600;font-size:1.5rem;color:var(--ink);letter-spacing:-.02em;font-variation-settings:"opsz" 24}
+/* DTC-13 (V16): kiosk lockup returns, scaled up — wordmark over a
+   "Powered by RAP" subline; stacked so it fits beside the mobile icons. */
+.logo{display:flex;flex-direction:column;align-items:flex-start;gap:1px;text-decoration:none}
+.logo .mark{font-family:var(--display);font-weight:600;font-size:2.125rem;line-height:1;color:var(--ink);letter-spacing:-.02em;font-variation-settings:"opsz" 24}
 .logo .mark em{font-style:italic;color:var(--orange);font-weight:500}
-.logo .tag{font-size:.6875rem;color:var(--ink-65);letter-spacing:.14em;text-transform:uppercase;font-weight:500}
+.logo .tag{font-size:.625rem;line-height:1;color:var(--ink-65);letter-spacing:.14em;text-transform:uppercase;font-weight:500;padding-left:2px}
 
 /* hidden SIEMPRE gana: sin esto, cualquier regla con display (.btn, .cart-deliver label, etc.)
    re-mostraba elementos con hidden — el radio de email y el botón email-cart "ocultos" seguían
@@ -791,6 +792,7 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
   <div class="container site-header-inner">
     <a href="/" class="logo" aria-label="FurnitureRx home">
       <span class="mark">FurnitureRx</span>
+      <span class="tag">Powered by RAP</span>
     </a>
     <nav class="site-nav" aria-label="Primary">
       <a href="/">Home</a>
@@ -828,7 +830,7 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
   <div class="hero-media" aria-hidden="true"></div>
   <div class="container hero-inner">
     <div class="hero-copy">
-      <p class="eyebrow eyebrow-ink">PLANS FOR NEW &amp; USED FURNITURE</p>
+      <p class="eyebrow eyebrow-orange">PLANS FOR NEW &amp; USED FURNITURE</p>
       <h1 class="hero-headline">The sofa hasn&rsquo;t arrived. <span class="nowrap">But life is waiting.</span></h1>
       <p class="hero-lead">Protect your new furniture for <span class="nowrap">$19.99/month.</span> <span class="nowrap">Cancel anytime.</span></p>
       <p class="hero-sub">Sign up before you shop. Payments begin <span class="nowrap">after delivery.</span></p>
@@ -866,7 +868,7 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
          Eligibility line below is unchanged. Step row (1·2·3) intentionally NOT
          in this commit. -->
     <div class="plans-head reveal">
-      <p class="eyebrow eyebrow-ink">Select a plan for your new items and <span class="nowrap">get covered</span></p>
+      <p class="eyebrow eyebrow-orange">Select a plan for your new items and <span class="nowrap">get covered</span></p>
       <h2 class="plans-h">How it works</h2>
       <p class="plans-lead">Pick a plan below and check out in about two minutes. Add your delivery date now at checkout or later from your dashboard &mdash; and when accidents happen, file a claim 24/7 online or by phone and we&rsquo;ll help get your item repaired or replaced (subject to Plan terms). Your subscription payments start on the date your items are delivered (or picked up). Please read the Plan terms by clicking the Plan T&amp;C link below.</p>
     </div>
