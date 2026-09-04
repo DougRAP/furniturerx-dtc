@@ -368,10 +368,9 @@ em.gold{font-style:italic;color:var(--gold);font-weight:500}
    ============================================================ */
 .plans{padding:clamp(32px,4vw,56px) 0 var(--sp-section)}
 /* DTC-9: section head — .plans-h / .plans-lead (defined below). Gap before
-   .plans-elig lives on the wrapper (the lead's own margin-bottom is zeroed by
-   the global p:last-child reset). */
+   the card grid lives on the wrapper (the lead's own margin-bottom is zeroed
+   by the global p:last-child reset). */
 .plans-head{margin:0 0 26px}
-.plans-elig{font-size:.9rem;color:var(--ink-65);line-height:1.55;max-width:640px;margin:0 0 22px}
 .plans-grid{display:grid;grid-template-columns:1fr;gap:20px;align-items:stretch}
 .plans-col-side{display:flex;flex-direction:column;gap:20px}
 .plan-card{background:var(--paper);border:1px solid var(--rule-strong);border-radius:4px;padding:28px 26px;position:relative;display:flex;flex-direction:column;box-shadow:var(--shadow-card)}
@@ -414,9 +413,10 @@ em.gold{font-style:italic;color:var(--gold);font-weight:500}
 /* DTC-4 (spec v10 §5): How-checkout-works strip — spacing + hairline only (top rule matches the
    .plans pattern; #kits below brings its own border-top, so no bottom rule here = no double rules). */
 .how-checkout{border-top:1px solid var(--rule);padding:clamp(40px,5vw,64px) 0;text-align:center}
-.how-steps{list-style:none;margin:0 0 16px;padding:0;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:10px}
+/* DTC-17 (V19): steps live in the left-aligned plans head — left-justified, orange numbers */
+.how-steps{list-style:none;margin:0 0 16px;padding:0;display:flex;flex-direction:column;justify-content:flex-start;align-items:flex-start;gap:10px}
 .how-steps li{font-family:var(--display);font-weight:500;font-size:1.125rem;letter-spacing:-.01em;color:var(--ink)}
-.how-num{font-family:var(--body);font-weight:700;font-size:.72rem;letter-spacing:.1em;color:var(--ink-45);margin-right:9px;vertical-align:2px}
+.how-num{font-family:var(--body);font-weight:700;font-size:.72rem;letter-spacing:.1em;color:var(--orange);margin-right:9px;vertical-align:2px}
 @media (min-width:680px){
   .how-steps{flex-direction:row;column-gap:34px}
 }
@@ -915,21 +915,16 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
          in this commit. -->
     <div class="plans-head reveal">
       <p class="eyebrow eyebrow-orange">Select a plan for your new items and <span class="nowrap">get covered</span></p>
-      <h2 class="plans-h">How it works</h2>
-      <!-- DTC-16 (V18.1): owner order — steps directly under the H2, paragraph after.
-           Steps CSS shared from the old #how-checkout strip (polish pass later). -->
+      <h2 class="plans-h">How it Works For New Items</h2>
+      <!-- DTC-17 (V19): owner copy — orange step numbers, literal arrows after
+           steps 1 and 2; row justifies left (kiosk-strip centering killed). -->
       <ol class="how-steps">
-        <li><span class="how-num" aria-hidden="true">1</span>Pick your plan</li>
-        <li><span class="how-num" aria-hidden="true">2</span>2-minute checkout</li>
-        <li><span class="how-num" aria-hidden="true">3</span>Add your delivery date now, or later from your dashboard</li>
+        <li><span class="how-num" aria-hidden="true">1</span>Pick Your Plan &amp; Signup &rarr;</li>
+        <li><span class="how-num" aria-hidden="true">2</span>Buy Your Furniture &rarr;</li>
+        <li><span class="how-num" aria-hidden="true">3</span>Add Photo of Sales Receipt When Available</li>
       </ol>
-      <p class="plans-lead">Pick a plan below and check out in about two minutes. Add your delivery date now at checkout or later from your dashboard &mdash; and when accidents happen, file a claim 24/7 online or by phone and we&rsquo;ll help get your item repaired or replaced (subject to Plan terms). Your subscription payments start on the date your items are delivered (or picked up). Please read the Plan terms by clicking the Plan T&amp;C link below. <button type="button" id="compare-open" class="plan-choose">Compare Coverage</button></p>
+      <p class="plans-lead">Get 1 Month Free when you purchase your subscription before your new items are delivered to your home. Your subscription starts on the Month/Year that you enter. Click here &rarr; <a href="/terms/" target="_blank" rel="noopener">Plan Terms</a> &rarr; to review coverage and <button type="button" id="compare-open" class="plan-choose">compare Plans</button>.</p>
     </div>
-
-    <!-- DTC-10: eligibility line replaced by the used-furniture/kits jump link (owner).
-         Eligibility facts still live in the drawer fine print and FAQ. Anchor target
-         #kits = top of the used/kits region (V15: kits sit above the membership card). -->
-    <p class="plans-elig reveal">For used furniture programs and kits, <a href="#kits">click here</a>.</p>
 
     <div class="plans-grid reveal">
 
