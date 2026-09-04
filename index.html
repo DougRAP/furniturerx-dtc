@@ -427,6 +427,46 @@ em.gold{font-style:italic;color:var(--gold);font-weight:500}
 .plans-h{font-size:clamp(1.5rem,2.6vw,2.125rem);line-height:1.1;margin:0 0 14px}
 .plans-lead{font-size:1.0625rem;line-height:1.6;color:var(--ink-80);margin:0 0 12px}
 
+/* DTC-14 (V17): plan-comparison accordion — native <details> directly under the
+   #plans head, collapsed by default, zero JS. Interaction mirrors details.faq-item
+   (hidden marker, orange +/− ::after) but as its own .plans-compare variant:
+   the FAQ rules carry that section's headline scale and full-bleed borders,
+   which don't fit here. Inside: a real <table> (th scope) — hairline row
+   separators + generous padding only, no fills, no zebra. Mobile-first:
+   table-layout:fixed with three 44px plan columns (col.pc-col), the feature
+   column takes the rest; under 680px the "plan" word in the column heads is
+   hidden (.pc-word) so heads stay inside the narrow columns — amount plus the
+   muted price-context subline remain legible. */
+details.plans-compare{border-top:1px solid var(--rule-strong);border-bottom:1px solid var(--rule-strong);margin:0 0 22px}
+details.plans-compare summary{list-style:none;cursor:pointer;padding:15px 40px 15px 0;position:relative;font-family:var(--display);font-weight:500;font-size:1.125rem;letter-spacing:-.015em;color:var(--ink);line-height:1.25;transition:color var(--t-fast) var(--ease);font-variation-settings:"opsz" 24}
+details.plans-compare summary::-webkit-details-marker{display:none}
+details.plans-compare summary::after{content:"+";position:absolute;right:4px;top:50%;transform:translateY(-50%);font-family:var(--display);font-weight:400;font-size:1.5rem;color:var(--orange);transition:transform var(--t-med) var(--ease);line-height:1}
+details.plans-compare[open] summary::after{content:"\2212"}
+details.plans-compare summary:hover{color:var(--orange)}
+details.plans-compare summary:focus-visible{outline:2px solid var(--orange);outline-offset:2px;border-radius:2px}
+.compare-table{width:100%;border-collapse:collapse;table-layout:fixed;margin:2px 0 18px}
+.compare-table col.pc-col{width:44px}
+.compare-table th,.compare-table td{padding:13px 2px}
+.compare-table thead th{vertical-align:bottom;border-bottom:1px solid var(--rule-strong);text-align:center;padding-top:2px}
+.compare-table tbody tr+tr th,.compare-table tbody tr+tr td{border-top:1px solid var(--rule)}
+/* Head cells: one line for the amount, one for the muted context — nowrap so the
+   three heads keep an even two-line baseline in the 44px mobile columns. */
+.pc-amt{display:block;font-family:var(--display);font-weight:500;font-size:.75rem;letter-spacing:-.01em;color:var(--ink);line-height:1.2;white-space:nowrap}
+.pc-per{display:block;font-family:var(--body);font-weight:400;font-size:.625rem;color:var(--ink-45);margin-top:3px;white-space:nowrap}
+.pc-word{display:none}
+.compare-table tbody th{text-align:left;font-family:var(--body);font-weight:400;font-size:.75rem;line-height:1.45;color:var(--ink-80)}
+.compare-table tbody td{text-align:center;color:var(--ink-45);font-size:.875rem;line-height:1}
+.compare-table .ck{display:inline-block;width:13px;height:7px;border-left:2px solid var(--orange);border-bottom:2px solid var(--orange);transform:rotate(-45deg);vertical-align:2px}
+.compare-terms{padding:0 0 20px}
+@media (min-width:680px){
+  .compare-table col.pc-col{width:128px}
+  .compare-table th,.compare-table td{padding:15px 10px}
+  .compare-table tbody th{font-size:.875rem}
+  .pc-amt{font-size:1.0625rem}
+  .pc-per{font-size:.6875rem}
+  .pc-word{display:inline}
+}
+
 /* ============================================================
    MEMBERSHIP CARD (DTC-11, V15) — the FULL kiosk membership block
    returns (owner reversed the slim V12 band): baseline rules restored
@@ -872,6 +912,82 @@ html.phone #phone-handoff{display:flex;width:100%;min-height:100vh;align-items:c
       <h2 class="plans-h">How it works</h2>
       <p class="plans-lead">Pick a plan below and check out in about two minutes. Add your delivery date now at checkout or later from your dashboard &mdash; and when accidents happen, file a claim 24/7 online or by phone and we&rsquo;ll help get your item repaired or replaced (subject to Plan terms). Your subscription payments start on the date your items are delivered (or picked up). Please read the Plan terms by clicking the Plan T&amp;C link below.</p>
     </div>
+
+    <!-- DTC-14 (V17): plan-comparison accordion — collapsed by default, native
+         <details>, no JS. Real <table>, th scope for a11y; check/dash cells carry
+         role="img" labels for screen readers. Row copy is placeholder — owner
+         rewrites. Sits between the section head and the used/kits jump link. -->
+    <details class="plans-compare reveal">
+      <summary>Compare coverage in detail</summary>
+      <table class="compare-table" aria-label="Plan comparison">
+        <colgroup><col><col class="pc-col"><col class="pc-col"><col class="pc-col"></colgroup>
+        <thead>
+          <tr>
+            <th scope="col" aria-label="Feature"></th>
+            <th scope="col"><span class="pc-amt">$19.99<span class="pc-word"> plan</span></span><span class="pc-per">monthly</span></th>
+            <th scope="col"><span class="pc-amt">$9.99<span class="pc-word"> plan</span></span><span class="pc-per">monthly</span></th>
+            <th scope="col"><span class="pc-amt">3-year<span class="pc-word"> plan</span></span><span class="pc-per">pay once</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Food, drink, ink, and pet stains</th>
+            <td><span class="ck" role="img" aria-label="Included"></span></td>
+            <td><span class="ck" role="img" aria-label="Included"></span></td>
+            <td><span class="ck" role="img" aria-label="Included"></span></td>
+          </tr>
+          <tr>
+            <th scope="row">Rips, tears, and burns</th>
+            <td><span class="ck" role="img" aria-label="Included"></span></td>
+            <td><span role="img" aria-label="Not included">&mdash;</span></td>
+            <td><span class="ck" role="img" aria-label="Included"></span></td>
+          </tr>
+          <tr>
+            <th scope="row">Mechanical and electrical failures</th>
+            <td><span class="ck" role="img" aria-label="Included"></span></td>
+            <td><span role="img" aria-label="Not included">&mdash;</span></td>
+            <td><span class="ck" role="img" aria-label="Included"></span></td>
+          </tr>
+          <tr>
+            <th scope="row">Up to $5,000 in coverage per plan</th>
+            <td><span class="ck" role="img" aria-label="Included"></span></td>
+            <td><span class="ck" role="img" aria-label="Included"></span></td>
+            <td><span class="ck" role="img" aria-label="Included"></span></td>
+          </tr>
+          <tr>
+            <th scope="row">We book and pay covered repairs</th>
+            <td><span class="ck" role="img" aria-label="Included"></span></td>
+            <td><span class="ck" role="img" aria-label="Included"></span></td>
+            <td><span class="ck" role="img" aria-label="Included"></span></td>
+          </tr>
+          <tr>
+            <th scope="row">Replacement if it can&rsquo;t be fixed</th>
+            <td><span class="ck" role="img" aria-label="Included"></span></td>
+            <td><span class="ck" role="img" aria-label="Included"></span></td>
+            <td><span class="ck" role="img" aria-label="Included"></span></td>
+          </tr>
+          <tr>
+            <th scope="row">24/7 claim filing, same-day response</th>
+            <td><span class="ck" role="img" aria-label="Included"></span></td>
+            <td><span class="ck" role="img" aria-label="Included"></span></td>
+            <td><span class="ck" role="img" aria-label="Included"></span></td>
+          </tr>
+          <tr>
+            <th scope="row">Repair Safety Net membership included</th>
+            <td><span class="ck" role="img" aria-label="Included"></span></td>
+            <td><span class="ck" role="img" aria-label="Included"></span></td>
+            <td><span class="ck" role="img" aria-label="Included"></span></td>
+          </tr>
+          <tr>
+            <th scope="row">One payment, three years of coverage</th>
+            <td><span role="img" aria-label="Not included">&mdash;</span></td>
+            <td><span role="img" aria-label="Not included">&mdash;</span></td>
+            <td><span class="ck" role="img" aria-label="Included"></span></td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="compare-terms"><a href="/terms/" target="_blank" rel="noopener" class="link-inline">View full terms and conditions <span class="arrow">&rarr;</span></a></p>
+    </details>
 
     <!-- DTC-10: eligibility line replaced by the used-furniture/kits jump link (owner).
          Eligibility facts still live in the drawer fine print and FAQ. Anchor target
